@@ -1,0 +1,158 @@
+@import "colors";
+
+// 中性色版(neutral)
+@neutral-1: #fff;
+@neutral-2: #f7f7f7;  // 灰背景色
+@neutral-3: #efefef;
+@neutral-4: #e9e9e9;  // 边框分割线色
+@neutral-5: #d9d9d9;  // 边框线色
+@neutral-6: #ccc;     // 失效背景色
+@neutral-7: #999;     // 辅助文字
+@neutral-8: #666;     // 文字色
+@neutral-9: #404040;  // 标题色
+@neutral-10: #222;
+@neutral-11: #000;
+
+// 默认主题
+@bg-1: @blue-500; // 蓝色背景
+@bg-2: @grey-100; // 灰色背景
+@bg-3: @grey-400; // disabled背景色/cancel背景色
+@bg-4: @white-darker; // 白色背景
+
+@text-1: @white-darker; // 白色字体
+@text-2: @black-darker; // 黑色字体 标题
+@text-3: @white-darker; // 失效白色字体
+@text-4: @black-dark; // 黑色字体 普通文本
+
+@border-1: @grey-200; // 分割线
+@border-2: @grey-300; // 边框色
+
+@hover-1: @blue-600; //激活颜色 按钮建议不使用hover/active效果
+@hover-2: @grey-200;
+@hover-3: @grey-500;
+@hover-4: @white-dark;
+
+// 字号，可拓展
+@font-size-1: 10px;
+@font-size-2: 12px;
+@font-size-3: 13px;
+@font-size-4: 14px;
+@font-size-5: 16px;
+@font-size-6: 18px;
+@font-size-7: 20px;
+
+
+
+// 最小单位
+@grid: 4px;
+
+// 圆角边框 (radius)
+@radius-1: 4px;
+@radius-2: 6px;
+
+.px2rem(@name, @px){
+  @media screen and (max-width: 1242px){
+      @{name}: 2rem * @px / 64;
+  }
+  @media screen and (min-width: 1243px){
+      @{name}: 1rem * @px / 64;
+  }
+}
+
+.px2px(@name, @px){
+    @{name}: @px * 1px;
+  [data-dpr="2"] & {
+      @{name}: @px * 2px;
+  }
+
+  [data-dpr="2.5"] & {
+      @{name}: @px * 2.5px;
+  }
+
+  [data-dpr="2.75"] & {
+      @{name}: @px * 2.75px;
+  }
+  [data-dpr="3"] & {
+      @{name}: @px * 3px;
+  }
+
+  [data-dpr="4"] & {
+      @{name}: @px * 4px;
+  }
+}
+
+.border(@color: @border-2, @width: 1px, @type: solid) {
+  border: @width * 1px @type @color;
+  & when (@width > 1px) {
+    .px2rem(border-width, @width);
+  }
+  box-sizing: border-box;
+}
+
+.border-top(@color: @border-2, @width: 1px, @type: solid){
+  border-top: @width * 1px @type @color;
+  & when (@width > 1px) {
+    .px2rem(border-top-width, @width);
+  }
+  box-sizing: border-box;
+}
+
+.border-right(@color: @border-2, @width: 1px, @type: solid){
+  border-right: @width * 1px @type @color;
+  & when (@width > 1px) {
+    .px2rem(border-right-width, @width);
+  }
+  box-sizing: border-box;
+}
+
+.border-bottom(@color: @border-2, @width: 1px, @type: solid){
+  border-bottom: @width * 1px @type @color;
+  & when (@width > 1px) {
+    .px2rem(border-bottom-width, @width);
+  }
+  box-sizing: border-box;
+}
+
+.border-left(@color: @border-2, @width: 1px, @type: solid){
+  border-left: @width * 1px @type @color;
+  & when (@width > 1px) {
+    .px2rem(border-left-width, @width);
+  }
+  box-sizing: border-box;
+}
+
+.border-radius(@width: @radius-1){
+  .px2rem(border-radius, @width);
+}
+
+.vertical-middle(@height: @font-size-6 + 20){
+  .px2rem(height, @height);
+  .px2rem(line-height, @height);
+}
+
+.padding-top-bottom(@width: 8px){
+  .px2rem(padding-top, @width);
+  .px2rem(padding-bottom, @width);
+}
+
+.padding-left-right(@width: 10px){
+  .px2rem(padding-left, @width);
+  .px2rem(padding-right, @width);
+}
+
+.bg-mask(@bg-color: @black-lighter, @z-index: 999){
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: @bg-color;
+    z-index: @z-index;
+    height: 100%;
+}
+.scroll(@name:overflow){
+  @{name}: scroll;
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+}
+
