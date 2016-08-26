@@ -1,5 +1,4 @@
 import * as classNames from 'classnames';
-import { PropTypes } from 'react';
 import * as React from 'react';
 interface ButtonProps {
   prefixCls?: string,
@@ -26,7 +25,7 @@ export default class Button extends React.Component<ButtonProps, any> {
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-small`]: size === 'small',
-    })
+    });
     return (
         <button className={btnClass} type={type} disabled={disabled} onClick={onClick} >{children}</button>
     );

@@ -1,5 +1,4 @@
 import * as classNames from 'classnames';
-import { PropTypes } from 'react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 let closeDialog = () => {};

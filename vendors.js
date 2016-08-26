@@ -5,5 +5,4 @@ import 'lodash';
 import 'html-entities';
 import 'react-transform-hmr';
 import 'react-transform-catch-errors';
-import 'redbox-react';
 import 'react-proxy';

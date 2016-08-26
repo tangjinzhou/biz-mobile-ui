@@ -41,7 +41,7 @@ var devConfigExtension = {
 
     // more options here: http://webpack.github.io/docs/configuration.html#devtool
     devtool: 'eval-source-map',
-    profile: true,
+    //profile: true,
     module: {
         loaders: [
             {
@@ -55,7 +55,7 @@ var devConfigExtension = {
                 //loader: ExtractTextPlugin.extract("css?sourceMap!postcss?sourceMap!less?sourceMap"),
                 include: path.join(__dirname, "src")
             },
-            { test: /\.(jpg|png|jpg|png|woff|eot|ttf|svg|gif)$/, loader: "file-loader?name=[name].[ext]" }
+            { test: /\.(jpg|png|jpg|png|woff|woff2|eot|ttf|svg|gif)$/, loader: "url?name=[name].[ext]" }
         ]
     },
     postcss: function () {

@@ -1,4 +1,7 @@
 {
+  "presets": [
+    "es2015"
+  ],
   "env": {
     "cacheDirectory": true,
     "development": {
@@ -14,13 +17,6 @@
                 ],
                 "locals": [
                   "module"
-                ]
-              },
-              {
-                "transform": "react-transform-catch-errors",
-                "imports": [
-                  "react",
-                  "redbox-react"
                 ]
               }
             ]
