@@ -1,0 +1,73 @@
+{
+  "name": "biz-mobile-ui",
+  "version": "1.0.0",
+  "description": "biz-mobile-ui",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:dll": "webpack --config webpack.dll.js",
+    "start": "npm run build:dll && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tangjinzhou/biz-mobile-ui.git"
+  },
+  "keywords": [
+    "biz-mobile-ui",
+    "react"
+  ],
+  "author": "tangjinzhou",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tangjinzhou/biz-mobile-ui/issues"
+  },
+  "homepage": "https://github.com/tangjinzhou/biz-mobile-ui#readme",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
+  },
+  "devDependencies": {
+    "add-asset-html-webpack-plugin": "^1.0.2",
+    "autoprefixer": "^6.4.0",
+    "babel": "~6.5.2",
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-external-helpers-2": "~6.3.13",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-plugin-transform-runtime": "^6.12.0",
+    "babel-polyfill": "~6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015-loose": "~7.0.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-2": "^6.13.0",
+    "babel-runtime": "^6.11.6",
+    "copy-webpack-plugin": "^3.0.1",
+    "css-loader": "~0.23.1",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "~0.9.0",
+    "html-webpack-plugin": "^2.22.0",
+    "less": "~2.7.1",
+    "less-loader": "~2.2.3",
+    "postcss-flexboxfixer": "0.0.5",
+    "postcss-loader": "^0.9.1",
+    "react-hot-loader": "~1.3.0",
+    "react-transform-catch-errors": "^1.0.2",
+    "react-transform-hmr": "^1.0.4",
+    "redbox-react": "^1.2.10",
+    "style-loader": "~0.13.1",
+    "ts-loader": "~0.8.2",
+    "tslint": "^3.14.0",
+    "tslint-loader": "~2.1.5",
+    "typescript": "~2.0.0",
+    "url-loader": "^0.5.7",
+    "webpack": "2.1.0-beta.15",
+    "webpack-config": "~5.2.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "~1.14.1",
+    "webpack-hot-middleware": "^2.12.2"
+  }
+}
