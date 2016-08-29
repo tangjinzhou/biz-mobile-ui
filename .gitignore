@@ -40,5 +40,5 @@ jspm_packages
 
 .idea/
 node_modules/
-typings/
 /node_modules/
+/dist/

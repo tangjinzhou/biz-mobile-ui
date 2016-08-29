@@ -1,0 +1,49 @@
+@tabsPrefixCls: bm-tabs;
+@tabPrefixCls: bm-tab;
+
+.@{tabsPrefixCls} {
+  width: 100%;
+  white-space: nowrap;
+  &-container {
+    display: flex;
+    .px2rem(height, 40px);
+    color: @text-2;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar{
+      display: none;
+    }
+  }
+  .@{tabPrefixCls} {
+    position: relative;
+    text-align: center;
+    flex: 1;
+    min-width: -webkit-min-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .border-bottom();
+    .padding-left-right(10px);
+  }
+  .@{tabPrefixCls}-inkBar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    .px2rem(height, 2px);
+    .px2rem(margin-top, -1px);
+    background-color: @bg-1;
+  }
+  .@{tabPrefixCls}-active {
+    color: @bg-1;
+  }
+
+  &-content {
+    width: 100%;
+  }
+  &-content-hidden {
+    display: none;
+  }
+
+}

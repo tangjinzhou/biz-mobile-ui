@@ -1,18 +1,5 @@
 @import "colors";
 
-// 中性色版(neutral)
-@neutral-1: #fff;
-@neutral-2: #f7f7f7;  // 灰背景色
-@neutral-3: #efefef;
-@neutral-4: #e9e9e9;  // 边框分割线色
-@neutral-5: #d9d9d9;  // 边框线色
-@neutral-6: #ccc;     // 失效背景色
-@neutral-7: #999;     // 辅助文字
-@neutral-8: #666;     // 文字色
-@neutral-9: #404040;  // 标题色
-@neutral-10: #222;
-@neutral-11: #000;
-
 // 默认主题
 @bg-1: @blue-500; // 蓝色背景
 @bg-2: @grey-100; // 灰色背景
@@ -51,10 +38,10 @@
 @radius-2: 6px;
 
 .px2rem(@name, @px){
-  @media screen and (max-width: 1242px){
+  @media screen and (max-width: 1245px){
       @{name}: 2rem * @px / 64;
   }
-  @media screen and (min-width: 1243px){
+  @media screen and (min-width: 1246px){
       @{name}: 1rem * @px / 64;
   }
 }

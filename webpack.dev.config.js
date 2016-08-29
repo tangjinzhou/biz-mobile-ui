@@ -40,7 +40,7 @@ var devConfigExtension = {
     },
 
     // more options here: http://webpack.github.io/docs/configuration.html#devtool
-    devtool: 'eval-source-map',
+    devtool: 'source-map',
     //profile: true,
     module: {
         loaders: [
@@ -66,7 +66,6 @@ var devConfigExtension = {
             context: __dirname,
             manifest: require("./dist/vendor-manifest.json")
         }),
-
         /*new webpack.optimize.CommonsChunkPlugin({
             name: 'hotReload',
             filename: 'hotReload.js',

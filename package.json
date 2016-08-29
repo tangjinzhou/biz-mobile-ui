@@ -24,8 +24,11 @@
   "homepage": "https://github.com/tangjinzhou/biz-mobile-ui#readme",
   "dependencies": {
     "classnames": "^2.2.5",
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "react-motion": "^0.4.4",
+    "react-swipeable-views": "^0.7.2",
+    "react-tap-event-plugin": "^1.0.0"
   },
   "devDependencies": {
     "add-asset-html-webpack-plugin": "^1.0.2",

@@ -11,18 +11,13 @@ module.exports = {
         library: "[name]"
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env':{
-                'NODE_ENV': JSON.stringify('production')
-            }
-        }),
         new webpack.DllPlugin({
             path: path.join(__dirname, "dist", "[name]-manifest.json"),
             name: "[name]",
             context: __dirname
-        }),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin()
+        })
+        /*new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin()*/
     ],
     resolve: {
         root: __dirname,
