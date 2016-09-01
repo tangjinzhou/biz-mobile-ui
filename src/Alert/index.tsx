@@ -27,18 +27,17 @@ interface AlertDialogProps {
     type: string;
     defaultValue?: string;
 }
-interface AlertDialog {
-    confirmInput?: any;
-}
+
 class AlertDialog extends React.Component<AlertDialogProps, any> {
     static defaultProps = {
         prefixCls: 'bm-alert',
         buttons: [{text: '确定'}],
         className: '',
     };
+    _confirmInput = null;
     onClick = (index) => {
         if(this.props.type === 'confirm') {
-            const value = this.confirmInput.value;
+            const value = this._confirmInput.value;
             this.props.onClick(index, value);
         } else {
             this.props.onClick(index);
@@ -65,7 +64,7 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
                     <div className={`${prefixCls}-info`}>
                         {title !== '' ? <p className={`${prefixCls}-title`}>{title}</p> : null}
                         {message !== '' ? <p className={`${prefixCls}-message`} dangerouslySetInnerHTML={{__html: message}}/> : null}
-                        {type === 'confirm' ? <input ref={(c) => this.confirmInput = c} className={`${prefixCls}-input`} type="text" defaultValue={defaultValue}/> : null}
+                        {type === 'confirm' ? <input ref={(c) => this._confirmInput = c} className={`${prefixCls}-input`} type="text" defaultValue={defaultValue}/> : null}
                     </div>
                     <div className={btnsClass}>
                         {buttons.map((item, index) => {

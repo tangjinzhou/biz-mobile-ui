@@ -2,6 +2,7 @@
 
 
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 //var Config = require('webpack-config').Config;
 var path = require("path");
 var nodeModulesPath = path.join(__dirname, 'node_modules');
@@ -45,17 +46,17 @@ var devConfigExtension = {
     module: {
         loaders: [
             {
+                test: /\.less$/,
+                //loaders: ['style', 'css?sourceMap', 'postcss?sourceMap','less?sourceMap'],
+                loader: ExtractTextPlugin.extract("css?sourceMap!postcss?sourceMap!less?sourceMap"),
+                include: path.join(__dirname, "src")
+            },
+            { test: /\.(jpg|png|jpg|png|woff|woff2|eot|ttf|svg|gif)$/, loader: "url?name=[name].[ext]" },
+            {
                 test: /\.tsx?$/,
                 loaders: ['babel', 'ts?configFileName=tsconfig.json'],
                 exclude : /node_modules/
-            },
-            {
-                test: /\.less$/,
-                loaders: ['style', 'css?sourceMap', 'postcss?sourceMap','less?sourceMap'],
-                //loader: ExtractTextPlugin.extract("css?sourceMap!postcss?sourceMap!less?sourceMap"),
-                include: path.join(__dirname, "src")
-            },
-            { test: /\.(jpg|png|jpg|png|woff|woff2|eot|ttf|svg|gif)$/, loader: "url?name=[name].[ext]" }
+            }
         ]
     },
     postcss: function () {
@@ -75,10 +76,10 @@ var devConfigExtension = {
             name: 'dllVendor',
             minChunks: Infinity,
         }),*/
-        /*new ExtractTextPlugin("[name].css", {
+        new ExtractTextPlugin("[name].css", {
             allChunks: true,
             disable: false
-        }),*/
+        }),
         // Used for hot-reload
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()

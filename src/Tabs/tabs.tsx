@@ -10,6 +10,7 @@ interface TabsPropType{
     animation?: boolean,
     animateTransitions?: boolean,
 }
+
 export default class Tabs extends React.Component<TabsPropType, any>{
     static defaultProps = {
         selectedIndex: 0,
@@ -21,14 +22,12 @@ export default class Tabs extends React.Component<TabsPropType, any>{
         animateTransitions: false,
     };
     state = {selectedIndex: 0};
+    _tabsContainer = null;
     componentWillMount() {
         const initialIndex = this.props.selectedIndex;
         this.setState({
             selectedIndex: initialIndex < this.getTabCount() ? initialIndex : 0,
         });
-    }
-    getTabCount() {
-        return this.getTabs().length;
     }
     componentWillReceiveProps(newProps) {
         if(newProps.selectedIndex !== undefined){
@@ -36,6 +35,9 @@ export default class Tabs extends React.Component<TabsPropType, any>{
                 selectedIndex: newProps.selectedIndex
             })
         }
+    }
+    getTabCount() {
+        return this.getTabs().length;
     }
     getTabs() {
         const tabs = [];
@@ -71,6 +73,13 @@ export default class Tabs extends React.Component<TabsPropType, any>{
             this.setState({selectedIndex: index});
         }
     }
+    updateSelectedPos = (tabOffsetLeft, tabWidth) => {
+        /*
+        const containerWidth = this._tabsContainer.clientWidth;
+        const scrollLeft = tabOffsetLeft - containerWidth/2 + tabWidth/2;
+        this._tabsContainer.scrollLeft = scrollLeft;
+        console.log(containerWidth, tabOffsetLeft, tabWidth);*/
+    }
     render() {
         const {prefixCls, className, onChange, animation, animateTransitions} = this.props;
         const tabsClass = classNames({
@@ -84,13 +93,14 @@ export default class Tabs extends React.Component<TabsPropType, any>{
                 key: index,
                 index: index,
                 selected: this.state.selectedIndex === index,
-                onTouchTap: this.handleTabTouchTap
+                onTouchTap: this.handleTabTouchTap,
+                updateSelectedPos: this.updateSelectedPos
             });
         });
         
         return (
             <div className={tabsClass}>
-                <div className={`${prefixCls}-container`}>
+                <div ref={(c) => this._tabsContainer = c} className={`${prefixCls}-container`}>
                     {tabs}
                 </div>
                 <div className={`${prefixCls}-content-container`}>

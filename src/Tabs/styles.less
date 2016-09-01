@@ -5,8 +5,8 @@
   width: 100%;
   white-space: nowrap;
   &-container {
+    position: relative;
     display: flex;
-    .px2rem(height, 40px);
     color: @text-2;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
@@ -16,6 +16,7 @@
   }
   .@{tabPrefixCls} {
     position: relative;
+    .px2rem(height, 44px);
     text-align: center;
     flex: 1;
     min-width: -webkit-min-content;

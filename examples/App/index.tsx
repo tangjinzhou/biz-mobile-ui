@@ -1,10 +1,7 @@
 import * as React from 'react';
 //import injectTapEventPlugin from 'react-tap-event-plugin';
-import Button from '../../src/Button';
-import Alert from '../../src/Alert';
-import Icon from '../../src/Icon';
-import Line from '../../src/Line';
-import {Tabs, Tab} from '../../src/Tabs';
+
+import {Button, Alert, Icon, Line, Tabs, Tab} from '../../src/index.tsx';
 interface AppProps {
 }
 
@@ -52,6 +49,18 @@ export default class App extends React.Component<AppProps, any> {
                 <Tabs selectedIndex={this.state.selectIndex} onChange={this.onTabChange} animation={true}>
                     <Tab label="旭日" icon={<Icon type="home" size="lg"/>}>
                         <div style={styles.tab}>world1</div>
+                    </Tab>
+                    <Tab label="晨星">
+                        <div style={Object.assign({}, styles.tab, {backgroundColor: '#2196F3'})}>world2</div>
+                    </Tab>
+                    <Tab label="品专">
+                        <div style={Object.assign({}, styles.tab, {backgroundColor: '#009688'})}>world3</div>
+                    </Tab>
+                    <Tab label="大竞价">
+                        <div style={Object.assign({}, styles.tab, {backgroundColor: '#FFEB3B'})}>world4</div>
+                    </Tab>
+                    <Tab label="信息流">
+                        <div style={Object.assign({}, styles.tab, {backgroundColor: '#9E9E9E'})}>world5</div>
                     </Tab>
                     <Tab label="晨星">
                         <div style={Object.assign({}, styles.tab, {backgroundColor: '#2196F3'})}>world2</div>
