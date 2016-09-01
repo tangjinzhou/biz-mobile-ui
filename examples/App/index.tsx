@@ -1,5 +1,4 @@
 import * as React from 'react';
-//import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import {Button, Alert, Icon, Line, Tabs, Tab} from '../../src/index.tsx';
 interface AppProps {
@@ -25,10 +24,10 @@ export default class App extends React.Component<AppProps, any> {
         Alert.alert({title:'biz',message:value, buttons:[{text:'取消',color:'grey'},{text:'确定'}]});
     }
     showAlertWithThreeBtn() {
-        Alert.alert({title:'biz-kcfe',message:"hello bizmolejj<br>快去更新!", buttons:[{text:'取消'},{text:'确定'},{text:'吐槽', color:'red'}]});
+        Alert.alert({title:'biz-kcfe',message:<span>hello bizmolejj<br/>快去更新!</span>, buttons:[{text:'取消'},{text:'确定'},{text:'吐槽', color:'red'}]});
     }
     showAlertConfirm() {
-        Alert.confirm({title:'请输入用户名', defaultValue: 'tjz', onClick: this.showAlertWithTwoBtn});
+        Alert.confirm({title:'请输入用户名', defaultValue: 'tjz', onTouchTap: this.showAlertWithTwoBtn});
     }
     onTabChange(index, oldIndex) {
         console.log(index, oldIndex);
@@ -39,13 +38,13 @@ export default class App extends React.Component<AppProps, any> {
     render() {
         return (
             <div>
-                <Button onClick={()=>this.showAlertWithTwoBtn(1,'hahah')} size="small"><Icon fixedWidth={true} type="user-plus"/>showAlertWithTwoBtn</Button>
-                <Button onClick={this.showAlertConfirm} disabled={true} size="small"><Icon type="home"/>showAlertConfirm</Button><br/>
+                <Button onTouchTap={()=>this.showAlertWithTwoBtn(1,'hahah')} size="small"><Icon fixedWidth={true} type="user-plus"/>showAlertWithTwoBtn</Button>
+                <Button onTouchTap={this.showAlertConfirm} disabled={true} size="small"><Icon type="home"/>showAlertConfirm</Button><br/>
                 <Line/>
-                <Button onClick={this.showAlert}><Icon type="cog"/>showAlert</Button>
-                <Button onClick={this.showAlertWithThreeBtn}><Icon size="lg" type="book"/>showAlert with three button<Icon type="pencil"/></Button>
-                <Button onClick={this.showAlertConfirm.bind(this)}><Icon size="2x" spin={true} type="spinner"/>showAlertConfirm</Button>
-                <Button onClick={this.changeTabsSelect}>changeTabsSelect</Button>
+                <Button onTouchTap={this.showAlert}><Icon type="cog"/>showAlert</Button>
+                <Button onTouchTap={this.showAlertWithThreeBtn}><Icon size="lg" type="book"/>showAlert with three button<Icon type="pencil"/></Button>
+                <Button onTouchTap={this.showAlertConfirm.bind(this)}><Icon size="2x" spin={true} type="spinner"/>showAlertConfirm</Button>
+                <Button onTouchTap={this.changeTabsSelect}>changeTabsSelect</Button>
                 <Tabs selectedIndex={this.state.selectIndex} onChange={this.onTabChange} animation={true}>
                     <Tab label="旭日" icon={<Icon type="home" size="lg"/>}>
                         <div style={styles.tab}>world1</div>

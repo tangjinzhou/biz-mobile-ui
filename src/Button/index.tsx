@@ -3,7 +3,7 @@ import * as React from 'react';
 interface ButtonProps {
   prefixCls?: string,
   type?: string,
-  onClick?: (x: any) => void;
+  onTouchTap?: (x?: any) => void;
   disabled?: boolean;
   className?: string;
   size?: string;
@@ -14,12 +14,12 @@ export default class Button extends React.Component<ButtonProps, any> {
     prefixCls: 'bm-button',
     type: 'button',
     disabled: false,
-    onClick: () => { },
+    onTouchTap: () => { },
     className: '',
   };
 
   render() {
-    const {prefixCls, className, size, type, disabled, onClick, children} = this.props;
+    const {prefixCls, className, size, type, disabled, onTouchTap, children} = this.props;
     const btnClass = classNames({
       [className]: true,
       [prefixCls]: true,
@@ -27,7 +27,7 @@ export default class Button extends React.Component<ButtonProps, any> {
       [`${prefixCls}-small`]: size === 'small',
     });
     return (
-        <button className={btnClass} type={type} disabled={disabled} onClick={onClick} >{children}</button>
+        <button className={btnClass} type={type} disabled={disabled} onTouchTap={onTouchTap} >{children}</button>
     );
   }
 }

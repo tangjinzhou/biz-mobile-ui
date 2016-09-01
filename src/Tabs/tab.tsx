@@ -8,7 +8,7 @@ interface TabPropType{
     key?: number,
     index?: number,
     selected?: boolean,
-    onTouchTap: (x:number, y: any) => any;
+    handleTabTouchTap?: (x:number, y: any) => any;
 }
 export default class Tab extends React.Component<TabPropType, any>{
     static defaultProps = {
@@ -51,7 +51,7 @@ export default class Tab extends React.Component<TabPropType, any>{
         }
     }
     render() {
-        const {prefixCls, className,index, label, key, icon, selected, onTouchTap} = this.props;
+        const {prefixCls, className,index, label, key, icon, selected, handleTabTouchTap} = this.props;
         const tabClass = classNames({
             [`${prefixCls}`]: true,
             [`${prefixCls}-active`]: selected,
@@ -59,7 +59,7 @@ export default class Tab extends React.Component<TabPropType, any>{
         });
 
         return (
-            <div ref={(c) => this._tab = c} className={tabClass} onClick={()=>onTouchTap(index, this)}>
+            <div ref={(c) => this._tab = c} className={tabClass} onTouchTap={()=>handleTabTouchTap(index, this)}>
                 {icon}
                 {label}
                 {selected? <div className={`${prefixCls}-inkBar`}></div> : null}

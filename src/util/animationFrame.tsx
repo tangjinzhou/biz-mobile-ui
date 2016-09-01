@@ -25,4 +25,4 @@ const animationFrame = function() {
             clearTimeout(id);
         };
 };
-export default animationFrame();
+export default animationFrame;

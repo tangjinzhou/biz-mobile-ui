@@ -11,18 +11,18 @@ interface ButtonProps {
 
 interface AlertConfigProps {
     title?: string;
-    message?: string;
+    message?: any;
     buttons?: Array<ButtonProps>;
-    onClick?: (x?:number, y?: string) => any;
+    onTouchTap?: (x?:number, y?: string) => any;
     defaultValue?: string;
 }
 
 interface AlertDialogProps {
     prefixCls?: string;
     title?: string;
-    message?: string;
+    message?: any;
     className?: string;
-    onClick?: (x?: number, y?: string) => any;
+    onTouchTap?: (x?: number, y?: string) => any;
     buttons?: Array<ButtonProps>;
     type: string;
     defaultValue?: string;
@@ -35,17 +35,17 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
         className: '',
     };
     _confirmInput = null;
-    onClick = (index) => {
+    onTouchTap = (index) => {
         if(this.props.type === 'confirm') {
             const value = this._confirmInput.value;
-            this.props.onClick(index, value);
+            this.props.onTouchTap(index, value);
         } else {
-            this.props.onClick(index);
+            this.props.onTouchTap(index);
         }
     }
     render() {
 
-        const {prefixCls, title, message, buttons, className, onClick, type, defaultValue} = this.props;
+        const {prefixCls, title, message, buttons, className, onTouchTap, type, defaultValue} = this.props;
         const alertClass = classNames({
             [className]: true,
             [prefixCls]: true,
@@ -63,7 +63,7 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
                 <div className={`${prefixCls}-wrap`}>
                     <div className={`${prefixCls}-info`}>
                         {title !== '' ? <p className={`${prefixCls}-title`}>{title}</p> : null}
-                        {message !== '' ? <p className={`${prefixCls}-message`} dangerouslySetInnerHTML={{__html: message}}/> : null}
+                        {message !== '' ? <p className={`${prefixCls}-message`}>{message}</p> : null}
                         {type === 'confirm' ? <input ref={(c) => this._confirmInput = c} className={`${prefixCls}-input`} type="text" defaultValue={defaultValue}/> : null}
                     </div>
                     <div className={btnsClass}>
@@ -71,9 +71,9 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
                             const color = item.color;
                             let button = null;
                             if(item.color) {
-                                button = <button style={{color: item.color}} key={index} className={`${prefixCls}-btn`} onClick={()=>this.onClick(index)}>{item.text}</button>;
+                                button = <button style={{color: item.color}} key={index} className={`${prefixCls}-btn`} onTouchTap={()=>this.onTouchTap(index)}>{item.text}</button>;
                             } else {
-                                button = <button key={index} className={`${prefixCls}-btn`} onClick={()=>this.onClick(index)}>{item.text}</button>;
+                                button = <button key={index} className={`${prefixCls}-btn`} onTouchTap={()=>this.onTouchTap(index)}>{item.text}</button>;
                             }
                             return button;
                         })}
@@ -89,7 +89,7 @@ function createDialog(config, type) {
     let div = document.createElement('div');
     document.body.appendChild(div);
 
-    let onClick = config.onClick || (() => {});
+    let onTouchTap = config.onTouchTap || (() => {});
     function close() {
         if (div) {
             document.body.style.overflow = '';
@@ -100,11 +100,11 @@ function createDialog(config, type) {
     }
     closeDialog = close;
     function cb(buttonIndex, confirmValue?:string) {
-        onClick(buttonIndex, confirmValue);
+        onTouchTap(buttonIndex, confirmValue);
         close();
     }
     document.body.style.overflow = 'hidden';
-    ReactDOM.render(<AlertDialog defaultValue={config.defaultValue} type={type} onClick={cb} title={config.title} message={config.message} buttons={config.buttons}/>, div);
+    ReactDOM.render(<AlertDialog defaultValue={config.defaultValue} type={type} onTouchTap={cb} title={config.title} message={config.message} buttons={config.buttons}/>, div);
 }
 
 export default class Alert {

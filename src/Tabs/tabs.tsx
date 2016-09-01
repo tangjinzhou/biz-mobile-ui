@@ -6,7 +6,7 @@ interface TabsPropType{
     className? : string,
     selectedIndex? : number,
     onChange?: (x:number, y:number)=>void,
-    onTabClick?:(x:number, y:number)=>void,
+    onTabTouchTap?:(x:number, y:number)=>void,
     animation?: boolean,
     animateTransitions?: boolean,
 }
@@ -17,7 +17,7 @@ export default class Tabs extends React.Component<TabsPropType, any>{
         prefixCls: 'bm-tabs',
         className: '',
         onChange:()=>{},
-        onTabClick: ()=>{},
+        onTabTouchTap: ()=>{},
         animation: true,
         animateTransitions: false,
     };
@@ -65,7 +65,7 @@ export default class Tabs extends React.Component<TabsPropType, any>{
     }
     handleTabTouchTap = (index, tab) => {
         this.handleChange(index, this.state.selectedIndex);
-        this.props.onTabClick(index, this.state.selectedIndex);
+        this.props.onTabTouchTap(index, this.state.selectedIndex);
     }
     handleChange = (index, fromIndex)=> {
         if(index !== fromIndex){
@@ -93,7 +93,7 @@ export default class Tabs extends React.Component<TabsPropType, any>{
                 key: index,
                 index: index,
                 selected: this.state.selectedIndex === index,
-                onTouchTap: this.handleTabTouchTap,
+                handleTabTouchTap: this.handleTabTouchTap,
                 updateSelectedPos: this.updateSelectedPos
             });
         });
