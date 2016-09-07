@@ -1,8 +1,10 @@
 {
   "globalDependencies": {
     "classnames": "registry:dt/classnames#0.0.0+20160316155526",
+    "radium": "registry:dt/radium#0.17.1+20160705223203",
     "react": "registry:dt/react#0.14.0+20160720060442",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
-    "react-tap-event-plugin": "registry:dt/react-tap-event-plugin#0.0.0+20160602142434"
+    "react-tap-event-plugin": "registry:dt/react-tap-event-plugin#0.0.0+20160602142434",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160829180742"
   }
 }

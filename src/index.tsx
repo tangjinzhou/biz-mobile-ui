@@ -10,3 +10,5 @@ export {default as Icon} from './Icon';
 export {default as Line} from './Line';
 export {default as Tabs} from './Tabs';
 export {default as Tab} from './Tabs/tab';
+export {default as TabBar} from './TabBar/tabBar';
+export {default as TabBarItem} from './TabBar/tabBarItem';

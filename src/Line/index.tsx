@@ -4,9 +4,9 @@ import * as classNames from 'classnames';
 type LineType = "across" | "vertical";
 interface LinePropType {
     prefixCls?: 'bm-line',
-    type?: LineType;
-    className?: string;
-    style?: {}
+    type?: LineType,
+    className?: string,
+    style?: React.CSSProperties,
 }
 
 export default class Line extends React.Component<LinePropType, any> {

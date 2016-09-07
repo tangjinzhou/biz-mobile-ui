@@ -11,7 +11,7 @@ interface ButtonProps {
 
 interface AlertConfigProps {
     title?: string;
-    message?: any;
+    message?: string | React.ReactNode;
     buttons?: Array<ButtonProps>;
     onTouchTap?: (x?:number, y?: string) => any;
     defaultValue?: string;
@@ -20,7 +20,7 @@ interface AlertConfigProps {
 interface AlertDialogProps {
     prefixCls?: string;
     title?: string;
-    message?: any;
+    message?: string | React.ReactNode;
     className?: string;
     onTouchTap?: (x?: number, y?: string) => any;
     buttons?: Array<ButtonProps>;

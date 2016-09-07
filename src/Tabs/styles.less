@@ -3,12 +3,13 @@
 
 .@{tabsPrefixCls} {
   width: 100%;
-  white-space: nowrap;
   &-container {
     position: relative;
+    background-color: @white-darker;
     display: flex;
+    white-space: nowrap;
     color: @text-2;
-    overflow: scroll;
+    overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
     &::-webkit-scrollbar{
       display: none;
@@ -16,7 +17,7 @@
   }
   .@{tabPrefixCls} {
     position: relative;
-    .px2rem(height, 44px);
+    .height(40px);
     text-align: center;
     flex: 1;
     min-width: -webkit-min-content;
@@ -32,8 +33,8 @@
     top: 100%;
     left: 0;
     width: 100%;
-    .px2rem(height, 2px);
-    .px2rem(margin-top, -1px);
+    .height(2px);
+    .margin-top(-1px);
     background-color: @bg-1;
   }
   .@{tabPrefixCls}-active {

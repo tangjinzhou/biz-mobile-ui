@@ -18,13 +18,13 @@ var updateView = function(width){
     docEl.style.fontSize = rem + 'px';
 }
 
-updateView(docEl.getBoundingClientRect().width);
+updateView(Math.min(docEl.getBoundingClientRect().width, docEl.getBoundingClientRect().height));
 
 var a;
 window.addEventListener("resize", function(){
     clearTimeout(a);
     a = setTimeout(function(){
-        updateView(docEl.getBoundingClientRect().width);
+        updateView(Math.min(docEl.getBoundingClientRect().width, docEl.getBoundingClientRect().height));
     }, 300);
 }, false)
 

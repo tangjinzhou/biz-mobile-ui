@@ -4,7 +4,7 @@ interface TabPropType{
     prefixCls? : string,
     className? : string,
     label : string,
-    icon? : any,
+    icon? : React.ReactNode,
     key?: number,
     index?: number,
     selected?: boolean,
@@ -20,34 +20,38 @@ export default class Tab extends React.Component<TabPropType, any>{
     tabRequestAnimation = null;
     componentDidMount() {
         if(this.props.selected) {
-            this.updateSelectedPos(this._tab.offsetLeft, this._tab.clientWidth);
+            this.updateSelectedPos(this._tab.offsetLeft, this._tab.clientWidth, false);
         }
     }
     componentDidUpdate() {
         if(this.props.selected) {
-            this.updateSelectedPos(this._tab.offsetLeft, this._tab.clientWidth);
+            this.updateSelectedPos(this._tab.offsetLeft, this._tab.clientWidth, true);
         }
     }
     componentWillUnmount() {
         this.tabRequestAnimation && cancelAnimationFrame(this.tabRequestAnimation);
     }
-    updateSelectedPos(tabOffsetLeft, tabWidth) {
+    updateSelectedPos(tabOffsetLeft, tabWidth, animation) {
         this.tabRequestAnimation && cancelAnimationFrame(this.tabRequestAnimation);
         this._tabContainer = this._tab.parentNode;
-        const containerWidth = this._tabContainer.clientWidth;
-        const scrollLeft = tabOffsetLeft - containerWidth/2 + tabWidth/2;
-        if(this._tabContainer.scrollLeft !== scrollLeft) {
-            let direction = this._tabContainer.scrollLeft < scrollLeft ? 'fordward' : 'backward';
-            let stepNum = (scrollLeft - this._tabContainer.scrollLeft)/20;
-            this.tabRequestAnimation = requestAnimationFrame(() => this.stepScrollLeft(scrollLeft, direction, stepNum));
+        let containerWidth = this._tabContainer.clientWidth;
+        let fromScrollLeft = this._tabContainer.scrollLeft;
+        let toScrollLeft = tabOffsetLeft - containerWidth/2 + tabWidth/2;
+        if(!animation){
+            this._tabContainer.scrollLeft = toScrollLeft;
+        }
+        if(animation && fromScrollLeft !== toScrollLeft) {
+            let direction = fromScrollLeft < toScrollLeft ? 'fordward' : 'backward';
+            let stepNum = (toScrollLeft - fromScrollLeft)/20;
+            this.tabRequestAnimation = requestAnimationFrame(() => this.stepScrollLeft(toScrollLeft, direction, stepNum));
         }
     }
-    stepScrollLeft(scrollLeft, direction, stepNum){
-        let preScrollLeft = this._tabContainer.scrollLeft;
+    stepScrollLeft(toScrollLeft, direction, stepNum){
+        let fromScrollLeft = this._tabContainer.scrollLeft;
         this._tabContainer.scrollLeft += stepNum;
-        let newScrollLeft = this._tabContainer.scrollLeft;
-        if(preScrollLeft != newScrollLeft && (direction === 'fordward' ? newScrollLeft < scrollLeft : newScrollLeft > scrollLeft)) {
-            this.tabRequestAnimation = requestAnimationFrame(()=>this.stepScrollLeft(scrollLeft, direction, stepNum));
+        let newFromScrollLeft = this._tabContainer.scrollLeft;
+        if(fromScrollLeft != newFromScrollLeft && (direction === 'fordward' ? newFromScrollLeft < toScrollLeft : newFromScrollLeft > toScrollLeft)) {
+            this.tabRequestAnimation = requestAnimationFrame(()=>this.stepScrollLeft(toScrollLeft, direction, stepNum));
         }
     }
     render() {
@@ -66,5 +70,4 @@ export default class Tab extends React.Component<TabPropType, any>{
             </div>
         )
     }
-
 }

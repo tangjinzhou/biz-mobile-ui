@@ -36,6 +36,10 @@ app.get('/dist/dll.vendor.js', function (req, res) {
     res.sendFile(path.join(__dirname, 'dist', 'dll.vendor.js'));
 });
 
+app.get('/*.action', function (req, res) {
+    res.sendFile(path.join(__dirname, 'mock',req.url.replace('.action','.json')));
+})
+
 app.listen(3333, function(err) {
     if (err) {
         console.log(err);

@@ -1,0 +1,40 @@
+@tabBarPrefixCls: bm-tabBar;
+@tabBarItemPrefixCls: bm-tabBarItem;
+
+.@{tabBarPrefixCls} {
+  width: 100%;
+  &-content-container {
+    .padding-bottom(40px);
+  }
+  &-container {
+    position: fixed;
+    bottom:0;
+    width: 100%;
+    display: flex;
+    white-space: nowrap;
+    color: @grey-600;
+    .border-top(1px, solid, @grey-700);
+    background-color: @white-darker;
+  }
+  .@{tabBarItemPrefixCls} {
+    .height(40px);
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .font-size(10px);
+  }
+  .@{tabBarItemPrefixCls}-active {
+    color: @bg-1;
+  }
+
+  &-content {
+    width: 100%;
+  }
+  &-content-hidden {
+    display: none;
+  }
+
+}
