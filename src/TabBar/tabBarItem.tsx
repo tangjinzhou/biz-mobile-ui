@@ -8,15 +8,15 @@ interface TabBarItemPropType{
     key?: number,
     index?: number,
     selected?: boolean,
-    handleTabTouchTap?: (x:number, y: any) => any;
+    handleChange?: (x:number, y: React.SyntheticEvent) => any;
 }
 export default class TabBarItem extends React.Component<TabBarItemPropType, any>{
     static defaultProps = {
-        prefixCls: 'bm-tabBarItem',
+        prefixCls: 'biz-tabBarItem',
         className: '',
     };
     render() {
-        const {prefixCls, className,index, label, key, icon, selected, handleTabTouchTap} = this.props;
+        const {prefixCls, className,index, label, key, icon, selected, handleChange} = this.props;
         const tabClass = classNames({
             [`${prefixCls}`]: true,
             [`${prefixCls}-active`]: selected,
@@ -24,7 +24,7 @@ export default class TabBarItem extends React.Component<TabBarItemPropType, any>
         });
 
         return (
-            <div className={tabClass} onTouchTap={()=>handleTabTouchTap(index, this)}>
+            <div className={tabClass} onTouchTap={(e)=>handleChange(index, e)}>
                 {icon}
                 {label}
             </div>

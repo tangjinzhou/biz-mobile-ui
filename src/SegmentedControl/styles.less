@@ -1,0 +1,30 @@
+@segmentedPrefixCls: biz-segmented;
+
+.@{segmentedPrefixCls} {
+    width: 100%;
+    display: flex;
+    white-space: nowrap;
+    color: @bg-1;
+    .border(1px, solid, @bg-1);
+    .border-radius(5px);
+    background-color: @white-darker;
+    overflow: hidden;
+  &-item {
+    .min-height(27px);
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .font-size(13px);
+    .border-right(1px, solid, @bg-1);
+    &:last-child {
+      border-right: 0;
+    }
+  }
+  &-item-active {
+    background: @bg-1;
+  }
+
+}

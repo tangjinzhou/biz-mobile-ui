@@ -8,11 +8,11 @@ interface TabPropType{
     key?: number,
     index?: number,
     selected?: boolean,
-    handleTabTouchTap?: (x:number, y: any) => any;
+    handleChange?: (x:number, y: React.SyntheticEvent) => any;
 }
 export default class Tab extends React.Component<TabPropType, any>{
     static defaultProps = {
-        prefixCls: 'bm-tab',
+        prefixCls: 'biz-tab',
         className: '',
     };
     _tab = null;
@@ -55,7 +55,7 @@ export default class Tab extends React.Component<TabPropType, any>{
         }
     }
     render() {
-        const {prefixCls, className,index, label, key, icon, selected, handleTabTouchTap} = this.props;
+        const {prefixCls, className,index, label, key, icon, selected, handleChange} = this.props;
         const tabClass = classNames({
             [`${prefixCls}`]: true,
             [`${prefixCls}-active`]: selected,
@@ -63,7 +63,7 @@ export default class Tab extends React.Component<TabPropType, any>{
         });
 
         return (
-            <div ref={(c) => this._tab = c} className={tabClass} onTouchTap={()=>handleTabTouchTap(index, this)}>
+            <div ref={(c) => this._tab = c} className={tabClass} onTouchTap={(e)=>handleChange(index, e)}>
                 {icon}
                 {label}
                 {selected? <div className={`${prefixCls}-inkBar`}></div> : null}

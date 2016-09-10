@@ -5,8 +5,7 @@ interface TabsPropType{
     prefixCls? : string,
     className? : string,
     selectedIndex? : number,
-    onChange?: (x:number, y:number)=>void,
-    onTabTouchTap?:(x:number, y:number)=>void,
+    onChange?: (x:number, y:number,z?:React.SyntheticEvent)=>void,
     animation?: boolean,
     animateTransitions?: boolean,
     other?: any,
@@ -16,7 +15,7 @@ interface TabsPropType{
 export default class Tabs extends React.Component<TabsPropType, any>{
     static defaultProps = {
         selectedIndex: 0,
-        prefixCls: 'bm-tabs',
+        prefixCls: 'biz-tabs',
         className: '',
         onChange:()=>{},
         onTabTouchTap: ()=>{},
@@ -65,15 +64,18 @@ export default class Tabs extends React.Component<TabsPropType, any>{
             return null;
         }
     }
-    handleTabTouchTap = (index, tab) => {
-        this.handleChange(index, this.state.selectedIndex);
-        this.props.onTabTouchTap(index, this.state.selectedIndex);
-    }
-    handleChange = (index, fromIndex)=> {
+
+    handleChange = (index, e)=> {
+        const fromIndex = this.state.selectedIndex;
+        this.props.onChange(index, fromIndex, e);
         if(index !== fromIndex){
-            this.props.onChange(index, fromIndex);
             this.setState({selectedIndex: index});
         }
+    }
+
+    swipeableViewsChange = (index, fromIndex)=> {
+        this.props.onChange(index, fromIndex);
+        this.setState({selectedIndex: index});
     }
     render() {
         const {prefixCls, className, onChange, animation, animateTransitions, tabsPosition} = this.props;
@@ -88,7 +90,7 @@ export default class Tabs extends React.Component<TabsPropType, any>{
                 key: index,
                 index: index,
                 selected: this.state.selectedIndex === index,
-                handleTabTouchTap: this.handleTabTouchTap
+                handleChange: this.handleChange
             });
         });
         const tabsContainer = <div className={`${prefixCls}-container`}>{tabs}</div>;
@@ -99,7 +101,7 @@ export default class Tabs extends React.Component<TabsPropType, any>{
                     {animation ?
                         <SwipeableViews
                             index={this.state.selectedIndex}
-                            onChangeIndex={this.handleChange}
+                            onChangeIndex={this.swipeableViewsChange}
                             animateTransitions={animateTransitions}
                         >
                             {contents}</SwipeableViews> : {contents}

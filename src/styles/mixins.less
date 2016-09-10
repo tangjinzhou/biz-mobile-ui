@@ -62,6 +62,9 @@
 .height(@height) {
   .px2rem(height, @height);
 }
+.min-height(@height) {
+  .px2rem(min-height, @height);
+}
 
 .width(@width) {
   .px2rem(width, @width);
@@ -172,7 +175,7 @@
   .px2rem(padding-right, @width);
 }
 
-.bg-mask(@bg-color: @black-lighter, @z-index: 999) {
+.bg-mask(@bg-color: @black-dark, @z-index: 999) {
   position: fixed;
   top: 0;
   right: 0;

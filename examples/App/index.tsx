@@ -1,16 +1,23 @@
+import * as attachFastClick from 'fastclick';
+//attachFastClick['attach'](document.body);
 import * as React from 'react';
 import request from './request';
 
-import {Button, Alert, Icon, Line, Tabs, Tab, TabBar, TabBarItem} from '../../src/index.tsx';
+import {Button, Alert, Icon, Line, Tabs, Tab, TabBar, TabBarItem, SegmentedControl} from '../../src/index.tsx';
 interface AppProps {
 
 }
 
 const styles = {
     tab: {
-        backgroundColor: '#F44336',
+        backgroundColor: '#ddd',
         height: '2800px',
         textAlign: 'center',
+        overflow: 'hidden',
+    },
+    seg: {
+        width: '90%',
+        margin: '20px auto 0',
     }
 }
 export default class App extends React.Component<AppProps, any> {
@@ -34,8 +41,8 @@ export default class App extends React.Component<AppProps, any> {
     showAlertConfirm() {
         Alert.confirm({title:'请输入用户名', defaultValue: 'tjz', onTouchTap: this.showAlertWithTwoBtn});
     }
-    onTabChange(index, preIndex) {
-        console.log(index, preIndex);
+    onTabChange(index, preIndex, tab) {
+        console.log(index, preIndex, tab);
     }
     changeTabsSelect=()=> {
         this.setState({selectIndex: 1 - this.state.selectIndex});
@@ -46,7 +53,11 @@ export default class App extends React.Component<AppProps, any> {
                 <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>}>
                     <Tabs selectedIndex={this.state.selectIndex} onChange={this.onTabChange} animation={true}>
                         <Tab label="旭日">
-                            <div style={styles.tab}>world1</div>
+                            <div style={styles.tab}>
+                                <SegmentedControl onChange={this.onTabChange} style={styles.seg} values={['详情','评论','相关']}/>
+                                <SegmentedControl onChange={this.onTabChange} selectedIndex={1} tintColor='#8E24AA' style={styles.seg} values={['详情','评论','相关']}/>
+                                <SegmentedControl onChange={this.onTabChange} style={Object.assign({},styles.seg, {width: '80%', height: '150px'})} values={['详情','评论']} enabled={false}/>
+                            </div>
                         </Tab>
                         <Tab label="晨星">
                             <div style={Object.assign({}, styles.tab, {backgroundColor: '#2196F3'})}>world2</div>

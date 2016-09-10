@@ -11,7 +11,7 @@ interface ButtonProps {
 
 export default class Button extends React.Component<ButtonProps, any> {
   static defaultProps = {
-    prefixCls: 'bm-button',
+    prefixCls: 'biz-button',
     type: 'button',
     disabled: false,
     onTouchTap: () => { },
