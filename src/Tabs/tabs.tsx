@@ -5,7 +5,7 @@ interface TabsPropType{
     prefixCls? : string,
     className? : string,
     selectedIndex? : number,
-    onChange?: (x:number, y:number,z?:React.SyntheticEvent)=>void,
+    onChangeIndex?: (x:number, y:number)=>void,
     animation?: boolean,
     animateTransitions?: boolean,
     other?: any,
@@ -17,7 +17,7 @@ export default class Tabs extends React.Component<TabsPropType, any>{
         selectedIndex: 0,
         prefixCls: 'biz-tabs',
         className: '',
-        onChange:()=>{},
+        onChangeIndex:()=>{},
         onTabTouchTap: ()=>{},
         animation: true,
         animateTransitions: false,
@@ -67,18 +67,17 @@ export default class Tabs extends React.Component<TabsPropType, any>{
 
     handleChange = (index, e)=> {
         const fromIndex = this.state.selectedIndex;
-        this.props.onChange(index, fromIndex, e);
+        this.props.onChangeIndex(index, fromIndex);
         if(index !== fromIndex){
             this.setState({selectedIndex: index});
         }
     }
-
     swipeableViewsChange = (index, fromIndex)=> {
-        this.props.onChange(index, fromIndex);
+        this.props.onChangeIndex(index, fromIndex);
         this.setState({selectedIndex: index});
     }
     render() {
-        const {prefixCls, className, onChange, animation, animateTransitions, tabsPosition} = this.props;
+        const {prefixCls, className, animation, animateTransitions, tabsPosition} = this.props;
         const tabsClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,

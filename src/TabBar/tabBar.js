@@ -5,13 +5,10 @@ class TabBar extends React.Component {
     constructor(...args) {
         super(...args);
         this.state = { selectedIndex: 0 };
-        this.handleTabTouchTap = (index, tab) => {
-            this.handleChange(index, this.state.selectedIndex);
-            this.props.onTabTouchTap(index, this.state.selectedIndex);
-        };
-        this.handleChange = (index, fromIndex) => {
+        this.handleChange = (index, e) => {
+            const fromIndex = this.state.selectedIndex;
+            this.props.onChangeIndex(index, fromIndex);
             if (index !== fromIndex) {
-                this.props.onChange(index, fromIndex);
                 this.setState({ selectedIndex: index });
             }
         };
@@ -54,7 +51,7 @@ class TabBar extends React.Component {
         }
     }
     render() {
-        const { prefixCls, className, onChange } = this.props;
+        const { prefixCls, className, onChangeIndex } = this.props;
         const tabsClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
@@ -66,7 +63,7 @@ class TabBar extends React.Component {
                 key: index,
                 index: index,
                 selected: this.state.selectedIndex === index,
-                handleTabTouchTap: this.handleTabTouchTap
+                handleChange: this.handleChange
             });
         });
         const tabsContainer = React.createElement("div", {className: `${prefixCls}-container`}, tabs);
@@ -75,9 +72,9 @@ class TabBar extends React.Component {
 }
 TabBar.defaultProps = {
     selectedIndex: 0,
-    prefixCls: 'bm-tabBar',
+    prefixCls: 'biz-tabBar',
     className: '',
-    onChange: () => { },
+    onChangeIndex: () => { },
     onTabTouchTap: () => { },
 };
 Object.defineProperty(exports, "__esModule", { value: true });

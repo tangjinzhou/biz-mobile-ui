@@ -6,7 +6,7 @@ interface SegmentedControlPropType{
     enabled?: boolean;
     selectedIndex?: number;
     values?: Array<string>;
-    onChange?: (x:number, y:number,z?:React.SyntheticEvent)=>void,
+    onChangeIndex?: (x:number, y:number)=>void,
     style?: any;
     prefixCls?: string;
     className?: string;
@@ -17,7 +17,7 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
         selectedIndex: 0,
         prefixCls: 'biz-segmented',
         className: '',
-        onChange:()=>{},
+        onChangeIndex:()=>{},
         values: [],
         style: {},
         enabled: true,
@@ -33,10 +33,10 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
     }
 
     onTouchTap = (e, index, value)=> {
-        const {onChange, enabled} = this.props;
+        const {onChangeIndex, enabled} = this.props;
         const fromIndex = this.state.selectedIndex;
         if(enabled){
-            onChange(index, fromIndex, e);
+            onChangeIndex(index, fromIndex);
             if(index !== fromIndex) {
                 this.setState({selectedIndex: index});
             }
@@ -44,7 +44,7 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
     }
     
     render() {
-        const {prefixCls, className, onChange, enabled, values, tintColor, style} = this.props;
+        const {prefixCls, className, onChangeIndex, enabled, values, tintColor, style} = this.props;
         const segmentedClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
@@ -62,8 +62,8 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
                     ref={(c)=>this['_tab_'+index]=c}
                     onTouchTap={(e) => this.onTouchTap(e, index, value)}
                     style={{
-                        color: index === selectedIndex ? '#fff' : tintColor,
-                        backgroundColor: index === selectedIndex ? tintColor : '#fff',
+                        color: index === selectedIndex ? '' : tintColor,
+                        backgroundColor: index === selectedIndex ? tintColor : '',
                         borderColor: tintColor,
                     }}
                 >

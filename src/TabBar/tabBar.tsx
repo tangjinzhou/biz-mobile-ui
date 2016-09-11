@@ -4,7 +4,7 @@ interface TabBarPropType{
     prefixCls? : string,
     className? : string,
     selectedIndex? : number,
-    onChange?: (x:number, y:number, z:React.SyntheticEvent)=>void,
+    onChangeIndex?: (x:number, y:number)=>void,
 }
 
 export default class TabBar extends React.Component<TabBarPropType, any>{
@@ -12,7 +12,7 @@ export default class TabBar extends React.Component<TabBarPropType, any>{
         selectedIndex: 0,
         prefixCls: 'biz-tabBar',
         className: '',
-        onChange:()=>{},
+        onChangeIndex:()=>{},
         onTabTouchTap: ()=>{},
     };
     state = {selectedIndex: 0};
@@ -59,13 +59,13 @@ export default class TabBar extends React.Component<TabBarPropType, any>{
 
     handleChange = (index, e)=> {
         const fromIndex = this.state.selectedIndex;
-        this.props.onChange(index, fromIndex, e);
+        this.props.onChangeIndex(index, fromIndex);
         if(index !== fromIndex){
             this.setState({selectedIndex: index});
         }
     }
     render() {
-        const {prefixCls, className, onChange} = this.props;
+        const {prefixCls, className, onChangeIndex} = this.props;
         const tabsClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,

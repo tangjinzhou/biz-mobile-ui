@@ -14,3 +14,5 @@ export {default as Tab} from './Tabs/tab';
 export {default as TabBar} from './TabBar/tabBar';
 export {default as TabBarItem} from './TabBar/tabBarItem';
 export {default as SegmentedControl} from './SegmentedControl';
+export {default as LinearProgress} from './LinearProgress';
+export {default as Carousel} from './Carousel';

@@ -1,0 +1,35 @@
+@linearProgressPrefixCls: biz-linearProgress;
+.@{linearProgressPrefixCls} {
+  position: relative;
+  background-color: @grey-400;
+  .height(4px);
+  width: 100%;
+  .border-radius(2px);
+  overflow: hidden;
+  &-indeterminate{
+      position: absolute;
+      top: 0;
+      left: -40%;
+      width: 40%;
+      height: 100%;
+      background: @bg-1;
+      transform: translate3d(0, 0, 0);
+      animation: indeterminateProgress 900ms infinite linear;
+  }
+  &-determinate{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: @bg-1;
+    transition: width 0.3s linear 0ms;
+  }
+}
+@keyframes indeterminateProgress {
+  0%{
+    left: -40%;
+  }
+  100%{
+    left: 100%;
+  }
+}
