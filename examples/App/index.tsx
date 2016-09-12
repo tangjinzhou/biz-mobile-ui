@@ -2,7 +2,6 @@ import * as attachFastClick from 'fastclick';
 //attachFastClick['attach'](document.body);
 import * as React from 'react';
 import request from './request';
-
 import {
     Button,
     Alert,
@@ -15,6 +14,7 @@ import {
     SegmentedControl,
     LinearProgress,
     Carousel,
+    Badge
 } from '../../src/index.tsx';
 interface AppProps {
 
@@ -97,7 +97,7 @@ export default class App extends React.Component<AppProps, any> {
     render() {
         return (
             <TabBar selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange}>
-                <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>}>
+                <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>} badgeContent={21}>
                     <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>
                         <Tab label="旭日">
                             <Carousel onChangeIndex={this.onTabChange} autoplay={true} style={{height: 500}}>
@@ -124,6 +124,7 @@ export default class App extends React.Component<AppProps, any> {
                                         onTouchTap={()=>this.changeProgress(this.state.progress - 10)}
                                         size="small">- 10</Button>
                             </div>
+
                         </Tab>
                         <Tab label="晨星">
                             <div style={Object.assign({}, styles.tab, {backgroundColor: '#2196F3'})}>world2</div>
@@ -131,10 +132,10 @@ export default class App extends React.Component<AppProps, any> {
                         <Tab label="品专">
                             <div style={Object.assign({}, styles.tab, {backgroundColor: '#009688'})}>world3</div>
                         </Tab>
-                        <Tab label="大竞价">
+                        <Tab label="大竞价" badgeContent="99+">
                             <div style={Object.assign({}, styles.tab, {backgroundColor: '#FFEB3B'})}>world4</div>
                         </Tab>
-                        <Tab label="信息流">
+                        <Tab label="信息流" badgeContent="new">
                             <div style={Object.assign({}, styles.tab, {backgroundColor: '#9E9E9E'})}>world5</div>
                         </Tab>
                         <Tab label="晨星">
@@ -162,7 +163,7 @@ export default class App extends React.Component<AppProps, any> {
                     <Button onTouchTap={this.showAlertConfirm.bind(this)}><Icon size="2x" spin={true} type="spinner"/>showAlertConfirm</Button>
                     <Button onTouchTap={this.changeTabsSelect}>changeTabsSelect</Button>
                 </TabBarItem>
-                <TabBarItem label="我的" icon={<Icon type="user" size="2x"/>}>
+                <TabBarItem label="我的" icon={<Icon type="user" size="2x"/>} badgeContent={<span>&sdot;&sdot;&sdot;</span>}>
                     <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>
                         <Tab label="旭日">
                             <div style={styles.tab}>world1</div>
@@ -172,7 +173,7 @@ export default class App extends React.Component<AppProps, any> {
                         </Tab>
                     </Tabs>
                 </TabBarItem>
-                <TabBarItem label="我的" icon={<Icon type="user" size="2x"/>}>
+                <TabBarItem label="我的" icon={<Icon type="user" size="2x"/>} badgeContent="">
                     <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>
                         <Tab label="旭日">
                             <div style={styles.tab}>world1</div>

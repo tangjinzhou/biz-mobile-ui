@@ -14,7 +14,7 @@
     white-space: nowrap;
     color: @grey-600;
     .border-top(1px, solid, @grey-700);
-    background-color: @white-darker;
+    background-color: @grey-100;
   }
   .@{tabBarItemPrefixCls} {
     .height(40px);
@@ -25,6 +25,10 @@
     align-items: center;
     justify-content: center;
     .font-size(10px);
+    &-badge {
+      .px2rem(top, -33px);
+      .px2rem(left, 5px);
+    }
   }
   .@{tabBarItemPrefixCls}-active {
     color: @bg-1;

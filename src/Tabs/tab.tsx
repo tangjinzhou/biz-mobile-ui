@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import Badge from '../Badge';
 interface TabPropType{
     prefixCls? : string,
     className? : string,
@@ -8,12 +9,14 @@ interface TabPropType{
     key?: number,
     index?: number,
     selected?: boolean,
-    handleChange?: (x:number, y: React.SyntheticEvent) => any;
+    handleChange?: (x:number, y: React.SyntheticEvent) => any,
+    badgeContent?: any,
 }
 export default class Tab extends React.Component<TabPropType, any>{
     static defaultProps = {
         prefixCls: 'biz-tab',
         className: '',
+        badgeContent: null,
     };
     _tab = null;
     _tabContainer = null;
@@ -55,7 +58,7 @@ export default class Tab extends React.Component<TabPropType, any>{
         }
     }
     render() {
-        const {prefixCls, className,index, label, key, icon, selected, handleChange} = this.props;
+        const {prefixCls, className,index, label, key, icon, selected, handleChange, badgeContent} = this.props;
         const tabClass = classNames({
             [`${prefixCls}`]: true,
             [`${prefixCls}-active`]: selected,
@@ -66,6 +69,7 @@ export default class Tab extends React.Component<TabPropType, any>{
             <div ref={(c) => this._tab = c} className={tabClass} onTouchTap={(e)=>handleChange(index, e)}>
                 {icon}
                 {label}
+                {badgeContent !== null ?<Badge className={`${prefixCls}-badge`} content={badgeContent}/>:null}
                 {selected? <div className={`${prefixCls}-inkBar`}></div> : null}
             </div>
         )

@@ -2,8 +2,10 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
-
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 interface CarouselProps {
+    prefixCls? : string,
+    className? : string,
     selectedIndex?: number,
     autoplay?: boolean,
     interval?: number,
@@ -13,10 +15,13 @@ interface CarouselProps {
     resistance?: boolean,
     style?: {},
     onSwitching?: (x: number, y?:string) => void,
+    showDots?: boolean,
 }
 
 export default class Carousel extends React.Component<CarouselProps, any> {
     static defaultProps = {
+        prefixCls: 'biz-carousel',
+        className: '',
         selectedIndex: 0,
         autoplay: false,
         interval: 3000,
@@ -25,22 +30,53 @@ export default class Carousel extends React.Component<CarouselProps, any> {
         disabled: false,
         resistance: false,
         onSwitching: () => {},
+        showDots: true,
     }
-
+    state = {selectedIndex: this.props.selectedIndex}
+    getDots() {
+        const dots = [];
+        const {prefixCls, children}=this.props;
+        const dotsCount = React.Children.count(children);
+        const selectedIndex = this.state.selectedIndex;
+        for (let i = 0; i < dotsCount; i++){
+            const dotClass = classNames({
+                [`${prefixCls}-active`]: selectedIndex === i,
+                [`${prefixCls}-dot`]: true,
+            });
+            dots.push(<span key={i} className={dotClass}></span>);
+        }
+        return dots;
+    }
+    onChangeIndex = (index, fromIndex)=>{
+        this.props.onChangeIndex(index, fromIndex);
+        this.setState({selectedIndex: index});
+    }
     render(){
-        const {selectedIndex, children, autoplay} = this.props;
-        const swipeableProps = Object.assign({},this.props,{index: selectedIndex});
-        delete swipeableProps.selectedIndex;
+        const {prefixCls, children, autoplay,interval,threshold,disabled,resistance, onSwitching, showDots} = this.props;
+        const swipeableProps = {
+            index: this.state.selectedIndex,
+            threshold: threshold,
+            disabled: disabled,
+            resistance: false,
+            onSwitching: onSwitching,
+            autoplay: autoplay,
+            interval: interval
+        };
+
         let SwipeableComponent = null;
         if(autoplay){
-            SwipeableComponent = autoPlay(SwipeableViews);
+            SwipeableComponent = AutoPlaySwipeableViews;
         } else {
             delete swipeableProps.autoplay;
             delete swipeableProps.interval;
             SwipeableComponent = SwipeableViews;
         }
+        const dots = this.getDots();
         return (
-            <SwipeableComponent  {...swipeableProps}>{children}</SwipeableComponent>
+            <div className={prefixCls}>
+                <SwipeableComponent  {...swipeableProps} onChangeIndex={this.onChangeIndex}>{children}</SwipeableComponent>
+                {showDots?<div className={`${prefixCls}-dots`}>{dots}</div>:null}
+            </div>
         )
     }
 }

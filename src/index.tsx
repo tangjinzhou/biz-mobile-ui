@@ -1,10 +1,9 @@
 import './styles/app.less';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import animationFrame from './util/animationFrame';
-
 injectTapEventPlugin();
 animationFrame();
-
+import {px2rem, htmlFontSize} from './util/util';
 export {default as Alert} from './Alert';
 export {default as Button} from './Button';
 export {default as Icon} from './Icon';
@@ -16,3 +15,4 @@ export {default as TabBarItem} from './TabBar/tabBarItem';
 export {default as SegmentedControl} from './SegmentedControl';
 export {default as LinearProgress} from './LinearProgress';
 export {default as Carousel} from './Carousel';
+export {default as Badge} from './Badge';

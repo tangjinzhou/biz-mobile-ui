@@ -1,0 +1,24 @@
+@carouselPrefixCls: biz-carousel;
+.@{carouselPrefixCls} {
+  position: relative;
+  &-dots{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    .bottom(6px);
+    left: 0;
+    width: 100%;
+  }
+  &-dot{
+    .margin(0, 2px);
+    .width(8px);
+    .height(8px);
+    border-radius: 50%;
+    font-size: 0;
+    line-height: 0;
+    background-color: @white-light;
+  }
+  &-active{
+    background-color: @white-darker;
+  }
+}
