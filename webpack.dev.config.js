@@ -6,7 +6,16 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 //var Config = require('webpack-config').Config;
 var path = require("path");
 var nodeModulesPath = path.join(__dirname, 'node_modules');
-
+var pxtorem = require('postcss-pxtorem');
+const pxtoremOpts = {
+    rootValue: 37.5,
+    unitPrecision: 5,
+    propWhiteList: [],
+    selectorBlackList: [],
+    replace: true,
+    mediaQuery: false,
+    minPixelValue: 2
+};
 var devConfigExtension = {
     cache: true,
     entry: {
@@ -60,7 +69,7 @@ var devConfigExtension = {
         ]
     },
     postcss: function () {
-        return [require('postcss-flexboxfixer'), require('autoprefixer')];
+        return [require('postcss-flexboxfixer'), require('autoprefixer'), pxtorem(pxtoremOpts)];
     },
     plugins: [
         new webpack.DllReferencePlugin({

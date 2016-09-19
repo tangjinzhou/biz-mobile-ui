@@ -11,6 +11,7 @@ interface TabPropType{
     selected?: boolean,
     handleChange?: (x:number, y: React.SyntheticEvent) => any,
     badgeContent?: any,
+    style?:{},
 }
 export default class Tab extends React.Component<TabPropType, any>{
     static defaultProps = {
@@ -58,7 +59,7 @@ export default class Tab extends React.Component<TabPropType, any>{
         }
     }
     render() {
-        const {prefixCls, className,index, label, key, icon, selected, handleChange, badgeContent} = this.props;
+        const {prefixCls, className,index, label, key, icon, selected, handleChange, badgeContent, style} = this.props;
         const tabClass = classNames({
             [`${prefixCls}`]: true,
             [`${prefixCls}-active`]: selected,
@@ -66,11 +67,10 @@ export default class Tab extends React.Component<TabPropType, any>{
         });
 
         return (
-            <div ref={(c) => this._tab = c} className={tabClass} onTouchTap={(e)=>handleChange(index, e)}>
+            <div style={style} ref={(c) => this._tab = c} className={tabClass} onTouchTap={(e)=>handleChange(index, e)}>
                 {icon}
                 {label}
                 {badgeContent !== null ?<Badge className={`${prefixCls}-badge`} content={badgeContent}/>:null}
-                {selected? <div className={`${prefixCls}-inkBar`}></div> : null}
             </div>
         )
     }

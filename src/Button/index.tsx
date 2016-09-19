@@ -18,9 +18,12 @@ export default class Button extends React.Component<ButtonProps, any> {
     onTouchTap: () => { },
     className: '',
   };
-
+  onTouchTap(e){
+    const {disabled, onTouchTap} = this.props;
+    disabled || this.props.onTouchTap(e);
+  }
   render() {
-    const {prefixCls, className, size, type, disabled, onTouchTap, children, style} = this.props;
+    const {prefixCls, className, size, type, disabled, children, style} = this.props;
     const btnClass = classNames({
       [className]: true,
       [prefixCls]: true,
@@ -28,7 +31,7 @@ export default class Button extends React.Component<ButtonProps, any> {
       [`${prefixCls}-small`]: size === 'small',
     });
     return (
-        <button style={style} className={btnClass} type={type} disabled={disabled} onTouchTap={onTouchTap} >{children}</button>
+        <button style={style} className={btnClass} type={type} disabled={disabled} onTouchTap={(e)=>this.onTouchTap(e)} >{children}</button>
     );
   }
 }

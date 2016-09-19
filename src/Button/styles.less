@@ -4,12 +4,11 @@
   position: relative;
   display: inline-block;
   width: 100%;
-  padding: 0;
-  .px2rem(font-size, @font-size-6);
-  .border-radius();
+  font-size: @font-size-6;
+  border-radius: @radius-1;
   color: @text-1;
   background-color: @bg-1;
-  .vertical-middle();
+  line-height: 44px;
   &-disabled {
     &:disabled {
       color: @text-3;
@@ -19,9 +18,8 @@
 
   &-small {
     width: auto;
-    .px2rem(font-size, @font-size-3);
-    padding: 0 3 * @grid;
-    .padding-left-right(10px);
-    .vertical-middle(@font-size-3 + 8);
+    font-size: @font-size-6;
+    padding: 0 10px;
+    line-height: 30px;
   }
 }

@@ -64,7 +64,6 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
                     style={{
                         color: index === selectedIndex ? '' : tintColor,
                         backgroundColor: index === selectedIndex ? tintColor : '',
-                        borderColor: tintColor,
                     }}
                 >
                     {value}

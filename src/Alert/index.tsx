@@ -1,7 +1,7 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-let closeDialog = () => {};
+
 
 interface ButtonProps {
     text: string;
@@ -87,7 +87,6 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
     }
 }
 
-
 function createDialog(config, type) {
     let div = document.createElement('div');
     document.body.appendChild(div);
@@ -101,24 +100,26 @@ function createDialog(config, type) {
             div = null;
         }
     }
-    closeDialog = close;
     function cb(buttonIndex, confirmValue?:string) {
         onTouchTap(buttonIndex, confirmValue);
         close();
     }
     document.body.style.overflow = 'hidden';
     ReactDOM.render(<AlertDialog defaultValue={config.defaultValue} type={type} onTouchTap={cb} title={config.title} message={config.message} buttons={config.buttons}/>, div);
+    return {close: close};
 }
-
+let instance = null;
 export default class Alert {
     static alert = (config?: AlertConfigProps) => {
-        createDialog(config || {}, 'alert');
+        instance = createDialog(config || {}, 'alert');
+        return instance;
     }
     static confirm = (config?: AlertConfigProps) => {
-        createDialog(config || {}, 'confirm');
+        instance = createDialog(config || {}, 'confirm');
+        return instance;
     }
     static close = () => {
-        closeDialog();
+        instance.close();
     }
 };
 

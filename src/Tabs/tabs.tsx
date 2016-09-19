@@ -20,7 +20,7 @@ export default class Tabs extends React.Component<TabsPropType, any>{
         onChangeIndex:()=>{},
         onTabTouchTap: ()=>{},
         animation: true,
-        animateTransitions: false,
+        animateTransitions: true,
         tabsPosition: 'top',
     };
     state = {selectedIndex: 0};

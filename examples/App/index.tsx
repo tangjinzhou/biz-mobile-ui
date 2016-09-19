@@ -2,6 +2,8 @@ import * as attachFastClick from 'fastclick';
 //attachFastClick['attach'](document.body);
 import * as React from 'react';
 import request from './request';
+import {px2rem, deviceHeight, htmlFontSize} from '../../src/util/util';
+import colors from '../../src/styles/colors';
 import {
     Button,
     Alert,
@@ -19,11 +21,11 @@ import {
 interface AppProps {
 
 }
-
+const slideHeight = px2rem(100);
 const styles = {
     tab: {
         backgroundColor: '#ddd',
-        height: '2800px',
+        minHeight: deviceHeight/htmlFontSize - parseFloat(px2rem(88)) + 'rem',
         textAlign: 'center',
         overflow: 'hidden',
     },
@@ -32,20 +34,23 @@ const styles = {
         margin: '20px auto 0',
     },
     slide1: {
-        height: 500,
+        height: slideHeight,
         textAlign: 'center',
         backgroundColor: '#FEA900',
     },
     slide2: {
-        height: 500,
+        height: slideHeight,
         textAlign: 'center',
         backgroundColor: '#B3DC4A',
     },
     slide3: {
-        height: 500,
+        height: slideHeight,
         textAlign: 'center',
         backgroundColor: '#6AC0FF',
     },
+    button: {
+        marginTop: px2rem(10),
+    }
 }
 export default class App extends React.Component<AppProps, any> {
     state = {selectIndex: 0, progress: 10}
@@ -55,10 +60,6 @@ export default class App extends React.Component<AppProps, any> {
             //console.log(res.data, this.isMounted());
         });
 
-    }
-
-    showAlert() {
-        Alert.alert();
     }
 
     showAlertWithTwoBtn(index, value) {
@@ -82,7 +83,7 @@ export default class App extends React.Component<AppProps, any> {
     }
 
     changeTabsSelect = ()=> {
-        this.setState({selectIndex: 1 - this.state.selectIndex});
+        this.setState({selectIndex: 0});
     }
 
     changeProgress(percent) {
@@ -96,25 +97,26 @@ export default class App extends React.Component<AppProps, any> {
 
     render() {
         return (
-            <TabBar selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange}>
+            <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
                 <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>} badgeContent={21}>
                     <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>
                         <Tab label="旭日">
+                            <div style={Object.assign({}, styles.tab, {backgroundColor: colors.grey_200})}>
                             <Carousel onChangeIndex={this.onTabChange} autoplay={true} style={{height: 500}}>
                                 <div style={styles.slide1}>slide 1</div>
                                 <div style={styles.slide2}>slide 2</div>
                                 <div style={styles.slide3}>slide 3</div>
                             </Carousel>
-                            <div style={styles.tab}>
+
                                 <SegmentedControl onChangeIndex={this.onTabChange} style={styles.seg}
                                                   values={['详情','评论','相关']}/>
                                 <SegmentedControl onChangeIndex={this.onTabChange} selectedIndex={1} tintColor='#8E24AA'
                                                   style={styles.seg} values={['详情','评论','相关']}/>
                                 <SegmentedControl onChangeIndex={this.onTabChange}
-                                                  style={Object.assign({},styles.seg, {width: '80%', height: '150px'})}
+                                                  style={Object.assign({},styles.seg, {width: '80%', height: px2rem(40)})}
                                                   values={['详情','评论']} enabled={false}/>
                                 <LinearProgress style={styles.seg}/>
-                                <LinearProgress style={Object.assign({},styles.seg,{height: 40})} color="#8E24AA"
+                                <LinearProgress style={Object.assign({},styles.seg,{height: px2rem(15)})} color="#8E24AA"
                                                 fillColor="#FFF"/>
                                 <LinearProgress style={styles.seg} mode="determinate" percent={this.state.progress}/>
                                 <Button style={styles.seg}
@@ -127,7 +129,16 @@ export default class App extends React.Component<AppProps, any> {
 
                         </Tab>
                         <Tab label="晨星">
-                            <div style={Object.assign({}, styles.tab, {backgroundColor: '#2196F3'})}>world2</div>
+                            <div style={Object.assign({}, styles.tab)}>
+                                <Button style={styles.button} onTouchTap={()=>this.showAlertWithTwoBtn(1,'hahah')} size="small"><Icon fixedWidth={true}
+                                                                                                                type="user-plus"/>showAlertWithTwoBtn</Button>
+                                <Button style={styles.button} onTouchTap={this.showAlertConfirm} disabled={true} size="small"><Icon type="home"/>showAlertConfirm</Button><br/>
+
+                                <Button style={styles.button} onTouchTap={this.showAlertWithThreeBtn}><Icon size="lg" type="book"/>showAlert with three button<Icon
+                                    type="pencil"/></Button>
+                                <Button style={styles.button} onTouchTap={this.showAlertConfirm.bind(this)}><Icon size="2x" spin={true} type="spinner"/>showAlertConfirm</Button>
+                                <Button style={styles.button} onTouchTap={this.changeTabsSelect}>changeTabsSelect</Button>
+                            </div>
                         </Tab>
                         <Tab label="品专">
                             <div style={Object.assign({}, styles.tab, {backgroundColor: '#009688'})}>world3</div>
@@ -153,15 +164,17 @@ export default class App extends React.Component<AppProps, any> {
                     </Tabs>
                 </TabBarItem>
                 <TabBarItem label="设置" icon={<Icon type="cog" size="2x"/>}>
-                    <Button onTouchTap={()=>this.showAlertWithTwoBtn(1,'hahah')} size="small"><Icon fixedWidth={true}
-                                                                                                    type="user-plus"/>showAlertWithTwoBtn</Button>
-                    <Button onTouchTap={this.showAlertConfirm} disabled={true} size="small"><Icon type="home"/>showAlertConfirm</Button><br/>
-                    <Line/>
-                    <Button onTouchTap={this.showAlert}><Icon type="cog"/>showAlert</Button>
-                    <Button onTouchTap={this.showAlertWithThreeBtn}><Icon size="lg" type="book"/>showAlert with three button<Icon
-                        type="pencil"/></Button>
-                    <Button onTouchTap={this.showAlertConfirm.bind(this)}><Icon size="2x" spin={true} type="spinner"/>showAlertConfirm</Button>
-                    <Button onTouchTap={this.changeTabsSelect}>changeTabsSelect</Button>
+                    <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>
+                        <Tab label="旭日">
+                            <div style={styles.tab}>world1</div>
+                        </Tab>
+                        <Tab label="晨星">
+                            <div style={Object.assign({}, styles.tab, {backgroundColor: '#2196F3'})}>world2</div>
+                        </Tab>
+                        <Tab label="CRM">
+                            <div style={Object.assign({}, styles.tab, {backgroundColor: '#2196F3'})}>world2</div>
+                        </Tab>
+                    </Tabs>
                 </TabBarItem>
                 <TabBarItem label="我的" icon={<Icon type="user" size="2x"/>} badgeContent={<span>&sdot;&sdot;&sdot;</span>}>
                     <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>

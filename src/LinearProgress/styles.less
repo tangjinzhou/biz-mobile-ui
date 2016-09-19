@@ -2,16 +2,17 @@
 .@{linearProgressPrefixCls} {
   position: relative;
   background-color: @grey-400;
-  .height(4px);
+  height: 6px;
   width: 100%;
-  .border-radius(2px);
+  border-radius: 3px;
   overflow: hidden;
   &-indeterminate{
       position: absolute;
       top: 0;
-      left: -40%;
-      width: 40%;
+      left: -50%;
+      width: 50%;
       height: 100%;
+      border-radius: 3px;
       background: @bg-1;
       transform: translate3d(0, 0, 0);
       animation: indeterminateProgress 900ms infinite linear;
@@ -22,14 +23,15 @@
     left: 0;
     height: 100%;
     background: @bg-1;
+    border-radius: 3px;
     transition: width 0.3s linear 0ms;
   }
 }
 @keyframes indeterminateProgress {
   0%{
-    left: -40%;
+    transform: translateX(-100%);
   }
   100%{
-    left: 100%;
+    transform: translateX(300%);
   }
 }

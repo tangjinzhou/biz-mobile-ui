@@ -2,10 +2,13 @@ export const htmlFontSize = parseFloat(window.getComputedStyle(document.getEleme
 
 export function px2rem(v){
     v = parseFloat(v);
-    return v / htmlFontSize + 'rem';
+    return v  / 37.5 + 'rem';
 }
 
 export function rem2px(v){
     v = parseFloat(v);
-    return v * htmlFontSize + 'px';
+    return v * 37.5 + 'px';
 }
+const rect = document.documentElement.getBoundingClientRect();
+export const deviceHeight = rect.height;
+export const deviceWidth = rect.width;
