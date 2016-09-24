@@ -47,7 +47,6 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
         }
     }
     render() {
-
         const {prefixCls, title, message, buttons, className, onTouchTap, type, defaultValue} = this.props;
         const alertClass = classNames({
             [className]: true,
@@ -62,7 +61,7 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
 
         return (
             <div className={alertClass}>
-                <div className={`${prefixCls}-mask`}></div>
+                <div className='body-mask'></div>
                 <div className={`${prefixCls}-wrap`}>
                     <div className={`${prefixCls}-info`}>
                         {title !== '' ? <p className={`${prefixCls}-title`}>{title}</p> : null}
@@ -108,18 +107,13 @@ function createDialog(config, type) {
     ReactDOM.render(<AlertDialog defaultValue={config.defaultValue} type={type} onTouchTap={cb} title={config.title} message={config.message} buttons={config.buttons}/>, div);
     return {close: close};
 }
-let instance = null;
+
 export default class Alert {
     static alert = (config?: AlertConfigProps) => {
-        instance = createDialog(config || {}, 'alert');
-        return instance;
+        return createDialog(config || {}, 'alert');
     }
     static confirm = (config?: AlertConfigProps) => {
-        instance = createDialog(config || {}, 'confirm');
-        return instance;
-    }
-    static close = () => {
-        instance.close();
+        return createDialog(config || {}, 'confirm');
     }
 };
 

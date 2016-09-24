@@ -16,3 +16,5 @@ export {default as SegmentedControl} from './SegmentedControl';
 export {default as LinearProgress} from './LinearProgress';
 export {default as Carousel} from './Carousel';
 export {default as Badge} from './Badge';
+export {default as Message} from './Message';
+export {default as Card} from './Card';

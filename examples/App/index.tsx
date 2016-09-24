@@ -16,7 +16,9 @@ import {
     SegmentedControl,
     LinearProgress,
     Carousel,
-    Badge
+    Badge,
+    Message,
+    Card
 } from '../../src/index.tsx';
 interface AppProps {
 
@@ -26,7 +28,6 @@ const styles = {
     tab: {
         backgroundColor: '#ddd',
         minHeight: deviceHeight/htmlFontSize - parseFloat(px2rem(88)) + 'rem',
-        textAlign: 'center',
         overflow: 'hidden',
     },
     seg: {
@@ -94,7 +95,11 @@ export default class App extends React.Component<AppProps, any> {
         }
         this.setState({progress: percent});
     }
-
+    showMessage = () =>{
+        const messge = Message.error('填写客户名称', 3, ()=>{
+            this.changeProgress(80);
+        });
+    }
     render() {
         return (
             <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
@@ -119,12 +124,19 @@ export default class App extends React.Component<AppProps, any> {
                                 <LinearProgress style={Object.assign({},styles.seg,{height: px2rem(15)})} color="#8E24AA"
                                                 fillColor="#FFF"/>
                                 <LinearProgress style={styles.seg} mode="determinate" percent={this.state.progress}/>
-                                <Button style={styles.seg}
+                                <Button style={Object.assign({},styles.seg, {display: 'block'})}
                                         onTouchTap={()=>this.changeProgress(this.state.progress + 20)}
                                         size="small">+ 20</Button>
-                                <Button style={styles.seg}
+                                <Button style={Object.assign({},styles.seg, {display: 'block'})}
                                         onTouchTap={()=>this.changeProgress(this.state.progress - 10)}
                                         size="small">- 10</Button>
+                                <Button style={Object.assign({},styles.seg, {display: 'block'})}
+                                    onTouchTap={this.showMessage}>
+                                    show info Message
+                                </Button>
+                                <Card>
+                                    hello World
+                                </Card>
                             </div>
 
                         </Tab>

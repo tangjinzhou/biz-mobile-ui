@@ -1,57 +1,104 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import Icon from '../Icon';
 import * as classNames from 'classnames';
 
 interface MessageProps {
-
+    type: string,
+    content?: string | React.ReactNode,
+    duration?: number
 }
 
-class Message extends React.Component<MessageProps, any> {
+class MessageDialog extends React.Component<MessageProps, any> {
     static defaultProps = {
-
+        duration: 3,
     }
 
     render(){
+        const prefixCls = 'biz-message';
+        const {type, duration, content} = this.props;
+        const wrapClass = classNames({
+            [`${prefixCls}-wrap`]: true,
+            [`${prefixCls}-info-wrap`]: type === 'info',
+            ['fadeIn']: true,
+        });
+        const iconProp = {
+            info: {
+                type: 'info-circle',
+                size: 'lg'
+            },
+            loading: {
+                type: 'spinner',
+                size: '3x',
+                spin: true,
+            },
+            success: {
+                type: 'check-circle-o',
+                size: '3x',
+            },
+            error: {
+                type: 'times-circle-o',
+                size: '3x',
+            }
+        };
         return(
-            <div></div>
+            <div className={prefixCls}>
+                <div className={['body-mask',`${prefixCls}-mask`].join(' ')}></div>
+                <div className={wrapClass}>
+                    <Icon {...iconProp[type]}></Icon>
+                    <div className={`${prefixCls}-content`}>
+                        {type == 'info'?<span>&nbsp;</span>:null}
+                        {content}
+                    </div>
+                </div>
+            </div>
         )
     }
 }
-function createMessage(config, type) {
+function createMessage(content, type, duration, onClose) {
     let div = document.createElement('div');
     document.body.appendChild(div);
 
-    let onTouchTap = config.onTouchTap || (() => {});
     function close() {
         if (div) {
-            document.body.style.overflow = '';
-            ReactDOM.unmountComponentAtNode(div);
-            div.parentNode.removeChild(div);
-            div = null;
+            if(onClose){
+                onClose();
+            }
+            div.className = 'fadeOut';
+            const fadeInWrap = div.getElementsByClassName('fadeIn')[0];
+            fadeInWrap.className = fadeInWrap.className + ' fadeOut';
+            setTimeout(function(){
+                document.body.style.overflow = '';
+                ReactDOM.unmountComponentAtNode(div);
+                div.parentNode.removeChild(div);
+                div = null;
+            }, 300);
         }
     }
-    function cb(buttonIndex, confirmValue?:string) {
-        onTouchTap(buttonIndex, confirmValue);
-        close();
-    }
+
     document.body.style.overflow = 'hidden';
-    ReactDOM.render(<Message defaultValue={config.defaultValue} type={type} title={config.title} message={config.message} />, div);
+    ReactDOM.render(<MessageDialog type={type} content={content}/>, div);
+    if(duration !== 0) {
+        setTimeout(function(){
+            close();
+        }, duration*1000);
+    }
     return {
         close: close
     }
 }
-interface MessageConfigProps{
 
-}
-let instance = null;
-export default class Alert {
-    static info = (config?: MessageConfigProps) => {
-        instance = createMessage(config || {}, 'info');
+export default class Message {
+    static info = (content: string | React.ReactNode, duration?: number, onClose?: () => void) => {
+        return createMessage(content, 'info', duration, onClose);
     }
-    static loading = (config?: MessageConfigProps) => {
-        instance = createMessage(config || {}, 'loading');
+    static loading = (content: string | React.ReactNode, duration?: number, onClose?: () => void) => {
+        return createMessage(content, 'loading', duration, onClose);
     }
-    static close = () => {
-        instance.close();
+    static success = (content: string | React.ReactNode, duration?: number, onClose?: () => void) => {
+        return createMessage(content, 'success', duration, onClose);
+    }
+    static error = (content: string | React.ReactNode, duration?: number, onClose?: () => void) => {
+        return createMessage(content, 'error', duration, onClose);
     }
 };
