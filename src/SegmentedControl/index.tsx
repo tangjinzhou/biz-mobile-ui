@@ -7,7 +7,7 @@ interface SegmentedControlPropType{
     selectedIndex?: number;
     values?: Array<string>;
     onChangeIndex?: (x:number, y:number)=>void,
-    style?: any;
+    style?: React.CSSProperties,
     prefixCls?: string;
     className?: string;
 }

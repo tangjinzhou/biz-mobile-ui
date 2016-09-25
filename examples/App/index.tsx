@@ -18,7 +18,8 @@ import {
     Carousel,
     Badge,
     Message,
-    Card
+    Card,
+    Switch
 } from '../../src/index.tsx';
 interface AppProps {
 
@@ -100,6 +101,9 @@ export default class App extends React.Component<AppProps, any> {
             this.changeProgress(80);
         });
     }
+    switchChange = (checked) =>{
+        console.log(checked);
+    }
     render() {
         return (
             <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
@@ -134,7 +138,12 @@ export default class App extends React.Component<AppProps, any> {
                                     onTouchTap={this.showMessage}>
                                     show info Message
                                 </Button>
-                                <Card>
+                                <Switch style={{marginTop: px2rem(10)}} onChange={this.switchChange}/>
+                                <Switch style={{marginTop: px2rem(10)}} checked={true} disabled onChange={this.switchChange}/>
+                                <Card style={{marginTop: px2rem(10)}}>
+                                    hello World
+                                </Card>
+                                <Card style={{marginTop: px2rem(10)}} full={true}>
                                     hello World
                                 </Card>
                             </div>

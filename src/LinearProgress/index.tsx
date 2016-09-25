@@ -7,7 +7,7 @@ interface LinearProgressProps {
     color?: string,
     fillColor?: string,
     mode?: 'determinate' | 'indeterminate',
-    style?: {},
+    style?: React.CSSProperties,
     percent?: number,
     transitionDuration?:number,
 }
@@ -21,7 +21,6 @@ export default class LinearProgress extends React.Component<LinearProgressProps,
         max: 100,
         min: 0,
         mode: 'indeterminate',
-        style: {},
         value: 0,
         percent: 0,
     }

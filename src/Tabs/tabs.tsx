@@ -10,6 +10,7 @@ interface TabsPropType{
     animateTransitions?: boolean,
     other?: any,
     tabsPosition?: string,
+    style?: React.CSSProperties,
 }
 
 export default class Tabs extends React.Component<TabsPropType, any>{
@@ -77,7 +78,7 @@ export default class Tabs extends React.Component<TabsPropType, any>{
         this.setState({selectedIndex: index});
     }
     render() {
-        const {prefixCls, className, animation, animateTransitions, tabsPosition} = this.props;
+        const {prefixCls, className, animation, animateTransitions, tabsPosition, style} = this.props;
         const tabsClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
@@ -94,7 +95,7 @@ export default class Tabs extends React.Component<TabsPropType, any>{
         });
         const tabsContainer = <div className={`${prefixCls}-container`}>{tabs}</div>;
         return (
-            <div className={tabsClass}>
+            <div className={tabsClass} style={style}>
                 {tabsPosition === 'bottom'? null : tabsContainer}
                 <div className={`${prefixCls}-content-container`}>
                     {animation ?

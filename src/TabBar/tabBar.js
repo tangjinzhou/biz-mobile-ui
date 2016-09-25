@@ -51,7 +51,7 @@ class TabBar extends React.Component {
         }
     }
     render() {
-        const { prefixCls, className, onChangeIndex } = this.props;
+        const { prefixCls, className, onChangeIndex, style } = this.props;
         const tabsClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
@@ -67,7 +67,7 @@ class TabBar extends React.Component {
             });
         });
         const tabsContainer = React.createElement("div", {className: `${prefixCls}-container`}, tabs);
-        return (React.createElement("div", {className: tabsClass}, React.createElement("div", {className: `${prefixCls}-content-container`}, contents), React.createElement("div", {className: `${prefixCls}-container`}, tabs)));
+        return (React.createElement("div", {className: tabsClass, style: style}, React.createElement("div", {className: `${prefixCls}-content-container`}, contents), React.createElement("div", {className: `${prefixCls}-container`}, tabs)));
     }
 }
 TabBar.defaultProps = {

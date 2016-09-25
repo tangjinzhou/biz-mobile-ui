@@ -6,7 +6,7 @@ import * as classNames from 'classnames';
 interface MessageProps {
     type: string,
     content?: string | React.ReactNode,
-    duration?: number
+    duration?: number,
 }
 
 class MessageDialog extends React.Component<MessageProps, any> {

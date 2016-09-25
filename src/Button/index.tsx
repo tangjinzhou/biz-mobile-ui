@@ -7,7 +7,7 @@ interface ButtonProps {
   disabled?: boolean;
   className?: string;
   size?: 'small';
-  style?: {},
+  style?: React.CSSProperties,
 }
 
 export default class Button extends React.Component<ButtonProps, any> {

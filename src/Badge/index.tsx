@@ -4,7 +4,7 @@ interface BadgeProps {
     prefixCls?:string,
     className?:string,
     content?: any,
-    style?:{},
+    style?: React.CSSProperties,
 }
 
 export default class Badge extends React.Component<BadgeProps, any> {

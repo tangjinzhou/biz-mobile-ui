@@ -26,6 +26,7 @@ interface AlertDialogProps {
     buttons?: Array<ButtonProps>;
     type: string;
     defaultValue?: string;
+    style?: React.CSSProperties,
 }
 
 class AlertDialog extends React.Component<AlertDialogProps, any> {
@@ -47,7 +48,7 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
         }
     }
     render() {
-        const {prefixCls, title, message, buttons, className, onTouchTap, type, defaultValue} = this.props;
+        const {prefixCls, title, message, buttons, className, onTouchTap, type, defaultValue, style} = this.props;
         const alertClass = classNames({
             [className]: true,
             [prefixCls]: true,
@@ -60,7 +61,7 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
         });
 
         return (
-            <div className={alertClass}>
+            <div className={alertClass} style={style}>
                 <div className='body-mask'></div>
                 <div className={`${prefixCls}-wrap`}>
                     <div className={`${prefixCls}-info`}>

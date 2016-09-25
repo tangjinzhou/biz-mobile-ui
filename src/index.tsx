@@ -18,3 +18,4 @@ export {default as Carousel} from './Carousel';
 export {default as Badge} from './Badge';
 export {default as Message} from './Message';
 export {default as Card} from './Card';
+export {default as Switch} from './Switch';

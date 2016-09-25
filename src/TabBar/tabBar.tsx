@@ -5,6 +5,7 @@ interface TabBarPropType{
     className? : string,
     selectedIndex? : number,
     onChangeIndex?: (x:number, y:number)=>void,
+    style?: React.CSSProperties,
 }
 
 export default class TabBar extends React.Component<TabBarPropType, any>{
@@ -65,7 +66,7 @@ export default class TabBar extends React.Component<TabBarPropType, any>{
         }
     }
     render() {
-        const {prefixCls, className, onChangeIndex} = this.props;
+        const {prefixCls, className, onChangeIndex, style} = this.props;
         const tabsClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
@@ -82,7 +83,7 @@ export default class TabBar extends React.Component<TabBarPropType, any>{
         });
         const tabsContainer = <div className={`${prefixCls}-container`}>{tabs}</div>;
         return (
-            <div className={tabsClass}>
+            <div className={tabsClass} style={style}>
                 <div className={`${prefixCls}-content-container`}>
                     {contents}
                 </div>
