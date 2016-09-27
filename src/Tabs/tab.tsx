@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import Badge from '../Badge';
-interface TabPropType{
-    prefixCls? : string,
-    className? : string,
+interface TabProps extends BizuiProps{
     label : string,
     icon? : React.ReactNode,
     key?: number,
@@ -11,9 +9,8 @@ interface TabPropType{
     selected?: boolean,
     handleChange?: (x:number, y: React.SyntheticEvent) => any,
     badgeContent?: any,
-    style?:{},
 }
-export default class Tab extends React.Component<TabPropType, any>{
+export default class Tab extends React.Component<TabProps, any>{
     static defaultProps = {
         prefixCls: 'biz-tab',
         className: '',

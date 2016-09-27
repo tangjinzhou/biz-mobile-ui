@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-interface SwitchProps extends bizuiProps {
+interface SwitchProps extends BizuiProps {
     name?:string,
     disabled?:boolean,
     checked?:boolean,

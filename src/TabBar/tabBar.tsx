@@ -1,14 +1,11 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-interface TabBarPropType{
-    prefixCls? : string,
-    className? : string,
+interface TabBarProps extends BizuiProps{
     selectedIndex? : number,
     onChangeIndex?: (x:number, y:number)=>void,
-    style?: React.CSSProperties,
 }
 
-export default class TabBar extends React.Component<TabBarPropType, any>{
+export default class TabBar extends React.Component<TabBarProps, any>{
     static defaultProps = {
         selectedIndex: 0,
         prefixCls: 'biz-tabBar',

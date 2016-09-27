@@ -1,19 +1,16 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import SwipeableViews from 'react-swipeable-views';
-interface TabsPropType{
-    prefixCls? : string,
-    className? : string,
+interface TabsProps extends BizuiProps{
     selectedIndex? : number,
     onChangeIndex?: (x:number, y:number)=>void,
     animation?: boolean,
     animateTransitions?: boolean,
     other?: any,
     tabsPosition?: string,
-    style?: React.CSSProperties,
 }
 
-export default class Tabs extends React.Component<TabsPropType, any>{
+export default class Tabs extends React.Component<TabsProps, any>{
     static defaultProps = {
         selectedIndex: 0,
         prefixCls: 'biz-tabs',

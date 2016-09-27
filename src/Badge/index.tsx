@@ -1,10 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-interface BadgeProps {
-    prefixCls?:string,
-    className?:string,
+interface BadgeProps extends BizuiProps {
     content?: any,
-    style?: React.CSSProperties,
 }
 
 export default class Badge extends React.Component<BadgeProps, any> {

@@ -1,18 +1,15 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-interface SegmentedControlPropType{
+interface SegmentedControlProps extends BizuiProps{
     tintColor?: string;
     enabled?: boolean;
     selectedIndex?: number;
     values?: Array<string>;
     onChangeIndex?: (x:number, y:number)=>void,
-    style?: React.CSSProperties,
-    prefixCls?: string;
-    className?: string;
 }
 
-export default class SegmentedControl extends React.Component<SegmentedControlPropType, any>{
+export default class SegmentedControl extends React.Component<SegmentedControlProps, any>{
     static defaultProps = {
         selectedIndex: 0,
         prefixCls: 'biz-segmented',

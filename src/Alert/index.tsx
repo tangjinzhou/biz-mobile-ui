@@ -17,16 +17,13 @@ interface AlertConfigProps {
     defaultValue?: string;
 }
 
-interface AlertDialogProps {
-    prefixCls?: string;
+interface AlertDialogProps extends BizuiProps {
     title?: string;
     message?: string | React.ReactNode;
-    className?: string;
     onTouchTap?: (x?: number, y?: string) => any;
     buttons?: Array<ButtonProps>;
     type: string;
     defaultValue?: string;
-    style?: React.CSSProperties,
 }
 
 class AlertDialog extends React.Component<AlertDialogProps, any> {

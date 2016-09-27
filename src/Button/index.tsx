@@ -1,13 +1,10 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-interface ButtonProps {
-  prefixCls?: string,
+interface ButtonProps extends BizuiProps{
   type?: string,
   onTouchTap?: (x?: any) => void;
   disabled?: boolean;
-  className?: string;
   size?: 'small';
-  style?: React.CSSProperties,
 }
 
 export default class Button extends React.Component<ButtonProps, any> {

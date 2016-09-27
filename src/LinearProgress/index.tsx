@@ -1,13 +1,10 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-interface LinearProgressProps {
-    prefixCls?: string;
-    className?: string;
+interface LinearProgressProps extends BizuiProps{
     color?: string,
     fillColor?: string,
     mode?: 'determinate' | 'indeterminate',
-    style?: React.CSSProperties,
     percent?: number,
     transitionDuration?:number,
 }

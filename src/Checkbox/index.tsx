@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import Icon from '../Icon';
 
-interface CheckboxProps extends bizuiProps{
+interface CheckboxProps extends BizuiProps{
     name?:string,
     disabled?:boolean,
     checked?:boolean,

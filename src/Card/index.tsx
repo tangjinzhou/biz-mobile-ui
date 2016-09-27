@@ -1,11 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-interface CardProps {
-    prefixCls?: string,
+interface CardProps extends BizuiProps {
     full?: boolean,
-    className?: string,
-    style?: React.CSSProperties,
 }
 export default class Card extends React.Component<CardProps, any> {
     static defaultProps = {

@@ -2,15 +2,12 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 
 type IconSize = "lg" | "2x" | "3x" | "4x" | "5x";
-interface IconPropType {
-    prefixCls?: string,
+interface IconPropType extends BizuiProps{
     type: string,
-    className?: string,
     size?: IconSize,
     spin?: boolean,
     fixedWidth?: boolean,
     color?: string,
-    style?: React.CSSProperties,
 }
 
 export default class Icon extends React.Component<IconPropType, any> {

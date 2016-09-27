@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-interface EllipsisProps extends bizuiProps{
+interface EllipsisProps extends BizuiProps{
     line?: number,
     text?: string,
     width?: string,

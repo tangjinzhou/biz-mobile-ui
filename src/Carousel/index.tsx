@@ -3,9 +3,7 @@ import * as classNames from 'classnames';
 import autoPlay from 'react-swipeable-views/lib/autoPlay';
 import SwipeableViews from 'react-swipeable-views';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-interface CarouselProps {
-    prefixCls? : string,
-    className? : string,
+interface CarouselProps extends BizuiProps {
     selectedIndex?: number,
     autoplay?: boolean,
     interval?: number,
@@ -13,7 +11,6 @@ interface CarouselProps {
     onChangeIndex?: (x:number, y:number) => void,
     disabled?: boolean,
     resistance?: boolean,
-    style?: {},
     onSwitching?: (x: number, y?:string) => void,
     showDots?: boolean,
 }
