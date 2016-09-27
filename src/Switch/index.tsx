@@ -39,7 +39,7 @@ export default class Switch extends React.Component<SwitchProps, any> {
     }
 
     render() {
-        const {prefixCls, className, style, name, disabled, checked, onChange} = this.props;
+        const {prefixCls, className, style, name, disabled, onChange} = this.props;
         const switchClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
@@ -54,6 +54,7 @@ export default class Switch extends React.Component<SwitchProps, any> {
                     checked={this.state.checked}
                     name={name}
                     {...inputDisabled}
+                    onChange={()=> {}}
                 />
                 <div className={`${prefixCls}-btn`}></div>
             </label>

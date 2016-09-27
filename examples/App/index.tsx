@@ -19,7 +19,9 @@ import {
     Badge,
     Message,
     Card,
-    Switch
+    Switch,
+    Checkbox,
+    Ellipsis
 } from '../../src/index.tsx';
 interface AppProps {
 
@@ -28,7 +30,7 @@ const slideHeight = px2rem(100);
 const styles = {
     tab: {
         backgroundColor: '#ddd',
-        minHeight: deviceHeight/htmlFontSize - parseFloat(px2rem(88)) + 'rem',
+        minHeight: deviceHeight / htmlFontSize - parseFloat(px2rem(88)) + 'rem',
         overflow: 'hidden',
     },
     seg: {
@@ -96,14 +98,16 @@ export default class App extends React.Component<AppProps, any> {
         }
         this.setState({progress: percent});
     }
-    showMessage = () =>{
-        const messge = Message.error('填写客户名称', 3, ()=>{
+
+    showMessage = () => {
+        const messge = Message.error('填写客户名称', 3, ()=> {
             this.changeProgress(80);
         });
     }
-    switchChange = (checked) =>{
+    switchChange = (checked) => {
         console.log(checked);
     }
+
     render() {
         return (
             <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
@@ -111,11 +115,11 @@ export default class App extends React.Component<AppProps, any> {
                     <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>
                         <Tab label="旭日">
                             <div style={Object.assign({}, styles.tab, {backgroundColor: colors.grey_200})}>
-                            <Carousel onChangeIndex={this.onTabChange} autoplay={true} style={{height: 500}}>
-                                <div style={styles.slide1}>slide 1</div>
-                                <div style={styles.slide2}>slide 2</div>
-                                <div style={styles.slide3}>slide 3</div>
-                            </Carousel>
+                                <Carousel onChangeIndex={this.onTabChange} autoplay={true} style={{height: 500}}>
+                                    <div style={styles.slide1}>slide 1</div>
+                                    <div style={styles.slide2}>slide 2</div>
+                                    <div style={styles.slide3}>slide 3</div>
+                                </Carousel>
 
                                 <SegmentedControl onChangeIndex={this.onTabChange} style={styles.seg}
                                                   values={['详情','评论','相关']}/>
@@ -125,7 +129,8 @@ export default class App extends React.Component<AppProps, any> {
                                                   style={Object.assign({},styles.seg, {width: '80%', height: px2rem(40)})}
                                                   values={['详情','评论']} enabled={false}/>
                                 <LinearProgress style={styles.seg}/>
-                                <LinearProgress style={Object.assign({},styles.seg,{height: px2rem(15)})} color="#8E24AA"
+                                <LinearProgress style={Object.assign({},styles.seg,{height: px2rem(15)})}
+                                                color="#8E24AA"
                                                 fillColor="#FFF"/>
                                 <LinearProgress style={styles.seg} mode="determinate" percent={this.state.progress}/>
                                 <Button style={Object.assign({},styles.seg, {display: 'block'})}
@@ -135,30 +140,44 @@ export default class App extends React.Component<AppProps, any> {
                                         onTouchTap={()=>this.changeProgress(this.state.progress - 10)}
                                         size="small">- 10</Button>
                                 <Button style={Object.assign({},styles.seg, {display: 'block'})}
-                                    onTouchTap={this.showMessage}>
+                                        onTouchTap={this.showMessage}>
                                     show info Message
                                 </Button>
                                 <Switch style={{marginTop: px2rem(10)}} onChange={this.switchChange}/>
-                                <Switch style={{marginTop: px2rem(10)}} checked={true} disabled onChange={this.switchChange}/>
+                                <Switch style={{marginTop: px2rem(10)}} checked disabled onChange={this.switchChange}/>
+                                <Checkbox style={{marginTop: px2rem(10)}}
+                                          label={<Ellipsis text="你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World"/>}
+                                          disabled checked/>
+                                <Checkbox style={{marginTop: px2rem(10)}}
+                                          label={<Ellipsis line={2} text="你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World"/>}/>
+                                <Checkbox style={{marginTop: px2rem(10)}}
+                                          label={<Ellipsis width={px2rem(200)} line={3} text="你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World"/>}
+                                          checked onChange={this.switchChange}/>
+
                                 <Card style={{marginTop: px2rem(10)}}>
                                     hello World
                                 </Card>
                                 <Card style={{marginTop: px2rem(10)}} full={true}>
-                                    hello World
+                                    你好
                                 </Card>
                             </div>
 
                         </Tab>
                         <Tab label="晨星">
                             <div style={Object.assign({}, styles.tab)}>
-                                <Button style={styles.button} onTouchTap={()=>this.showAlertWithTwoBtn(1,'hahah')} size="small"><Icon fixedWidth={true}
-                                                                                                                type="user-plus"/>showAlertWithTwoBtn</Button>
-                                <Button style={styles.button} onTouchTap={this.showAlertConfirm} disabled={true} size="small"><Icon type="home"/>showAlertConfirm</Button><br/>
+                                <Button style={styles.button} onTouchTap={()=>this.showAlertWithTwoBtn(1,'hahah')}
+                                        size="small"><Icon fixedWidth={true}
+                                                           type="user-plus"/>showAlertWithTwoBtn</Button>
+                                <Button style={styles.button} onTouchTap={this.showAlertConfirm} disabled={true}
+                                        size="small"><Icon type="home"/>showAlertConfirm</Button><br/>
 
-                                <Button style={styles.button} onTouchTap={this.showAlertWithThreeBtn}><Icon size="lg" type="book"/>showAlert with three button<Icon
+                                <Button style={styles.button} onTouchTap={this.showAlertWithThreeBtn}><Icon size="lg"
+                                                                                                            type="book"/>showAlert with three button<Icon
                                     type="pencil"/></Button>
-                                <Button style={styles.button} onTouchTap={this.showAlertConfirm.bind(this)}><Icon size="2x" spin={true} type="spinner"/>showAlertConfirm</Button>
-                                <Button style={styles.button} onTouchTap={this.changeTabsSelect}>changeTabsSelect</Button>
+                                <Button style={styles.button} onTouchTap={this.showAlertConfirm.bind(this)}><Icon
+                                    size="2x" spin={true} type="spinner"/>showAlertConfirm</Button>
+                                <Button style={styles.button}
+                                        onTouchTap={this.changeTabsSelect}>changeTabsSelect</Button>
                             </div>
                         </Tab>
                         <Tab label="品专">
@@ -197,7 +216,8 @@ export default class App extends React.Component<AppProps, any> {
                         </Tab>
                     </Tabs>
                 </TabBarItem>
-                <TabBarItem label="我的" icon={<Icon type="user" size="2x"/>} badgeContent={<span>&sdot;&sdot;&sdot;</span>}>
+                <TabBarItem label="我的" icon={<Icon type="user" size="2x"/>}
+                            badgeContent={<span>&sdot;&sdot;&sdot;</span>}>
                     <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>
                         <Tab label="旭日">
                             <div style={styles.tab}>world1</div>

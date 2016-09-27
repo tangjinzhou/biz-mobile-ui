@@ -19,3 +19,5 @@ export {default as Badge} from './Badge';
 export {default as Message} from './Message';
 export {default as Card} from './Card';
 export {default as Switch} from './Switch';
+export {default as Checkbox} from './Checkbox';
+export {default as Ellipsis} from './Ellipsis';
