@@ -21,7 +21,9 @@ import {
     Card,
     Switch,
     Checkbox,
-    Ellipsis
+    Ellipsis,
+    Table,
+    Arrow
 } from '../../src/index.tsx';
 interface AppProps {
 
@@ -143,6 +145,14 @@ export default class App extends React.Component<AppProps, any> {
                                         onTouchTap={this.showMessage}>
                                     show info Message
                                 </Button>
+                                <Arrow direction="right"/>
+                                <Arrow direction="left"/>
+                                <Arrow direction="top"/>
+                                <Arrow direction="bottom"/>
+                                <Arrow direction="right" color={colors.blue_500} innerColor="#eee"/>
+                                <Arrow direction="left" color={colors.blue_500} innerColor="#eee"/>
+                                <Arrow direction="top" color={colors.blue_500} innerColor="#eee"/>
+                                <Arrow direction="bottom" color={colors.blue_500} innerColor="#eee" size={px2rem(20)} lineThickness={px2rem(4)}/>
                                 <Switch style={{marginTop: px2rem(10)}} onChange={this.switchChange}/>
                                 <Switch style={{marginTop: px2rem(10)}} checked disabled onChange={this.switchChange}/>
                                 <Checkbox style={{marginTop: px2rem(10)}}

@@ -20,4 +20,4 @@ TabBarItem.defaultProps = {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = TabBarItem;
-//# sourceMappingURL=tabBarItem.js.map
+//# sourceMappingURL=TabBarItem.js.map

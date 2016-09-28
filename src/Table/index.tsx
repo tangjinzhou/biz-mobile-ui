@@ -1,6 +1,4 @@
-import * as React from 'react';
-import * as classNames from 'classnames';
+import Table from "./Table";
+export { default as Table} from './Table';
+export default Table;
 
-interface TableProps extends BizuiProps{
-    
-}

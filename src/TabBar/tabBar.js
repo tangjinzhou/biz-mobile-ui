@@ -79,4 +79,4 @@ TabBar.defaultProps = {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = TabBar;
-//# sourceMappingURL=tabBar.js.map
+//# sourceMappingURL=TabBar.js.map

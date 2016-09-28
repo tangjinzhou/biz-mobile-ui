@@ -1,0 +1,19 @@
+@arrowPrefixCls: biz-arrow;
+
+.@{arrowPrefixCls} {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+  &-outer{
+    display: block;
+    border: 10px solid transparent;
+  }
+  &-inner{
+    display: block;
+    position: absolute;
+    border: 10px solid transparent;
+  }
+}
