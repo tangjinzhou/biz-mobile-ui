@@ -111,6 +111,36 @@ export default class App extends React.Component<AppProps, any> {
     }
 
     render() {
+        const columns = [
+            [
+                {title: '实时消耗', attr: {colSpan: 4}}
+            ],
+            [
+                {title: '地区', dataIndex: 'area',  attr: {key: 'area',}},
+                {title: '名称', dataIndex: 'name',  attr: {key: 'name',}},
+                {title: '消耗', dataIndex: 'cost',  attr: {key: 'cost',}},
+                {title: '环比', dataIndex: 'subCost',  attr: {key: 'subCost',}}
+            ]
+        ];
+        const data = [{
+            area: '北京',
+            name: '搜狗',
+            cost: '1298,23',
+            subCost: '-12',
+            key: '1',
+        }, {
+            area: '上海',
+            name: '搜狐',
+            cost: '90.23',
+            subCost: '+98',
+            key: '2',
+        }, {
+            area: '广州',
+            name: '搜猫',
+            cost: '1765,12.34',
+            subCost: '--',
+            key: '3',
+        }];
         return (
             <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
                 <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>} badgeContent={21}>
@@ -122,7 +152,10 @@ export default class App extends React.Component<AppProps, any> {
                                     <div style={styles.slide2}>slide 2</div>
                                     <div style={styles.slide3}>slide 3</div>
                                 </Carousel>
-
+                                <Table
+                                    columns={columns}
+                                    dataSource={data}
+                                />
                                 <SegmentedControl onChangeIndex={this.onTabChange} style={styles.seg}
                                                   values={['详情','评论','相关']}/>
                                 <SegmentedControl onChangeIndex={this.onTabChange} selectedIndex={1} tintColor='#8E24AA'
@@ -152,7 +185,8 @@ export default class App extends React.Component<AppProps, any> {
                                 <Arrow direction="right" color={colors.blue_500} innerColor="#eee"/>
                                 <Arrow direction="left" color={colors.blue_500} innerColor="#eee"/>
                                 <Arrow direction="top" color={colors.blue_500} innerColor="#eee"/>
-                                <Arrow direction="bottom" color={colors.blue_500} innerColor="#eee" size={px2rem(20)} lineThickness={px2rem(4)}/>
+                                <Arrow direction="bottom" color={colors.blue_500} innerColor="#eee" size={px2rem(20)}
+                                       lineThickness={px2rem(4)}/>
                                 <Switch style={{marginTop: px2rem(10)}} onChange={this.switchChange}/>
                                 <Switch style={{marginTop: px2rem(10)}} checked disabled onChange={this.switchChange}/>
                                 <Checkbox style={{marginTop: px2rem(10)}}
