@@ -113,13 +113,23 @@ export default class App extends React.Component<AppProps, any> {
     render() {
         const columns = [
             [
-                {title: '实时消耗', attr: {colSpan: 4}}
+                {title: '实时消耗', colSpan: 10}
             ],
             [
-                {title: '地区', dataIndex: 'area',  attr: {key: 'area',}},
-                {title: '名称', dataIndex: 'name',  attr: {key: 'name',}},
-                {title: '消耗', dataIndex: 'cost',  attr: {key: 'cost',}},
-                {title: '环比', dataIndex: 'subCost',  attr: {key: 'subCost',}}
+                {title: '地区', field: 'area', width: px2rem(100), attr: {}},
+                {title: '名称', field: 'name', width: px2rem(100),  attr: {}, content:
+                    function (item, index, field) {
+                        return <div>{item.area}<br/>{item.name}</div>;
+                    }
+                },
+                {title: '消耗', field: 'cost',  attr: {test: 'cost',}, align: 'left'},
+                {title: '环比', field: 'subCost',  attr: {test: 'subCost',}, align: 'left'},
+                {title: '消耗', field: 'cost',  attr: {test: 'cost',}, align: 'left'},
+                {title: '环比', field: 'subCost', attr: {test: 'subCost',}, align: 'left'},
+                {title: '消耗', field: 'cost', width: px2rem(100),  attr: {test: 'cost',}, align: 'left'},
+                {title: '环比', field: 'subCost', width: px2rem(100),  attr: {test: 'subCost',}, align: 'left'},
+                {title: '消耗', field: 'cost', width: px2rem(100),  attr: {test: 'cost',}, align: 'left'},
+                {title: '环比', field: 'subCost', width: px2rem(100),  attr: {test: 'subCost',}, align: 'left'}
             ]
         ];
         const data = [{
@@ -127,19 +137,34 @@ export default class App extends React.Component<AppProps, any> {
             name: '搜狗',
             cost: '1298,23',
             subCost: '-12',
-            key: '1',
+            attr:{
+                selected: true,
+            }
         }, {
             area: '上海',
             name: '搜狐',
             cost: '90.23',
             subCost: '+98',
-            key: '2',
+            attr:{
+                selectable: false,
+               // selected: true,
+            }
         }, {
             area: '广州',
             name: '搜猫',
-            cost: '1765,12.34',
+            cost: '1765,12.34983773666626227727',
             subCost: '--',
-            key: '3',
+            attr:{
+                selected: true,
+            }
+        },{
+            area: '北京',
+            name: '搜狗',
+            cost: '1298,23',
+            subCost: '-12',
+            attr:{
+                selected: true,
+            }
         }];
         return (
             <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
@@ -155,6 +180,9 @@ export default class App extends React.Component<AppProps, any> {
                                 <Table
                                     columns={columns}
                                     dataSource={data}
+                                    width="200%"
+                                    height={px2rem(200)}
+                                    selectable
                                 />
                                 <SegmentedControl onChangeIndex={this.onTabChange} style={styles.seg}
                                                   values={['详情','评论','相关']}/>

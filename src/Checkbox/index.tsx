@@ -51,7 +51,7 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
             [`${prefixCls}-disabled`]: disabled,
         })
         const inputDisabled = disabled ? {disabled: 'disabled'} : '';
-        const iconType = this.state.checked ? 'check-square-o': 'square-o';
+        const iconType = this.state.checked ? 'check-square': 'square-o';
         return (
             <div style={style} className={checkboxClass} onTouchTap={()=>this.touchTap()}>
                 <input
