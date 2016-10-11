@@ -6,7 +6,7 @@ interface CheckboxProps extends BizuiProps{
     name?:string,
     disabled?:boolean,
     checked?:boolean,
-    onChange?:Function,
+    onChange?:(boolean, Event?)=>any,
     label?: string | React.ReactNode,
     labelPosition? : 'left' | 'right',
 }
@@ -25,21 +25,27 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
     }
     state = {checked: this.props.checked};
 
-    componentDidUpdate() {
-        this.props.onChange(this.state.checked);
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.checked !== this.state.checked) {
+            //this.props.onChange(this.state.checked);
+        }
     }
 
     componentWillReceiveProps(newProps) {
         if (typeof newProps.checked === 'boolean') {
-            this.setState({
-                checked: newProps.checked
-            })
+            if(newProps.checked !== this.state.checked) {
+                this.setState({
+                    checked: newProps.checked
+                });
+            }
         }
     }
 
-    touchTap() {
+    touchTap(e) {
         if (!this.props.disabled) {
-            this.setState({checked: !this.state.checked});
+            const checked = !this.state.checked;
+            this.setState({checked: checked});
+            this.props.onChange(checked, e);
         }
     }
 
@@ -53,7 +59,7 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
         const inputDisabled = disabled ? {disabled: 'disabled'} : '';
         const iconType = this.state.checked ? 'check-square': 'square-o';
         return (
-            <div style={style} className={checkboxClass} onTouchTap={()=>this.touchTap()}>
+            <div style={style} className={checkboxClass} onTouchTap={(e)=>this.touchTap(e)}>
                 <input
                     style={{display: 'none'}}
                     className={`${prefixCls}-checkbox`}

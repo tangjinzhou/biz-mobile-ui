@@ -59,6 +59,7 @@ const styles = {
     }
 }
 export default class App extends React.Component<AppProps, any> {
+    _table = null;
     state = {selectIndex: 0, progress: 10}
     //isMounted = this.isMounted;
     componentDidMount() {
@@ -85,7 +86,7 @@ export default class App extends React.Component<AppProps, any> {
     }
 
     onTabChange(index, fromIndex) {
-        console.log(index, fromIndex);
+        //console.log(index, fromIndex);
     }
 
     changeTabsSelect = ()=> {
@@ -108,6 +109,10 @@ export default class App extends React.Component<AppProps, any> {
     }
     switchChange = (checked) => {
         console.log(checked);
+    }
+    selectedChange = (row, checked) => {
+        console.log(row, checked);
+        console.log(this._table.getSelectedRows())
     }
 
     render() {
@@ -155,7 +160,7 @@ export default class App extends React.Component<AppProps, any> {
             cost: '1765,12.34983773666626227727',
             subCost: '--',
             attr:{
-                selected: true,
+                //selected: true,
             }
         },{
             area: '北京',
@@ -163,7 +168,15 @@ export default class App extends React.Component<AppProps, any> {
             cost: '1298,23',
             subCost: '-12',
             attr:{
-                selected: true,
+                //selected: true,
+            }
+        },{
+            area: '深圳',
+            name: '搜狗',
+            cost: '1298,23',
+            subCost: '-12',
+            attr:{
+                //selected: true,
             }
         }];
         return (
@@ -178,11 +191,14 @@ export default class App extends React.Component<AppProps, any> {
                                     <div style={styles.slide3}>slide 3</div>
                                 </Carousel>
                                 <Table
+                                    ref={(c) => this._table = c}
                                     columns={columns}
                                     dataSource={data}
                                     width="200%"
                                     height={px2rem(200)}
-                                    selectable
+                                    selectable={true}
+                                    multiSelectable={true}
+                                    selectedChange={this.selectedChange}
                                 />
                                 <SegmentedControl onChangeIndex={this.onTabChange} style={styles.seg}
                                                   values={['详情','评论','相关']}/>

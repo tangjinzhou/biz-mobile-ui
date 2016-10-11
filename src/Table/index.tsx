@@ -23,6 +23,7 @@ interface TableProps extends BizuiProps {
     fixedHeader?:boolean,
     selectable?:boolean,
     multiSelectable?:boolean,
+    selectedChange?: Function,
     dataSource?:Array<Object>,
     dataSourceField?:Array<HeaderTrProps>,
     height?:string,
@@ -43,18 +44,70 @@ class Table extends React.Component<TableProps, any> {
         multiSelectable: true,
         dataSource: [],
         height: 'auto',
+        selectedChange: ()=>{},
     }
     state = {
-        selectedRows: [],
+        rowsStatus: [],
     };
     componentWillMount() {
-        this.setState({selectedRows: this.calculatePreselectedRows(this.props)});
+        this.setState({rowsStatus: this.getRowsStatus(this.props)});
     }
     componentWillReceiveProps(nextProps) {
-
+        this.setState({rowsStatus: this.getRowsStatus(nextProps)});
     }
-    calculatePreselectedRows(props) {
-        return [];
+    getRowsStatus(props) {
+        const rowsStatus = [];
+        const {dataSource, selectable, multiSelectable} = props;
+        let selectedNums = 0;
+        if(selectable) {
+            for(let i = 0, rowsLen = dataSource.length; i < rowsLen; i++) {
+                let dataItem = dataSource[i];
+                dataItem.attr = Object.assign({}, {selected: false, selectable: true}, dataItem.attr);
+                if(dataItem.attr.selected) {
+                    selectedNums++;
+                }
+                rowsStatus.push(dataItem.attr);
+            }
+            if(!multiSelectable && selectedNums > 1) {
+                console.error('multiSelectable为false时, 不允许出现多个行被默认选中!');
+            }
+        }
+        return rowsStatus;
+    }
+    selectedChange = (row, checked, e) => {
+        let newStatus = [];
+        if(row === 'all') {
+            newStatus = this.setSelectedFalse(checked);
+        } else {
+            newStatus = [...this.state.rowsStatus];
+            if(!this.props.multiSelectable){
+                newStatus = this.setSelectedFalse(false);
+            }
+            newStatus[row].selected = checked;
+        }
+        this.props.selectedChange(row, checked);
+        this.setState({rowsStatus: newStatus});
+    }
+    setSelectedFalse(checked){
+        const newStatus = [];
+        for(let i = 0, rowsLen = this.state.rowsStatus.length; i < rowsLen; i++) {
+            let status = this.state.rowsStatus[i];
+            if(status.selectable){
+                status.selected = checked;
+            }
+            newStatus.push(status);
+        }
+        return newStatus;
+    }
+    getSelectedRows() {
+        const selectedRows = [];
+        for(let i = 0, rowsLen = this.state.rowsStatus.length; i < rowsLen; i++) {
+            let status = this.state.rowsStatus[i];
+            if(status.selected){
+                selectedRows.push(i);
+            }
+        }
+        return selectedRows;
     }
     getHeader() {
         const {columns,dataSource, selectable, multiSelectable, prefixCls} = this.props;
@@ -68,11 +121,10 @@ class Table extends React.Component<TableProps, any> {
         }
         const headerTr = [];
         let selectableAll = true;
-        if(selectable && multiSelectable) {
-            for(let i = 0, dataLen = dataSource.length; i < dataLen; i++) {
-                let attr = dataSource[i]['attr'] || {};
-                let tdSelectable = attr.selectable === false ? false : true;
-                if(tdSelectable && !attr.selected){
+        if(this.state.rowsStatus.length > 0) {
+            for(let i = 0, rowsLen = this.state.rowsStatus.length; i < rowsLen; i++) {
+                let status = this.state.rowsStatus[i];
+                if(status.selectable && !status.selected){
                     selectableAll = false;
                     break;
                 }
@@ -84,7 +136,7 @@ class Table extends React.Component<TableProps, any> {
             let headerTh = [];
             //全选
             if(i === 0 && selectable) {
-                headerTh.push(<th key={'th-checkbox-all'} className={`${prefixCls}-checkbox`} rowSpan={tempColumns.length}><Checkbox checked={selectableAll} disabled={!multiSelectable}/></th>);
+                headerTh.push(<th key={'th-checkbox-all'} className={`${prefixCls}-checkbox`} rowSpan={tempColumns.length}><Checkbox onChange={(checked, e)=>this.selectedChange('all', checked, e)} checked={selectableAll} disabled={!multiSelectable}/></th>);
             }
             for (let j = 0, thLen = tempColumns[i].length; j < thLen; j++) {
                 let thData = tempColumns[i][j];
@@ -111,21 +163,14 @@ class Table extends React.Component<TableProps, any> {
             }
         }
         const tbodyTr = [];
-        let tempSelected = false;//multiSelectable===false时, 仅有第一个被选中, 出现第二个时给错误提示
         for (let i = 0, dataLen = dataSource.length; i < dataLen; i++) {
             let tempData = dataSource[i];
             tempData['attr'] = tempData['attr'] || {};
             let tbodyTd = [];
             if(selectable) {
-                let tdSelectable = tempData['attr'].selectable === false ? false : true;
-                let tdSelected = tempData['attr'].selected;
-                if(tdSelected && !multiSelectable) {
-                    if(tempSelected) {
-                        console.error('multiSelectable为false时, 不允许出现多个行被默认选中!');
-                    }
-                    tempSelected = !tempSelected;
-                }
-                tbodyTd.push(<td key={'td-checkbox-'+i} className={`${prefixCls}-checkbox`}><Checkbox checked={tdSelected} disabled={!tdSelectable}/></td>)
+                let tdSelectable = this.state.rowsStatus[i].selectable;
+                let tdSelected = this.state.rowsStatus[i].selected;
+                tbodyTd.push(<td key={'td-checkbox-'+i} className={`${prefixCls}-checkbox`}><Checkbox onChange={(checked, e)=>this.selectedChange(i, checked, e)} checked={tdSelected} disabled={!tdSelectable}/></td>)
             }
             for (let j = 0, indexLen = dataSourceField.length; j < indexLen; j++) {
                 let field = dataSourceField[j].field;
