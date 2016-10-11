@@ -109,11 +109,19 @@ class Table extends React.Component<TableProps, any> {
     setAllRowsSelected() {
         this.setState({rowsStatus: this.getSelectedStatus(true)});
     }
-    cancelallRowsSelected() {
+    cancelAllRowsSelected() {
         this.setState({rowsStatus: this.getSelectedStatus(false)});
     }
     invertRowsSelected() {
-        
+        const newStatus = [];
+        for(let i = 0, rowsLen = this.state.rowsStatus.length; i < rowsLen; i++) {
+            let status = this.state.rowsStatus[i];
+            if(status.selectable){
+                status.selected = !status.selected;
+            }
+            newStatus.push(status);
+        }
+        this.setState({rowsStatus: newStatus});
     }
     getHeader() {
         const {columns,dataSource, selectable, multiSelectable, prefixCls} = this.props;

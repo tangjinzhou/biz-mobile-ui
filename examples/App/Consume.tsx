@@ -2,6 +2,7 @@ import * as React from 'react';
 import {px2rem} from '../../src/util/util';
 import {
     Table,
+    Button,
 } from '../../src/index.tsx';
 interface ConsumeProps {
 
@@ -11,9 +12,18 @@ export default class Consume extends React.Component<ConsumeProps, any> {
     _table = null;
     selectedChange = (row, checked) => {
         console.log(row, checked);
-        console.log(this._table.getSelectedRows())
+        console.log(this._table.getSelectedRows());
+    }
+    cancelAllSelected = () => {
+        this._table.cancelAllRowsSelected();
+    }
+    setAllSelected = () => {
+        this._table.setAllRowsSelected();
     }
 
+    invertSelected = () => {
+        this._table.invertRowsSelected();
+    }
     render() {
         const columns = [
             [
@@ -79,17 +89,27 @@ export default class Consume extends React.Component<ConsumeProps, any> {
             }
         }];
         return (
-            <Table
-                ref={(c) => this._table = c}
-                columns={columns}
-                dataSource={data}
-                width="200%"
-                height={px2rem(200)}
-                selectable={true}
-                multiSelectable={true}
-                selectedChange={this.selectedChange}
-            />
+            <div>
+                <Table
+                    ref={(c) => this._table = c}
+                    columns={columns}
+                    dataSource={data}
+                    width="200%"
+                    height={px2rem(200)}
+                    selectable={true}
+                    multiSelectable={true}
+                    selectedChange={this.selectedChange}
+                />
+                <Button onTouchTap={this.cancelAllSelected} size="small">取消选择</Button>
+                <Button onTouchTap={this.setAllSelected} size="small">全选</Button>
+                <Button onTouchTap={this.invertSelected} size="small">反选</Button>
+            </div>
         );
     }
 }
+
+
+
+
+
 
