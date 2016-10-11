@@ -1,4 +1,4 @@
-import * as attachFastClick from 'fastclick';
+//import * as attachFastClick from 'fastclick';
 //attachFastClick['attach'](document.body);
 import * as React from 'react';
 import request from './request';
@@ -25,6 +25,8 @@ import {
     Table,
     Arrow
 } from '../../src/index.tsx';
+import Pregress from './Progress';
+import Consume from './Consume';
 interface AppProps {
 
 }
@@ -60,7 +62,7 @@ const styles = {
 }
 export default class App extends React.Component<AppProps, any> {
     _table = null;
-    state = {selectIndex: 0, progress: 10}
+    state = {selectIndex: 0};
     //isMounted = this.isMounted;
     componentDidMount() {
         let req = request('./getProduct.action').then((res)=> {
@@ -93,92 +95,17 @@ export default class App extends React.Component<AppProps, any> {
         this.setState({selectIndex: 0});
     }
 
-    changeProgress(percent) {
-        if (percent < 0) {
-            percent = 0;
-        } else if (percent > 100) {
-            percent = 100;
-        }
-        this.setState({progress: percent});
-    }
-
     showMessage = () => {
         const messge = Message.error('填写客户名称', 3, ()=> {
-            this.changeProgress(80);
+            console.log('showMessage done');
         });
     }
     switchChange = (checked) => {
         console.log(checked);
     }
-    selectedChange = (row, checked) => {
-        console.log(row, checked);
-        console.log(this._table.getSelectedRows())
-    }
 
     render() {
-        const columns = [
-            [
-                {title: '实时消耗', colSpan: 10}
-            ],
-            [
-                {title: '地区', field: 'area', width: px2rem(100), attr: {}},
-                {title: '名称', field: 'name', width: px2rem(100),  attr: {}, content:
-                    function (item, index, field) {
-                        return <div>{item.area}<br/>{item.name}</div>;
-                    }
-                },
-                {title: '消耗', field: 'cost',  attr: {test: 'cost',}, align: 'left'},
-                {title: '环比', field: 'subCost',  attr: {test: 'subCost',}, align: 'left'},
-                {title: '消耗', field: 'cost',  attr: {test: 'cost',}, align: 'left'},
-                {title: '环比', field: 'subCost', attr: {test: 'subCost',}, align: 'left'},
-                {title: '消耗', field: 'cost', width: px2rem(100),  attr: {test: 'cost',}, align: 'left'},
-                {title: '环比', field: 'subCost', width: px2rem(100),  attr: {test: 'subCost',}, align: 'left'},
-                {title: '消耗', field: 'cost', width: px2rem(100),  attr: {test: 'cost',}, align: 'left'},
-                {title: '环比', field: 'subCost', width: px2rem(100),  attr: {test: 'subCost',}, align: 'left'}
-            ]
-        ];
-        const data = [{
-            area: '北京',
-            name: '搜狗',
-            cost: '1298,23',
-            subCost: '-12',
-            attr:{
-                selected: true,
-            }
-        }, {
-            area: '上海',
-            name: '搜狐',
-            cost: '90.23',
-            subCost: '+98',
-            attr:{
-                selectable: false,
-               // selected: true,
-            }
-        }, {
-            area: '广州',
-            name: '搜猫',
-            cost: '1765,12.34983773666626227727',
-            subCost: '--',
-            attr:{
-                //selected: true,
-            }
-        },{
-            area: '北京',
-            name: '搜狗',
-            cost: '1298,23',
-            subCost: '-12',
-            attr:{
-                //selected: true,
-            }
-        },{
-            area: '深圳',
-            name: '搜狗',
-            cost: '1298,23',
-            subCost: '-12',
-            attr:{
-                //selected: true,
-            }
-        }];
+
         return (
             <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
                 <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>} badgeContent={21}>
@@ -190,16 +117,7 @@ export default class App extends React.Component<AppProps, any> {
                                     <div style={styles.slide2}>slide 2</div>
                                     <div style={styles.slide3}>slide 3</div>
                                 </Carousel>
-                                <Table
-                                    ref={(c) => this._table = c}
-                                    columns={columns}
-                                    dataSource={data}
-                                    width="200%"
-                                    height={px2rem(200)}
-                                    selectable={true}
-                                    multiSelectable={true}
-                                    selectedChange={this.selectedChange}
-                                />
+                                <Consume/>
                                 <SegmentedControl onChangeIndex={this.onTabChange} style={styles.seg}
                                                   values={['详情','评论','相关']}/>
                                 <SegmentedControl onChangeIndex={this.onTabChange} selectedIndex={1} tintColor='#8E24AA'
@@ -207,17 +125,7 @@ export default class App extends React.Component<AppProps, any> {
                                 <SegmentedControl onChangeIndex={this.onTabChange}
                                                   style={Object.assign({},styles.seg, {width: '80%', height: px2rem(40)})}
                                                   values={['详情','评论']} enabled={false}/>
-                                <LinearProgress style={styles.seg}/>
-                                <LinearProgress style={Object.assign({},styles.seg,{height: px2rem(15)})}
-                                                color="#8E24AA"
-                                                fillColor="#FFF"/>
-                                <LinearProgress style={styles.seg} mode="determinate" percent={this.state.progress}/>
-                                <Button style={Object.assign({},styles.seg, {display: 'block'})}
-                                        onTouchTap={()=>this.changeProgress(this.state.progress + 20)}
-                                        size="small">+ 20</Button>
-                                <Button style={Object.assign({},styles.seg, {display: 'block'})}
-                                        onTouchTap={()=>this.changeProgress(this.state.progress - 10)}
-                                        size="small">- 10</Button>
+                                <Pregress/>
                                 <Button style={Object.assign({},styles.seg, {display: 'block'})}
                                         onTouchTap={this.showMessage}>
                                     show info Message

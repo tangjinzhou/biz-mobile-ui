@@ -21,7 +21,7 @@ export default class TabBar extends React.Component<TabBarProps, any>{
         });
     }
     componentWillReceiveProps(newProps) {
-        if(newProps.selectedIndex !== undefined){
+        if(newProps.selectedIndex !== this.state.selectedIndex){
             this.setState({
                 selectedIndex: newProps.selectedIndex
             })

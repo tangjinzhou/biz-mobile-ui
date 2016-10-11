@@ -22,7 +22,7 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
     state = {selectedIndex: this.props.selectedIndex};
     tabsCompontent=null;
     componentWillReceiveProps(newProps) {
-        if(newProps.selectedIndex !== undefined){
+        if(newProps.selectedIndex !== this.state.selectedIndex){
             this.setState({
                 selectedIndex: newProps.selectedIndex
             })

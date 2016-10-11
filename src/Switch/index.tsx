@@ -27,12 +27,10 @@ export default class Switch extends React.Component<SwitchProps, any> {
     }
 
     componentWillReceiveProps(newProps) {
-        if (typeof newProps.checked === 'boolean') {
-            if(newProps.checked !== this.state.checked) {
-                this.setState({
-                    checked: newProps.checked
-                });
-            }
+        if(newProps.checked !== this.state.checked) {
+            this.setState({
+                checked: newProps.checked
+            });
         }
     }
 

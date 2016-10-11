@@ -29,7 +29,7 @@ export default class Tabs extends React.Component<TabsProps, any>{
         });
     }
     componentWillReceiveProps(newProps) {
-        if(newProps.selectedIndex !== undefined){
+        if(newProps.selectedIndex !== this.state.selectedIndex){
             this.setState({
                 selectedIndex: newProps.selectedIndex
             })

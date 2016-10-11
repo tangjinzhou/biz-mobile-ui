@@ -20,7 +20,7 @@ class TabBar extends React.Component {
         });
     }
     componentWillReceiveProps(newProps) {
-        if (newProps.selectedIndex !== undefined) {
+        if (newProps.selectedIndex !== this.state.selectedIndex) {
             this.setState({
                 selectedIndex: newProps.selectedIndex
             });

@@ -52,9 +52,6 @@ class Table extends React.Component<TableProps, any> {
     componentWillMount() {
         this.setState({rowsStatus: this.getRowsStatus(this.props)});
     }
-    componentWillReceiveProps(nextProps) {
-        this.setState({rowsStatus: this.getRowsStatus(nextProps)});
-    }
     getRowsStatus(props) {
         const rowsStatus = [];
         const {dataSource, selectable, multiSelectable} = props;
@@ -77,18 +74,18 @@ class Table extends React.Component<TableProps, any> {
     selectedChange = (row, checked, e) => {
         let newStatus = [];
         if(row === 'all') {
-            newStatus = this.setSelectedFalse(checked);
+            newStatus = this.getSelectedStatus(checked);
         } else {
             newStatus = [...this.state.rowsStatus];
             if(!this.props.multiSelectable){
-                newStatus = this.setSelectedFalse(false);
+                newStatus = this.getSelectedStatus(false);
             }
             newStatus[row].selected = checked;
         }
         this.props.selectedChange(row, checked);
         this.setState({rowsStatus: newStatus});
     }
-    setSelectedFalse(checked){
+    getSelectedStatus(checked){
         const newStatus = [];
         for(let i = 0, rowsLen = this.state.rowsStatus.length; i < rowsLen; i++) {
             let status = this.state.rowsStatus[i];
@@ -108,6 +105,15 @@ class Table extends React.Component<TableProps, any> {
             }
         }
         return selectedRows;
+    }
+    setAllRowsSelected() {
+        this.setState({rowsStatus: this.getSelectedStatus(true)});
+    }
+    cancelallRowsSelected() {
+        this.setState({rowsStatus: this.getSelectedStatus(false)});
+    }
+    invertRowsSelected() {
+        
     }
     getHeader() {
         const {columns,dataSource, selectable, multiSelectable, prefixCls} = this.props;
