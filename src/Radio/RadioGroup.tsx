@@ -47,6 +47,7 @@ export default class Radio extends React.Component<RadioGroupProps, any> {
             return React.cloneElement(radio, {
                 key: index,
                 labelPosition: labelPosition,
+                name: name,
                 checked: valueSelected === radio.props.value,
                 onChange: (value) => this.selectChange(value),
             });

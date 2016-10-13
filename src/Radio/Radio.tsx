@@ -61,6 +61,7 @@ export default class Radio extends React.Component<RadioProps, any> {
                     name={name}
                     {...inputDisabled}
                     onChange={()=>{}}
+                    value={value}
                 />
                 {labelPosition === 'right' ? <Icon type={iconType}/> : null}
                 <div className={`${prefixCls}-label`}>{label}</div>
