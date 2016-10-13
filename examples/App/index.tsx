@@ -21,6 +21,8 @@ import {
     Card,
     Switch,
     Checkbox,
+    Radio,
+    RadioGroup,
     Ellipsis,
     Table,
     Arrow
@@ -100,8 +102,8 @@ export default class App extends React.Component<AppProps, any> {
             console.log('showMessage done');
         });
     }
-    switchChange = (checked) => {
-        console.log(checked);
+    commonFunc = (...args) => {
+        console.log(args);
     }
 
     render() {
@@ -139,16 +141,34 @@ export default class App extends React.Component<AppProps, any> {
                                 <Arrow direction="top" color={colors.blue_500} innerColor="#eee"/>
                                 <Arrow direction="bottom" color={colors.blue_500} innerColor="#eee" size={px2rem(20)}
                                        lineThickness={px2rem(4)}/>
-                                <Switch style={{marginTop: px2rem(10)}} onChange={this.switchChange}/>
-                                <Switch style={{marginTop: px2rem(10)}} checked disabled onChange={this.switchChange}/>
-                                <Checkbox style={{marginTop: px2rem(10)}}
-                                          label={<Ellipsis text="你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World"/>}
-                                          disabled checked/>
-                                <Checkbox style={{marginTop: px2rem(10)}}
-                                          label={<Ellipsis line={2} text="你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World"/>}/>
-                                <Checkbox style={{marginTop: px2rem(10)}}
-                                          label={<Ellipsis width={px2rem(200)} line={3} text="你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World你好hello World"/>}
-                                          checked onChange={this.switchChange}/>
+                                <Switch style={{marginTop: px2rem(10)}} onChange={this.commonFunc}/>
+                                <Switch style={{marginTop: px2rem(10)}} checked disabled onChange={this.commonFunc}/>
+                                <RadioGroup name="productType" valueSelected="2" onChange={this.commonFunc}>
+                                    <Radio label="旭日" value="1"/>
+                                    <Radio label="晨星" value="2"/>
+                                    <Radio label="皓月" value="3"/>
+                                </RadioGroup>
+                                <div>
+                                    <Radio style={{marginTop: px2rem(10)}}
+                                           label={<Ellipsis width={px2rem(50)} line={1} text="你好helloeooeoddllld"/>}
+                                           checked onChange={this.commonFunc}
+                                           labelPosition="left"/>
+                                </div>
+
+                                <div>
+                                    <Checkbox style={{marginTop: px2rem(10)}}
+                                              label={<Ellipsis text="你好"/>}
+                                              disabled checked/>
+                                    <Checkbox style={{marginTop: px2rem(10)}}
+                                              label={<Ellipsis line={2} text="你好"/>}/>
+                                </div>
+                                <div>
+                                    <Checkbox style={{marginTop: px2rem(10)}}
+                                              label={<Ellipsis width={px2rem(50)} line={1} text="你好helloeooeoddllld"/>}
+                                              checked onChange={this.commonFunc}
+                                              labelPosition="left" value="1"/>
+                                </div>
+
 
                                 <Card style={{marginTop: px2rem(10)}}>
                                     hello World
