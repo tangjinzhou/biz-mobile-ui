@@ -25,7 +25,8 @@ import {
     RadioGroup,
     Ellipsis,
     Table,
-    Arrow
+    Arrow,
+    Slider
 } from '../../src/index.tsx';
 import Pregress from './Progress';
 import Consume from './Consume';
@@ -143,6 +144,16 @@ export default class App extends React.Component<AppProps, any> {
                                        lineThickness={px2rem(4)}/>
                                 <Switch style={{marginTop: px2rem(10)}} onChange={this.commonFunc}/>
                                 <Switch style={{marginTop: px2rem(10)}} checked disabled onChange={this.commonFunc}/>
+                                <Slider
+                                    style={{width: '90%', margin: '0 auto'}}
+                                    value={60}
+                                    min={10}
+                                    max={99}
+                                    step={0.1}
+                                    onChange={this.commonFunc}
+                                    onDragStart={this.commonFunc}
+                                    onDragStop={this.commonFunc}
+                                />
                                 <RadioGroup name="productType" valueSelected="2" onChange={this.commonFunc}>
                                     <Radio label="旭日" value="1"/>
                                     <Radio label="晨星" value="2"/>

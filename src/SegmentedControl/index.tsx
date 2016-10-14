@@ -11,9 +11,9 @@ interface SegmentedControlProps extends BizuiProps{
 
 export default class SegmentedControl extends React.Component<SegmentedControlProps, any>{
     static defaultProps = {
-        selectedIndex: 0,
         prefixCls: 'biz-segmented',
         className: '',
+        selectedIndex: 0,
         onChangeIndex:()=>{},
         values: [],
         style: {},

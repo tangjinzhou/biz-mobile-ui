@@ -25,3 +25,4 @@ export {default as RadioGroup} from './Radio/RadioGroup';
 export {default as Ellipsis} from './Ellipsis';
 export {default as Table} from './Table';
 export {default as Arrow} from './Arrow';
+export {default as Slider} from './Slider';
