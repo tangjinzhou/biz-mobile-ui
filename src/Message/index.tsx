@@ -70,7 +70,7 @@ function createMessage(content, type, duration, onClose) {
             setTimeout(function(){
                 document.body.style.overflow = '';
                 ReactDOM.unmountComponentAtNode(div);
-                div.parentNode.removeChild(div);
+                div.remove();
                 div = null;
             }, 300);
         }

@@ -26,3 +26,4 @@ export {default as Ellipsis} from './Ellipsis';
 export {default as Table} from './Table';
 export {default as Arrow} from './Arrow';
 export {default as Slider} from './Slider';
+export {default as Popup} from './Popup';

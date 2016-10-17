@@ -26,7 +26,8 @@ import {
     Ellipsis,
     Table,
     Arrow,
-    Slider
+    Slider,
+    Popup
 } from '../../src/index.tsx';
 import Pregress from './Progress';
 import Consume from './Consume';
@@ -103,6 +104,23 @@ export default class App extends React.Component<AppProps, any> {
             console.log('showMessage done');
         });
     }
+    showPopup = (position) => {
+
+        Popup.show(<ul>
+                <li style={{padding: px2rem(10)}}>
+                    hello World
+                </li>
+                <li style={{padding: px2rem(10)}}>
+                    hello sogou
+                </li>
+            <li style={{padding: px2rem(10)}}>
+                hello World
+            </li>
+            <li style={{padding: px2rem(10)}}>
+                hello sogou
+            </li>
+            </ul>, {position: position, showMask: false});
+    }
     commonFunc = (...args) => {
         console.log(args);
     }
@@ -132,6 +150,14 @@ export default class App extends React.Component<AppProps, any> {
                                 <Button style={Object.assign({},styles.seg, {display: 'block'})}
                                         onTouchTap={this.showMessage}>
                                     show info Message
+                                </Button>
+                                <Button style={Object.assign({},styles.seg, {display: 'block'})}
+                                        onTouchTap={()=>this.showPopup('top')}>
+                                    showTopPopup
+                                </Button>
+                                <Button style={Object.assign({},styles.seg, {display: 'block'})}
+                                        onTouchTap={()=>this.showPopup('bottom')}>
+                                    showBottomPopup
                                 </Button>
                                 <Arrow direction="right"/>
                                 <Arrow direction="left"/>

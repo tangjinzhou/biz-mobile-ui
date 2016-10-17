@@ -1,0 +1,26 @@
+@popupPrefixCls: biz-popup;
+
+.@{popupPrefixCls} {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  &-mask{
+    background-color: @black-dark;
+  }
+  &-wrap{
+    position: absolute;
+    left: 0;
+    .animated(300ms);
+    background-color: @white-darker;
+    width: 100%;
+  }
+  &-wrap-top{
+    top: 0;
+  }
+  &-wrap-bottom{
+    bottom: 0;
+  }
+}
