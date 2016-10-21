@@ -5,7 +5,9 @@ interface LinearProgressProps extends BizuiProps{
     color?: string,
     fillColor?: string,
     mode?: 'determinate' | 'indeterminate',
-    percent?: number,
+    value?: number,
+    min?: number,
+    max?: number,
     transitionDuration?:number,
 }
 
@@ -22,7 +24,7 @@ export default class LinearProgress extends React.Component<LinearProgressProps,
         percent: 0,
     }
     render() {
-        const {prefixCls, className, color, fillColor, mode, style, percent, transitionDuration} = this.props;
+        const {prefixCls, className, color, fillColor, mode, style,min, max, value: val, transitionDuration} = this.props;
         const linearClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
@@ -31,9 +33,13 @@ export default class LinearProgress extends React.Component<LinearProgressProps,
             [`${prefixCls}-indeterminate`]: mode === 'indeterminate',
             [`${prefixCls}-determinate`]: mode === 'determinate',
         });
+        let value = val;
+        value = value < min ? min : value;
+        value = value > max ? max : value;
+        const percent = value / (max - min) * 100 + '%';
         const modeStyle = {
             backgroundColor: color,
-            width: mode === 'determinate' ? percent + '%' : '',
+            width: mode === 'determinate' ? percent : '',
             transitionDuration: mode === 'determinate'? transitionDuration + 'ms' : '',
         };
         return(

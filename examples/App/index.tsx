@@ -27,7 +27,8 @@ import {
     Table,
     Arrow,
     Slider,
-    Popup
+    Popup,
+    InputItem,
 } from '../../src/index.tsx';
 import Pregress from './Progress';
 import Consume from './Consume';
@@ -138,6 +139,7 @@ export default class App extends React.Component<AppProps, any> {
                                     <div style={styles.slide2}>slide 2</div>
                                     <div style={styles.slide3}>slide 3</div>
                                 </Carousel>
+                                <InputItem label="客户名" value="sogou"/>
                                 <Consume/>
                                 <SegmentedControl onChangeIndex={this.onTabChange} style={styles.seg}
                                                   values={['详情','评论','相关']}/>
