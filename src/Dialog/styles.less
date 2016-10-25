@@ -1,0 +1,22 @@
+@dialogPrefixCls: biz-dialog;
+
+.@{dialogPrefixCls} {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &-mask{
+    background-color: @black-dark;
+  }
+  &-wrap{
+    .animated(300ms);
+    background-color: @white-darker;
+    min-width: 100px;
+    min-height: 50px;
+  }
+}

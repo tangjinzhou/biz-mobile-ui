@@ -11,7 +11,7 @@ interface MessageProps {
 
 class MessageDialog extends React.Component<MessageProps, any> {
     static defaultProps = {
-        duration: 3,
+        duration: 1500,
     }
 
     render(){
@@ -81,7 +81,7 @@ function createMessage(content, type, duration, onClose) {
     if(duration !== 0) {
         setTimeout(function(){
             close();
-        }, duration*1000);
+        }, duration);
     }
     return {
         close: close

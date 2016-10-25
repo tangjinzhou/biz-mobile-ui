@@ -29,6 +29,8 @@ import {
     Slider,
     Popup,
     InputItem,
+    Dialog,
+    //DatePicker,
 } from '../../src/index.tsx';
 import Pregress from './Progress';
 import Consume from './Consume';
@@ -67,13 +69,19 @@ const styles = {
 }
 export default class App extends React.Component<AppProps, any> {
     _table = null;
-    state = {selectIndex: 0};
+    state = {selectIndex: 0, info: 'hello', open: true};
     //isMounted = this.isMounted;
     componentDidMount() {
         let req = request('./getProduct.action').then((res)=> {
             //console.log(res.data, this.isMounted());
         });
-
+        let _this = this;
+        /*setTimeout(function(){
+            _this.setState({info: 'world'});
+        }, 3000);*/
+        /*setTimeout(function(){
+            _this.setState({open: false});
+        }, 5000);*/
     }
 
     showAlertWithTwoBtn(index, value) {
@@ -101,7 +109,7 @@ export default class App extends React.Component<AppProps, any> {
     }
 
     showMessage = () => {
-        const messge = Message.error('填写客户名称', 3, ()=> {
+        const messge = Message.error('填写正确的邮箱', 1000, ()=> {
             console.log('showMessage done');
         });
     }
@@ -139,7 +147,13 @@ export default class App extends React.Component<AppProps, any> {
                                     <div style={styles.slide2}>slide 2</div>
                                     <div style={styles.slide3}>slide 3</div>
                                 </Carousel>
-                                <InputItem label="客户名" value="sogou"/>
+
+                                {this.state.open ? <Dialog open={this.state.open}>{this.state.info}</Dialog>:null}
+                                <div style={{background: '#FFFFFF', paddingLeft: px2rem(15)}}>
+                                    <InputItem labelWidth={px2rem(50)} label="客户名" value="sogou" placeholder="请输入客户名"/>
+                                    <InputItem labelWidth={px2rem(50)} label="邮箱" type="number" value="" extra="@qq.com" placeholder="请输入邮箱" error={true} onErrorTap={this.showMessage}/>
+                                </div>
+
                                 <Consume/>
                                 <SegmentedControl onChangeIndex={this.onTabChange} style={styles.seg}
                                                   values={['详情','评论','相关']}/>

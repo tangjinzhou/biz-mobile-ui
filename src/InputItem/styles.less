@@ -1,0 +1,54 @@
+@inputPrefixCls: biz-input;
+.@{inputPrefixCls} {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  border-bottom: 1px solid @grey-400;
+  line-height: 20px;
+  &-label{
+    font-size: 16px;
+    text-align: left;
+    margin-right: 10px;
+  }
+  &-val{
+    flex: 1;
+    input{
+      font-size: 16px;
+      appearance: none;
+      width: 100%;
+      border: 0;
+      background-color: transparent;
+    }
+    margin-right: 10px;
+  }
+  &-clear{
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: @grey-400;
+    i{
+      width: 100%;
+      line-height: 20px;
+      font-size: 18px;
+      color: @white-darker;
+    }
+  }
+  &-extra{
+    margin-right: 10px;
+    color: @grey-600;
+  }
+  &-error{
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: @red-500;
+    i{
+      width: 100%;
+      line-height: 20px;
+      font-size: 18px;
+      color: @white-darker;
+    }
+  }
+}

@@ -6,7 +6,7 @@ import * as classNames from 'classnames';
 interface PopupDialogProps extends BizuiProps{
     content?: string | React.ReactNode,
     maskOnTouchTap?: Function,
-    animationType: 'slideInDown' | 'slideInUp',
+    animationType: 'slideInDown' | 'slideInUp' | 'fadeIn',
     showMask?: boolean,
     position: 'top' | 'bottom',
 }

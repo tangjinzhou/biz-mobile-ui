@@ -37,6 +37,9 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
         this._confirmInput && this._confirmInput.focus();
     }
     onTouchTap = (index) => {
+        if(this._confirmInput) {
+            this._confirmInput.blur();
+        }
         if(this.props.type === 'confirm') {
             const value = this._confirmInput.value;
             this.props.onTouchTap(index, value);

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import Icon from '../Icon';
 interface InputProps extends BizuiProps {
     label?: string | React.ReactNode,
     type?: 'text' | 'tel' | 'number' | 'password',
@@ -14,11 +15,14 @@ interface InputProps extends BizuiProps {
     onFocus?: Function,
     extra?: string | React.ReactNode,
     error?: boolean,
-    autoFocus?: boolean,
+    onErrorTap?: Function,
+    labelWidth?: string,
 }
 
 export default class InputItem extends React.Component<InputProps, any>{
     static defaultProps = {
+        prefixCls: 'biz-input',
+        className: '',
         label: '',
         type: 'text',
         value: '',
@@ -29,7 +33,7 @@ export default class InputItem extends React.Component<InputProps, any>{
         onBlur: ()=>{},
         onFocus: ()=>{},
         error: false,
-        autoFocus: false,
+        onErrorTap: ()=>{},
     }
     state = {
         value: '',
@@ -40,9 +44,7 @@ export default class InputItem extends React.Component<InputProps, any>{
         this.setState({value: this.props.value || ''});
     }
     componentDidMount() {
-        if(this.props.autoFocus) {
-            this._input.focus();
-        }
+
     }
     componentWillReceiveProps(newProps) {
         if (newProps.value !== this.state.value) {
@@ -52,32 +54,35 @@ export default class InputItem extends React.Component<InputProps, any>{
         }
     }
     onChange = (e) => {
-        if(e.target.value !== this.state.value) {
-            this.props.onChange(e.target.value);
-            this.setState({value: e.target.value});
+        const val = e.target.value;
+        if(val !== this.state.value) {
+            const {clear, onChange} = this.props;
+            onChange(val);
+            this.setState({value: val, showClear: clear && val.length > 0});
         }
     }
     onFocus = () => {
         const {clear, onFocus} = this.props;
-        onFocus(this.state.value);
-        this.setState({showClear: clear});
+        const val = this.state.value;
+        onFocus(val);
+        this.setState({showClear: clear && val.length > 0});
     }
     onBlur = () => {
         this.props.onBlur(this.state.value);
         this.setState({showClear: false});
     }
-    clearValue() {
-        this.setState({value: ''});
+    clearValue = () => {
+        this.setState({value: '', showClear: false});
     }
     render(){
-        const {prefixCls, className, type, label, extra, error, placeholder} = this.props;
-        const inpueItemClass = classNames({
+        const {prefixCls, className, type, label, extra, error, name, placeholder, onErrorTap, labelWidth} = this.props;
+        const inputItemClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
         })
         return(
-            <div className={inpueItemClass}>
-                <div className={`${prefixCls}-label`}>{label}</div>
+            <div className={inputItemClass}>
+                <div className={`${prefixCls}-label`} style={{width: labelWidth}}>{label}</div>
                 <div className={`${prefixCls}-val`}>
                     <input
                         onTouchTap={()=>this._input.focus()}
@@ -88,11 +93,12 @@ export default class InputItem extends React.Component<InputProps, any>{
                         onChange={this.onChange}
                         onBlur={this.onBlur}
                         onFocus={this.onFocus}
+                        name={name}
                     />
                 </div>
-                {this.state.showClear ? <div className={`${prefixCls}-clear`} onTouchTap={this.clearValue}></div> : null}
                 {extra ? <div className={`${prefixCls}-extra`}>{extra}</div> : null}
-                {error ? <div className={`${prefixCls}-error`}></div> : null}
+                {this.state.showClear ? <div className={`${prefixCls}-clear`} onTouchTap={this.clearValue}><Icon type="remove" fixedWidth={true}/></div> : null}
+                {error ? <div className={`${prefixCls}-error`} onTouchTap={onErrorTap}><Icon type="exclamation" fixedWidth={true}/></div> : null}
             </div>
         )
     }

@@ -18,7 +18,7 @@ export default class Icon extends React.Component<IconPropType, any> {
         fixedWidth: false,
     };
     render() {
-        const {prefixCls, type, className, size, spin, fixedWidth, style} = this.props;
+        const {prefixCls, type, className, size, spin, fixedWidth, style, color} = this.props;
         const iconClass = classNames({
             [`${prefixCls}`]: true,
             [`${prefixCls}-${type}`]: true,
@@ -28,7 +28,7 @@ export default class Icon extends React.Component<IconPropType, any> {
             [className]: true,
         })
         return (
-            <i style={style} className={iconClass} aria-hidden="true"></i>
+            <i style={Object.assign({},style, {color: color})} className={iconClass} aria-hidden="true"></i>
         );
     }
 }
