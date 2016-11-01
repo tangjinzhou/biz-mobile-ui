@@ -17,6 +17,7 @@ interface InputProps extends BizuiProps {
     error?: boolean,
     onErrorTap?: Function,
     labelWidth?: string,
+    onTouchTap?: Function,
 }
 
 export default class InputItem extends React.Component<InputProps, any>{
@@ -74,18 +75,26 @@ export default class InputItem extends React.Component<InputProps, any>{
     clearValue = () => {
         this.setState({value: '', showClear: false});
     }
+    onTouchTap=()=>{
+        const {disabled, onTouchTap} = this.props;
+        if(!disabled) {
+            this._input.focus();
+        }
+        onTouchTap && onTouchTap();
+    }
     render(){
-        const {prefixCls, className, type, label, extra, error, name, placeholder, onErrorTap, labelWidth} = this.props;
+        const {prefixCls, className, type, label, extra, error, name, placeholder, onErrorTap, labelWidth, disabled} = this.props;
         const inputItemClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
-        })
+        });
+        const inputDisabled = disabled ? {disabled: 'disabled'} : '';
         return(
             <div className={inputItemClass}>
                 <div className={`${prefixCls}-label`} style={{width: labelWidth}}>{label}</div>
                 <div className={`${prefixCls}-val`}>
                     <input
-                        onTouchTap={()=>this._input.focus()}
+                        onTouchTap={this.onTouchTap}
                         placeholder={placeholder}
                         ref={(c) => this._input = c}
                         type={type}
@@ -94,6 +103,7 @@ export default class InputItem extends React.Component<InputProps, any>{
                         onBlur={this.onBlur}
                         onFocus={this.onFocus}
                         name={name}
+                        {...inputDisabled}
                     />
                 </div>
                 {extra ? <div className={`${prefixCls}-extra`}>{extra}</div> : null}

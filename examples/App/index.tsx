@@ -101,7 +101,7 @@ export default class App extends React.Component<AppProps, any> {
     }
 
     onTabChange(index, fromIndex) {
-        //console.log(index, fromIndex);
+        console.log(index, fromIndex);
     }
 
     changeTabsSelect = ()=> {
@@ -142,7 +142,7 @@ export default class App extends React.Component<AppProps, any> {
                     <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>
                         <Tab label="旭日">
                             <div style={Object.assign({}, styles.tab, {backgroundColor: colors.grey_200})}>
-                                <Carousel onChangeIndex={this.onTabChange} autoplay={true} style={{height: 500}}>
+                                <Carousel onChangeIndex={this.commonFunc} autoplay={true} style={{height: 500}}>
                                     <div style={styles.slide1}>slide 1</div>
                                     <div style={styles.slide2}>slide 2</div>
                                     <div style={styles.slide3}>slide 3</div>
@@ -152,6 +152,7 @@ export default class App extends React.Component<AppProps, any> {
                                 <div style={{background: '#FFFFFF', paddingLeft: px2rem(15)}}>
                                     <InputItem labelWidth={px2rem(50)} label="客户名" value="sogou" placeholder="请输入客户名"/>
                                     <InputItem labelWidth={px2rem(50)} label="邮箱" type="number" value="" extra="@qq.com" placeholder="请输入邮箱" error={true} onErrorTap={this.showMessage}/>
+                                    <InputItem labelWidth={px2rem(50)} label="电话" type="number" value="4158" disabled/>
                                 </div>
 
                                 <Consume/>

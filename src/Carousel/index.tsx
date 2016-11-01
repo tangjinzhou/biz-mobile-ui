@@ -44,12 +44,20 @@ export default class Carousel extends React.Component<CarouselProps, any> {
         }
         return dots;
     }
+    componentWillReceiveProps(newProps) {
+        if(newProps.selectedIndex !== this.state.selectedIndex) {
+            this.setState({
+                selectedIndex: newProps.selectedIndex
+            });
+        }
+    }
     onChangeIndex = (index, fromIndex)=>{
-        this.props.onChangeIndex(index, fromIndex);
+        //自动播放组件无fromIndex参数,手动添加上
+        this.props.onChangeIndex(index, fromIndex || this.state.selectedIndex);
         this.setState({selectedIndex: index});
     }
     render(){
-        const {prefixCls, children, autoplay,interval,threshold,disabled,resistance, onSwitching, showDots} = this.props;
+        const {prefixCls, children, autoplay,interval,threshold,disabled,resistance, onSwitching, showDots, style, className} = this.props;
         const swipeableProps = {
             index: this.state.selectedIndex,
             threshold: threshold,
@@ -69,8 +77,12 @@ export default class Carousel extends React.Component<CarouselProps, any> {
             SwipeableComponent = SwipeableViews;
         }
         const dots = this.getDots();
+        const carouselClass = classNames({
+            [`${prefixCls}`]: true,
+            [className]: true,
+        });
         return (
-            <div className={prefixCls}>
+            <div className={carouselClass} style={style}>
                 <SwipeableComponent  {...swipeableProps} onChangeIndex={this.onChangeIndex}>{children}</SwipeableComponent>
                 {showDots?<div className={`${prefixCls}-dots`}>{dots}</div>:null}
             </div>

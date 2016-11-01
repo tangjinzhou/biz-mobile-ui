@@ -4,7 +4,7 @@ import colors from '../styles/colors';
 
 interface ArrowProps extends BizuiProps {
     size?: string,
-    direction: 'top'|'bottom'|'left'|'right',
+    direction?: 'top'|'bottom'|'left'|'right',
     color?: string,
     innerColor?: string,
     lineThickness?: string,
@@ -65,8 +65,8 @@ function getStyles(props) {
 export default class Arrow extends React.Component<ArrowProps, any>{
     static defaultProps = {
         prefixCls: 'biz-arrow',
-        full: true,
         className: '',
+        direction: 'top',
         color: colors.grey_900,
         innerColor: colors.grey_900,
         lineThickness: '2px'

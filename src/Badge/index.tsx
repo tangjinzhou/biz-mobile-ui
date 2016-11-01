@@ -8,7 +8,7 @@ export default class Badge extends React.Component<BadgeProps, any> {
     static defaultProps = {
         prefixCls: 'biz-badge',
         className: '',
-        badgeContent: '',
+        content: '',
     }
 
     render() {

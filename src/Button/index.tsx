@@ -1,10 +1,10 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 interface ButtonProps extends BizuiProps{
-  type?: string,
+  type?: 'button' | 'reset' | 'submit',
   onTouchTap?: (x?: any) => void;
   disabled?: boolean;
-  size?: 'small';
+  size?: 'small' | 'large';
 }
 
 export default class Button extends React.Component<ButtonProps, any> {
@@ -14,6 +14,7 @@ export default class Button extends React.Component<ButtonProps, any> {
     disabled: false,
     onTouchTap: () => { },
     className: '',
+    size: 'large',
   };
   onTouchTap(e){
     const {disabled, onTouchTap} = this.props;
