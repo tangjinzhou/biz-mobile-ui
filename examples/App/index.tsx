@@ -17,7 +17,7 @@ import {
     LinearProgress,
     Carousel,
     Badge,
-    Message,
+    Toast,
     Card,
     Switch,
     Checkbox,
@@ -109,7 +109,7 @@ export default class App extends React.Component<AppProps, any> {
     }
 
     showMessage = () => {
-        const messge = Message.error('填写正确的邮箱', 1000, ()=> {
+        const messge = Toast.error('填写正确的邮箱', 1000, ()=> {
             console.log('showMessage done');
         });
     }

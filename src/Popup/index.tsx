@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Icon from '../Icon';
 import * as classNames from 'classnames';
 
 interface PopupDialogProps extends BizuiProps{
@@ -10,15 +9,12 @@ interface PopupDialogProps extends BizuiProps{
     showMask?: boolean,
     position: 'top' | 'bottom',
 }
-interface PopupProps {
+interface PopupProps extends BizuiProps{
     duration?: number,
     maskOnTouchTap?: Function,
     animationType?: 'slideInDown' | 'slideInUp' | 'fadeIn',
     position?: 'top' | 'bottom',
     showMask?: boolean,
-    style?: Object,
-    classNames?: string,
-    prefixCls?: string,
 }
 
 class PopupDialog extends React.Component<PopupDialogProps, any> {

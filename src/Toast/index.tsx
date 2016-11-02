@@ -6,17 +6,16 @@ import * as classNames from 'classnames';
 interface MessageProps {
     type: string,
     content?: string | React.ReactNode,
-    duration?: number,
 }
 
 class MessageDialog extends React.Component<MessageProps, any> {
     static defaultProps = {
-        duration: 1500,
+
     }
 
     render(){
-        const prefixCls = 'biz-message';
-        const {type, duration, content} = this.props;
+        const prefixCls = 'biz-toast';
+        const {type, content} = this.props;
         const wrapClass = classNames({
             [`${prefixCls}-wrap`]: true,
             [`${prefixCls}-info-wrap`]: type === 'info',
@@ -58,7 +57,7 @@ class MessageDialog extends React.Component<MessageProps, any> {
 function createMessage(content, type, duration, onClose) {
     let div = document.createElement('div');
     document.body.appendChild(div);
-
+    duration = duration === undefined ? 1500 : duration;
     function close() {
         if (div) {
             if(onClose){
@@ -88,7 +87,10 @@ function createMessage(content, type, duration, onClose) {
     }
 }
 
-export default class Message {
+export default class Toast {
+    static show = (content: string | React.ReactNode, duration?: number, onClose?: () => void) => {
+        return createMessage(content, 'info', duration, onClose);
+    }
     static info = (content: string | React.ReactNode, duration?: number, onClose?: () => void) => {
         return createMessage(content, 'info', duration, onClose);
     }
