@@ -37,7 +37,6 @@ class DialogComponent extends React.Component<DialogComponentProps, any> {
     }
 }
 interface DialogProps extends BizuiProps{
-    duration?: number,
     maskOnTouchTap?: Function,
     showMask?: boolean,
     classNames?: string,

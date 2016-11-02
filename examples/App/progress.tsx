@@ -30,7 +30,8 @@ export default class Progress extends React.Component<ProgressProps, any> {
         return (
             <div>
                 <CircleProgress value={25}/>
-                <CircleProgress value={100}/>
+                <CircleProgress value={90} color="red"/>
+
                 <CircleProgress value={this.state.progress} size={px2rem(100)} linecap="round"/>
                 <LinearProgress style={styles.progress}/>
                 <LinearProgress style={Object.assign({},styles.progress,{height: px2rem(15)})}

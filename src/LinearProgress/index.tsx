@@ -21,7 +21,7 @@ export default class LinearProgress extends React.Component<LinearProgressProps,
         min: 0,
         mode: 'indeterminate',
         value: 0,
-        percent: 0,
+        transitionDuration: 300,
     }
     render() {
         const {prefixCls, className, color, fillColor, mode, style,min, max, value: val, transitionDuration} = this.props;

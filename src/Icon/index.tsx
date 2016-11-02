@@ -12,7 +12,7 @@ interface IconPropType extends BizuiProps{
 
 export default class Icon extends React.Component<IconPropType, any> {
     static defaultProps = {
-        prefixCls: 'bizicon',
+        prefixCls: 'biz-icon',
         className: '',
         spin: false,
         fixedWidth: false,

@@ -9,8 +9,8 @@ interface CheckboxProps extends BizuiProps{
     onChange?:(boolean, string?)=>any,
     label?: string | React.ReactNode,
     labelPosition? : 'left' | 'right',
-    checkedIcon? : Icon,
-    uncheckedIcon? : Icon,
+    checkedIcon? : React.ReactNode,
+    uncheckedIcon? : React.ReactNode,
     value?: string,
 }
 
@@ -18,7 +18,6 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
     static defaultProps = {
         prefixCls: 'biz-checkbox',
         className: '',
-        name: '',
         disabled: false,
         checked: false,
         onChange: ()=> {
@@ -27,7 +26,6 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
         labelPosition: 'right',
         checkedIcon: <Icon type='check-square'/>,
         uncheckedIcon: <Icon type='square-o'/>,
-        value: '',
     }
     state = {checked: this.props.checked};
 
@@ -60,12 +58,12 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
             <div style={style} className={checkboxClass} onTouchTap={(e)=>this.touchTap(e, value)}>
                 <input
                     style={{display: 'none'}}
-                    className={`${prefixCls}-checkbox`}
                     type="checkbox"
                     checked={this.state.checked}
                     name={name}
                     {...inputDisabled}
                     onChange={()=>{}}
+                    value={value}
                 />
                 {labelPosition === 'right' ? icon : null}
                 <div className={`${prefixCls}-label`}>{label}</div>
