@@ -37,7 +37,7 @@ export {createDialog} from './Dialog';
 //export {default as SearchBar} from './SearchBar';
 //export {default as Picker} from './Picker';
 //export {default as DatePicker} from './DatePicker'; ios and 安卓两种 参考material-ui & andt-mobile & mint-ui
-//以下参考https://github.com/pbakaus/scroller去做, 尽量不要引入过多第三方控件
+//以下基于https://github.com/pbakaus/scroller去做, 尽量不要引入过多第三方控件
 //export {default as PullRefresh} from './PullRefresh';下拉刷新
 //export {default as ListView} from './ListView';
 //export {default as LoadMore} from './LoadMore'; 上拉加载更多 and 手动加载更多
