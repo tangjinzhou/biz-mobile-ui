@@ -10,7 +10,6 @@ interface PopupDialogProps extends BizuiProps{
     position: 'top' | 'bottom',
 }
 interface PopupProps extends BizuiProps{
-    duration?: number,
     maskOnTouchTap?: Function,
     animationType?: 'slideInDown' | 'slideInUp' | 'fadeIn',
     position?: 'top' | 'bottom',

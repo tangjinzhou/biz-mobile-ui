@@ -97,7 +97,7 @@ export default class App extends React.Component<AppProps, any> {
     }
 
     showAlertConfirm() {
-        Alert.confirm({title: '请输入用户名', defaultValue: 'tjz', onTouchTap: this.showAlertWithTwoBtn});
+        Alert.prompt({title: '请输入用户名', defaultValue: 'tjz', onTouchTap: this.showAlertWithTwoBtn});
     }
 
     onTabChange(index, fromIndex) {
@@ -158,11 +158,11 @@ export default class App extends React.Component<AppProps, any> {
                                 <Consume/>
                                 <SegmentedControl onChangeIndex={this.onTabChange} style={styles.seg}
                                                   values={['详情','评论','相关']}/>
-                                <SegmentedControl onChangeIndex={this.onTabChange} selectedIndex={1} tintColor='#8E24AA'
+                                <SegmentedControl onChangeIndex={this.onTabChange} selectedIndex={1} color='#8E24AA'
                                                   style={styles.seg} values={['详情','评论','相关']}/>
                                 <SegmentedControl onChangeIndex={this.onTabChange}
                                                   style={Object.assign({},styles.seg, {width: '80%', height: px2rem(40)})}
-                                                  values={['详情','评论']} enabled={false}/>
+                                                  values={['详情','评论']} disabled={true}/>
                                 <Pregress/>
                                 <Button style={Object.assign({},styles.seg, {display: 'block'})}
                                         onTouchTap={this.showMessage}>

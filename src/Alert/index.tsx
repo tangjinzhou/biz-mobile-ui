@@ -9,21 +9,23 @@ interface ButtonProps {
     color?: string;
 }
 
-interface AlertConfigProps {
-    title?: string;
-    message?: string | React.ReactNode;
-    buttons?: Array<ButtonProps>;
-    onTouchTap?: (x?:number, y?: string) => any;
-    defaultValue?: string;
+interface AlertConfigProps extends BizuiProps {
+    title?: string,
+    message?: string | React.ReactNode,
+    buttons?: Array<ButtonProps>,
+    onTouchTap?: (x?:number, y?: string) => any,
+    defaultValue?: string,
+    placeholder?: string,
 }
 
 interface AlertDialogProps extends BizuiProps {
-    title?: string;
-    message?: string | React.ReactNode;
-    onTouchTap?: (x?: number, y?: string) => any;
-    buttons?: Array<ButtonProps>;
-    type: string;
-    defaultValue?: string;
+    title?: string,
+    message?: string | React.ReactNode,
+    onTouchTap?: (x?: number, y?: string) => any,
+    buttons?: Array<ButtonProps>,
+    type: string,
+    defaultValue?: string,
+    placeholder?: string,
 }
 
 class AlertDialog extends React.Component<AlertDialogProps, any> {
@@ -32,23 +34,23 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
         buttons: [{text: '确定'}],
         className: '',
     };
-    _confirmInput = null;
+    _promptInput = null;
     componentDidMount() {
-        this._confirmInput && this._confirmInput.focus();
+        this._promptInput && this._promptInput.focus();
     }
     onTouchTap = (index) => {
-        if(this._confirmInput) {
-            this._confirmInput.blur();
+        if(this._promptInput) {
+            this._promptInput.blur();
         }
-        if(this.props.type === 'confirm') {
-            const value = this._confirmInput.value;
+        if(this.props.type === 'prompt') {
+            const value = this._promptInput.value;
             this.props.onTouchTap(index, value);
         } else {
             this.props.onTouchTap(index);
         }
     }
     render() {
-        const {prefixCls, title, message, buttons, className, onTouchTap, type, defaultValue, style} = this.props;
+        const {prefixCls, title, message, buttons, className, onTouchTap, type, defaultValue, style, placeholder} = this.props;
         const alertClass = classNames({
             [className]: true,
             [prefixCls]: true,
@@ -67,7 +69,7 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
                     <div className={`${prefixCls}-info`}>
                         {title !== '' ? <p className={`${prefixCls}-title`}>{title}</p> : null}
                         {message !== '' ? <p className={`${prefixCls}-message`}>{message}</p> : null}
-                        {type === 'confirm' ? <input onTouchTap={()=>this._confirmInput.focus()} ref={(c) => this._confirmInput = c} className={`${prefixCls}-input`} type="text" defaultValue={defaultValue}/> : null}
+                        {type === 'prompt' ? <input placeholder={placeholder} onTouchTap={()=>this._promptInput.focus()} ref={(c) => this._promptInput = c} className={`${prefixCls}-input`} type="text" defaultValue={defaultValue}/> : null}
                     </div>
                     <div className={btnsClass}>
                         {buttons.map((item, index) => {
@@ -105,7 +107,7 @@ function createDialog(config, type) {
         close();
     }
     document.body.style.overflow = 'hidden';
-    ReactDOM.render(<AlertDialog defaultValue={config.defaultValue} type={type} onTouchTap={cb} title={config.title} message={config.message} buttons={config.buttons}/>, div);
+    ReactDOM.render(<AlertDialog {...config} type={type} onTouchTap={cb}/>, div);
     return {close: close};
 }
 
@@ -113,8 +115,9 @@ export default class Alert {
     static alert = (config?: AlertConfigProps) => {
         return createDialog(config || {}, 'alert');
     }
-    static confirm = (config?: AlertConfigProps) => {
-        return createDialog(config || {}, 'confirm');
+
+    static prompt = (config?: AlertConfigProps) => {
+        return createDialog(config || {}, 'prompt');
     }
 };
 

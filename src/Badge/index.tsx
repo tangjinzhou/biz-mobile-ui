@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 interface BadgeProps extends BizuiProps {
-    content?: any,
+    content?: string | React.ReactNode,
 }
 
 export default class Badge extends React.Component<BadgeProps, any> {
@@ -23,7 +23,7 @@ export default class Badge extends React.Component<BadgeProps, any> {
         })
         return (
             <div className={badgeClass} style={style}>
-                {content !== null ? <span className={contentClass}>{content}</span> : null}
+                <span className={contentClass}>{content}</span>
             </div>
         )
     }

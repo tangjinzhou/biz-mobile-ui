@@ -2,13 +2,12 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import Badge from '../Badge';
 interface TabProps extends BizuiProps{
-    label : string,
-    icon? : React.ReactNode,
+    label : string | React.ReactNode,
     key?: number,
     index?: number,
     selected?: boolean,
     handleChange?: (x:number, y: React.SyntheticEvent) => any,
-    badgeContent?: any,
+    badgeContent?: string | React.ReactNode,
 }
 export default class Tab extends React.Component<TabProps, any>{
     static defaultProps = {
@@ -56,7 +55,7 @@ export default class Tab extends React.Component<TabProps, any>{
         }
     }
     render() {
-        const {prefixCls, className,index, label, key, icon, selected, handleChange, badgeContent, style} = this.props;
+        const {prefixCls, className,index, label, key, selected, handleChange, badgeContent, style} = this.props;
         const tabClass = classNames({
             [`${prefixCls}`]: true,
             [`${prefixCls}-active`]: selected,
@@ -65,7 +64,6 @@ export default class Tab extends React.Component<TabProps, any>{
 
         return (
             <div style={style} ref={(c) => this._tab = c} className={tabClass} onTouchTap={(e)=>handleChange(index, e)}>
-                {icon}
                 {label}
                 {badgeContent !== null ?<Badge className={`${prefixCls}-badge`} content={badgeContent}/>:null}
             </div>

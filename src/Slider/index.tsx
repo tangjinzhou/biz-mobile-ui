@@ -5,8 +5,7 @@ interface SliderProps extends BizuiProps {
     disabled?: boolean,
     max?: number,
     min?: number,
-    name?: string,
-    onChange?: Function,
+    onChange?: (x:number, y:number)=>void,
     onDragStart?: Function,
     onDragStop?: Function,
     step?: number,
@@ -143,13 +142,14 @@ export default class Slider extends React.Component<SliderProps, any>{
             value = min;
         }
         if (this.state.value !== value) {
+            if (this.props.onChange) {
+                this.props.onChange(value, this.state.value);
+            }
             this.setState({
                 value: value,
             });
 
-            if (this.props.onChange) {
-                this.props.onChange(value);
-            }
+
         }
     }
     render (){

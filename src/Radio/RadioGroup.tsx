@@ -11,6 +11,8 @@ interface RadioGroupProps extends BizuiProps{
 
 export default class Radio extends React.Component<RadioGroupProps, any> {
     static defaultProps = {
+        prefixCls: 'biz-radioGroup',
+        className: '',
         labelPosition: 'right',
         onChange: ()=> {
         },
@@ -41,7 +43,7 @@ export default class Radio extends React.Component<RadioGroupProps, any> {
         this.props.onChange(value);
     }
     render() {
-        const {name, onChange, labelPosition} = this.props;
+        const {name, onChange, labelPosition, prefixCls, className} = this.props;
         const valueSelected = this.state.valueSelected;
         const radios = this.getRadios().map((radio, index) => {
             return React.cloneElement(radio, {
@@ -52,8 +54,12 @@ export default class Radio extends React.Component<RadioGroupProps, any> {
                 onChange: (value) => this.selectChange(value),
             });
         });
+        const radioGroupClass = classNames({
+            [`${prefixCls}`]: true,
+            [className]: true,
+        })
         return (
-            <div>
+            <div className={radioGroupClass}>
                 {radios}
             </div>
         );

@@ -6,7 +6,6 @@ interface TabsProps extends BizuiProps{
     onChangeIndex?: (x:number, y:number)=>void,
     animation?: boolean,
     animateTransitions?: boolean,
-    other?: any,
     tabsPosition?: string,
 }
 

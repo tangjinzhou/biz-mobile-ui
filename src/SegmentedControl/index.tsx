@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 
 interface SegmentedControlProps extends BizuiProps{
-    tintColor?: string;
-    enabled?: boolean;
+    color?: string;
+    disabled?: boolean;
     selectedIndex?: number;
     values?: Array<string>;
     onChangeIndex?: (x:number, y:number)=>void,
@@ -17,7 +17,7 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
         onChangeIndex:()=>{},
         values: [],
         style: {},
-        enabled: true,
+        disabled: false,
     };
     state = {selectedIndex: this.props.selectedIndex};
     tabsCompontent=null;
@@ -30,9 +30,9 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
     }
 
     onTouchTap = (e, index, value)=> {
-        const {onChangeIndex, enabled} = this.props;
+        const {onChangeIndex, disabled} = this.props;
         const fromIndex = this.state.selectedIndex;
-        if(enabled){
+        if(disabled){
             onChangeIndex(index, fromIndex);
             if(index !== fromIndex) {
                 this.setState({selectedIndex: index});
@@ -41,7 +41,7 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
     }
     
     render() {
-        const {prefixCls, className, onChangeIndex, enabled, values, tintColor, style} = this.props;
+        const {prefixCls, className, onChangeIndex, disabled, values, color, style} = this.props;
         const segmentedClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
@@ -59,8 +59,8 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
                     ref={(c)=>this['_tab_'+index]=c}
                     onTouchTap={(e) => this.onTouchTap(e, index, value)}
                     style={{
-                        color: index === selectedIndex ? '' : tintColor,
-                        backgroundColor: index === selectedIndex ? tintColor : '',
+                        color: index === selectedIndex ? '' : color,
+                        backgroundColor: index === selectedIndex ? color : '',
                     }}
                 >
                     {value}
@@ -69,8 +69,8 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
         });
         this.tabsCompontent = tabs;
         const segmentedStyle = Object.assign({}, style, {
-            opacity: enabled ? 1 : 0.5,
-            borderColor: tintColor,
+            opacity: disabled ? 0.5 : 1,
+            borderColor: color,
         });
         return (
             <div className={segmentedClass} style={segmentedStyle}>
