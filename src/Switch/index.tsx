@@ -5,26 +5,19 @@ interface SwitchProps extends BizuiProps {
     name?:string,
     disabled?:boolean,
     checked?:boolean,
-    onChange?:Function,
+    onChange?:(checked: boolean)=>void,
 }
 
 export default class Switch extends React.Component<SwitchProps, any> {
     static defaultProps = {
         prefixCls: 'biz-switch',
         className: '',
-        name: '',
         disabled: false,
-        checked: false,
+        checked: true,
         onChange: ()=> {
         },
     }
     state = {checked: this.props.checked};
-
-    componentDidUpdate(prevProps, prevState) {
-        if(prevState.checked !== this.state.checked) {
-            //this.props.onChange(this.state.checked);
-        }
-    }
 
     componentWillReceiveProps(newProps) {
         if(newProps.checked !== this.state.checked) {

@@ -8,7 +8,7 @@ interface TabBarItemProps extends BizuiProps{
     index?: number,
     selected?: boolean,
     handleChange?: (x:number, y: React.SyntheticEvent) => any,
-    badgeContent?: any
+    badgeContent?: string | React.ReactNode,
 }
 export default class TabBarItem extends React.Component<TabBarItemProps, any>{
     static defaultProps = {
