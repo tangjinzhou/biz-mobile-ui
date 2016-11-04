@@ -10,12 +10,13 @@ interface ConsumeProps {
 
 export default class Consume extends React.Component<ConsumeProps, any> {
     _table = null;
-    selectedChange = (row, checked) => {
-        console.log(row, checked);
+    selectedChange = (row, checked, attr) => {
+        console.log(row, checked, attr);
         console.log(this._table.getSelectedRows());
     }
     cancelAllSelected = () => {
         this._table.cancelAllRowsSelected();
+        console.log(this._table.getSelectedRows());
     }
     setAllSelected = () => {
         this._table.setAllRowsSelected();
@@ -61,7 +62,7 @@ export default class Consume extends React.Component<ConsumeProps, any> {
             subCost: '+98',
             attr:{
                 selectable: false,
-                // selected: true,
+                selected: true,
             }
         }, {
             area: '广州',

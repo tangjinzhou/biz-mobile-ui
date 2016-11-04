@@ -4,16 +4,11 @@ import Checkbox from '../Checkbox';
 interface HeaderTrProps extends BizuiProps {
     key?:string,
     colSpan?:number,
-    rowSpan?:number,
-    selectable?:boolean,
-    selected?:boolean,
-    onRowSelection?:Function,
     align?: string,
     width?: string,
     content?: Function,
     title: string,
     field?: string,
-    attr?: Object
 }
 interface DataAttr {
 
@@ -23,7 +18,7 @@ interface TableProps extends BizuiProps {
     fixedHeader?:boolean,
     selectable?:boolean,
     multiSelectable?:boolean,
-    selectedChange?: Function,
+    selectedChange?: (row: number|'all', checked: boolean, attr: {})=>void,
     dataSource?:Array<Object>,
     dataSourceField?:Array<HeaderTrProps>,
     height?:string,
@@ -71,7 +66,7 @@ class Table extends React.Component<TableProps, any> {
         }
         return rowsStatus;
     }
-    selectedChange = (row, checked, e) => {
+    selectedChange = (row, checked, attr={}) => {
         let newStatus = [];
         if(row === 'all') {
             newStatus = this.getSelectedStatus(checked);
@@ -82,7 +77,7 @@ class Table extends React.Component<TableProps, any> {
             }
             newStatus[row].selected = checked;
         }
-        this.props.selectedChange(row, checked);
+        this.props.selectedChange(row, checked, attr);
         this.setState({rowsStatus: newStatus});
     }
     getSelectedStatus(checked){
@@ -150,12 +145,11 @@ class Table extends React.Component<TableProps, any> {
             let headerTh = [];
             //全选
             if(i === 0 && selectable) {
-                headerTh.push(<th key={'th-checkbox-all'} className={`${prefixCls}-checkbox`} rowSpan={tempColumns.length}><Checkbox onChange={(checked, e)=>this.selectedChange('all', checked, e)} checked={selectableAll} disabled={!multiSelectable}/></th>);
+                headerTh.push(<th key={'th-checkbox-all'} className={`${prefixCls}-checkbox`} rowSpan={tempColumns.length}><Checkbox onChange={(checked, e)=>this.selectedChange('all', checked)} checked={selectableAll} disabled={!multiSelectable}/></th>);
             }
             for (let j = 0, thLen = tempColumns[i].length; j < thLen; j++) {
                 let thData = tempColumns[i][j];
-                thData.attr = thData.attr || {};
-                headerTh.push(<th key={'th-' + j} style={{textAlign: thData.align, width: thData.width}} colSpan={thData.colSpan} data-attr={JSON.stringify(thData.attr)}>{thData.title}</th>);
+                headerTh.push(<th key={'th-' + j} style={{textAlign: thData.align, width: thData.width}} colSpan={thData.colSpan}>{thData.title}</th>);
             }
             headerTr.push(<tr key={'tr-'+i}>{headerTh}</tr>);
         }
@@ -184,14 +178,14 @@ class Table extends React.Component<TableProps, any> {
             if(selectable) {
                 let tdSelectable = this.state.rowsStatus[i].selectable;
                 let tdSelected = this.state.rowsStatus[i].selected;
-                tbodyTd.push(<td key={'td-checkbox-'+i} className={`${prefixCls}-checkbox`}><Checkbox onChange={(checked, e)=>this.selectedChange(i, checked, e)} checked={tdSelected} disabled={!tdSelectable}/></td>)
+                tbodyTd.push(<td key={'td-checkbox-'+i} className={`${prefixCls}-checkbox`}><Checkbox onChange={(checked, e)=>this.selectedChange(i, checked, tempData['attr'])} checked={tdSelected} disabled={!tdSelectable}/></td>)
             }
             for (let j = 0, indexLen = dataSourceField.length; j < indexLen; j++) {
                 let field = dataSourceField[j].field;
                 let content = dataSourceField[j].content as Function || function (item, index, field) {
                             return item[field];
                         }
-                tbodyTd.push(<td key={'td-' + j} data-attr={JSON.stringify(tempData['attr'])}>{content(tempData, i, field)}</td>);
+                tbodyTd.push(<td key={'td-' + j}>{content(tempData, i, field)}</td>);
             }
             tbodyTr.push(<tr key={'tr-'+i}>{tbodyTd}</tr>);
         }
