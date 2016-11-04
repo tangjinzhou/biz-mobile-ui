@@ -9,8 +9,11 @@
 #### 实例方法
 
 全选`setAllRowsSelected`
+
 取消选择`cancelAllRowsSelected` 
+
 获取已选择的索引`getSelectedRows`
+
 反选`invertRowsSelected` 
 
 #### TableProps
