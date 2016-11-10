@@ -1,4 +1,4 @@
-export default {
+export let colors = {
     //== Google material colors
     //'## Red
     red_50: '#FFEBEE',
@@ -306,3 +306,5 @@ export default {
     black_dark: 'rgba(0,0,0,.54)', // Secondary text / Icons
     black_darker: 'rgba(0,0,0,.87)', // Text
 }
+
+export default colors;

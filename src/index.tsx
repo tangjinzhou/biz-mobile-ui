@@ -3,6 +3,7 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import animationFrame from './util/animationFrame';
 injectTapEventPlugin();
 animationFrame();
+export {colors} from './styles/colors';
 export {default as Alert} from './Alert';
 export {default as Button} from './Button';
 export {default as Icon} from './Icon';
