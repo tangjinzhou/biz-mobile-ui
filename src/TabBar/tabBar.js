@@ -1,79 +1,95 @@
-import * as React from 'react';
-import * as classNames from 'classnames';
-export default class TabBar extends React.Component {
-    constructor(...args) {
-        super(...args);
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var React = require('react');
+var classNames = require('classnames');
+var TabBar = (function (_super) {
+    __extends(TabBar, _super);
+    function TabBar() {
+        var _this = this;
+        _super.apply(this, arguments);
         this.state = { selectedIndex: 0 };
-        this.handleChange = (index, e) => {
-            const fromIndex = this.state.selectedIndex;
-            this.props.onChangeIndex(index, fromIndex);
+        this.handleChange = function (index, e) {
+            var fromIndex = _this.state.selectedIndex;
+            _this.props.onChangeIndex(index, fromIndex);
             if (index !== fromIndex) {
-                this.setState({ selectedIndex: index });
+                _this.setState({ selectedIndex: index });
             }
         };
     }
-    componentWillMount() {
-        const initialIndex = this.props.selectedIndex;
+    TabBar.prototype.componentWillMount = function () {
+        var initialIndex = this.props.selectedIndex;
         this.setState({
             selectedIndex: initialIndex < this.getTabCount() ? initialIndex : 0,
         });
-    }
-    componentWillReceiveProps(newProps) {
+    };
+    TabBar.prototype.componentWillReceiveProps = function (newProps) {
         if (newProps.selectedIndex !== this.state.selectedIndex) {
             this.setState({
                 selectedIndex: newProps.selectedIndex
             });
         }
-    }
-    getTabCount() {
+    };
+    TabBar.prototype.getTabCount = function () {
         return this.getTabs().length;
-    }
-    getTabs() {
-        const tabs = [];
-        React.Children.forEach(this.props.children, (tab) => {
+    };
+    TabBar.prototype.getTabs = function () {
+        var tabs = [];
+        React.Children.forEach(this.props.children, function (tab) {
             if (React.isValidElement(tab)) {
                 tabs.push(tab);
             }
         });
         return tabs;
-    }
-    getContent(tab, index, prefixCls) {
-        const contentClass = classNames({
-            [`${prefixCls}-content`]: true,
-            [`${prefixCls}-content-hidden`]: index !== this.state.selectedIndex
-        });
+    };
+    TabBar.prototype.getContent = function (tab, index, prefixCls) {
+        var contentClass = classNames((_a = {},
+            _a[prefixCls + "-content"] = true,
+            _a[prefixCls + "-content-hidden"] = index !== this.state.selectedIndex,
+            _a
+        ));
         if (tab.props.children) {
             return (React.createElement("div", {className: contentClass, key: index}, tab.props.children));
         }
         else {
             return null;
         }
-    }
-    render() {
-        const { prefixCls, className, onChangeIndex, style } = this.props;
-        const tabsClass = classNames({
-            [`${prefixCls}`]: true,
-            [className]: true,
-        });
-        const contents = [];
-        const tabs = this.getTabs().map((tab, index) => {
-            contents.push(this.getContent(tab, index, prefixCls));
+        var _a;
+    };
+    TabBar.prototype.render = function () {
+        var _this = this;
+        var _a = this.props, prefixCls = _a.prefixCls, className = _a.className, onChangeIndex = _a.onChangeIndex, style = _a.style;
+        var tabsClass = classNames((_b = {},
+            _b["" + prefixCls] = true,
+            _b[className] = true,
+            _b
+        ));
+        var contents = [];
+        var tabs = this.getTabs().map(function (tab, index) {
+            contents.push(_this.getContent(tab, index, prefixCls));
             return React.cloneElement(tab, {
                 key: index,
                 index: index,
-                selected: this.state.selectedIndex === index,
-                handleChange: this.handleChange
+                selected: _this.state.selectedIndex === index,
+                handleChange: _this.handleChange
             });
         });
-        const tabsContainer = React.createElement("div", {className: `${prefixCls}-container`}, tabs);
-        return (React.createElement("div", {className: tabsClass, style: style}, React.createElement("div", {className: `${prefixCls}-content-container`}, contents), React.createElement("div", {className: `${prefixCls}-container`}, tabs)));
-    }
-}
-TabBar.defaultProps = {
-    selectedIndex: 0,
-    prefixCls: 'biz-tabBar',
-    className: '',
-    onChangeIndex: () => { },
-    onTabTouchTap: () => { },
-};
+        var tabsContainer = React.createElement("div", {className: prefixCls + "-container"}, tabs);
+        return (React.createElement("div", {className: tabsClass, style: style}, React.createElement("div", {className: prefixCls + "-content-container"}, contents), React.createElement("div", {className: prefixCls + "-container"}, tabs)));
+        var _b;
+    };
+    TabBar.defaultProps = {
+        selectedIndex: 0,
+        prefixCls: 'biz-tabBar',
+        className: '',
+        onChangeIndex: function () { },
+        onTabTouchTap: function () { },
+    };
+    return TabBar;
+}(React.Component));
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = TabBar;
 //# sourceMappingURL=TabBar.js.map

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import objectAssign from 'object-assign';
 
 interface SegmentedControlProps extends BizuiProps{
     color?: string;
@@ -68,7 +69,7 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
             );
         });
         this.tabsCompontent = tabs;
-        const segmentedStyle = Object.assign({}, style, {
+        const segmentedStyle = objectAssign({}, style, {
             opacity: disabled ? 0.5 : 1,
             borderColor: color,
         });

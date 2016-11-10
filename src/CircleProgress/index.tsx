@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import objectAssign from 'object-assign';
 
 interface CircleProgressProps extends BizuiProps{
     color?: string,
@@ -40,7 +41,7 @@ export default class CircleProgress extends React.Component<CircleProgressProps,
         const strokeDasharray = progress + ',' + circumference;
         
         return(
-            <div className={circleClass} style={Object.assign({}, style, circleSize)}>
+            <div className={circleClass} style={objectAssign({}, style, circleSize)}>
                 <svg className={`${prefixCls}-bg`} viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r={radius} fill="none" style={{stroke: fillColor}}  strokeWidth={strokeWidth} strokeDashoffset="0"></circle>
                 </svg>

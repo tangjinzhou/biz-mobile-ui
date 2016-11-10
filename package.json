@@ -28,6 +28,7 @@
   "homepage": "https://github.com/tangjinzhou/biz-mobile-ui#readme",
   "dependencies": {
     "classnames": "^2.2.5",
+    "object-assign": "^4.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-motion": "^0.4.4",

@@ -6,12 +6,9 @@ import {colors} from '@bizfe/biz-mobile-ui'
 let navStyles = {
     container: {
         padding: '10px 0',
-        background: colors.black_lighter,
+        background: colors.grey_50,
         color: colors.black_dark,
-        borderRight: '1px solid '+colors.grey_700,
-    },
-    link: {
-
+        borderRight: '1px solid '+colors.grey_200,
     }
 }
 export default class ApiNav extends React.Component {
@@ -23,7 +20,7 @@ export default class ApiNav extends React.Component {
         })
         const {style} = this.props;
         return (
-            <ul style={Object.assign({}, navStyles.container, style)}>
+            <ul className="api-nav" style={Object.assign({}, navStyles.container, style)}>
                 {links}
             </ul>
         )

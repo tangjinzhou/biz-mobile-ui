@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import marked from 'marked'
+import highlight from 'highlight.js'
 import request from '../request';
 import { Link, History } from 'react-router'
 marked.setOptions({
@@ -11,7 +12,10 @@ marked.setOptions({
     pedantic: false,
     sanitize: false,
     smartLists: true,
-    smartypants: false
+    smartypants: false,
+    highlight: function (code) {
+        return highlight.highlightAuto(code).value;
+    }
 });
 export default class Doc extends React.Component {
     constructor(...args) {

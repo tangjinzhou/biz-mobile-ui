@@ -32,9 +32,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.post('/getDoc',upload.array(), function (req, res) {
-    var filePath = path.join(__dirname, 'node_modules', '@bizfe', 'biz-mobile-ui', 'src', req.body.name, 'index.md')
-    var file = fs.readFileSync(filePath, "utf8");
-    res.send({doc: file});
+    var docFilePath = path.join(__dirname, 'node_modules', '@bizfe', 'biz-mobile-ui', 'src', req.body.name, 'index.md');
+    var demoFilePath = path.join(__dirname, 'App', 'Demo', req.body.name, 'index.js');
+    var docFile = fs.readFileSync(docFilePath, "utf8");
+    var demoFile = fs.readFileSync(demoFilePath, "utf8");
+    res.send({doc: docFile + '### demo代码\n ```javascript\n' + demoFile + '\n```'});
 });
 
 app.get('/dist/*', function (req, res) {

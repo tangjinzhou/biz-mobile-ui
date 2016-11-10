@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import objectAssign from 'object-assign';
 import Checkbox from '../Checkbox';
 interface HeaderTrProps extends BizuiProps {
     key?:string,
@@ -54,7 +55,7 @@ class Table extends React.Component<TableProps, any> {
         if(selectable) {
             for(let i = 0, rowsLen = dataSource.length; i < rowsLen; i++) {
                 let dataItem = dataSource[i];
-                dataItem.attr = Object.assign({}, {selected: false, selectable: true}, dataItem.attr);
+                dataItem.attr = objectAssign({}, {selected: false, selectable: true}, dataItem.attr);
                 if(dataItem.attr.selected) {
                     selectedNums++;
                 }
@@ -206,7 +207,7 @@ class Table extends React.Component<TableProps, any> {
         const header = this.getHeader();
         const tbody = this.getTbody();
         return (
-            <div className={tableClass} style={Object.assign({},style, {height: height})}>
+            <div className={tableClass} style={objectAssign({},style, {height: height})}>
                 {fixedHeader ?
                     <div style={{width: width}}>
                         <table>

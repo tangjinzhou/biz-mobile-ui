@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-
+import objectAssign from 'object-assign';
 interface LinearProgressProps extends BizuiProps{
     color?: string,
     fillColor?: string,
@@ -43,7 +43,7 @@ export default class LinearProgress extends React.Component<LinearProgressProps,
             transitionDuration: mode === 'determinate'? transitionDuration + 'ms' : '',
         };
         return(
-            <div className={linearClass} style={Object.assign({}, style, {backgroundColor: fillColor})}>
+            <div className={linearClass} style={objectAssign({}, style, {backgroundColor: fillColor})}>
                 <div className={modeClass} style={modeStyle}></div>
             </div>
         )

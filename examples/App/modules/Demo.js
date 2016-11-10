@@ -1,22 +1,20 @@
 import React from 'react'
-
+import AlertDemo from '../Demo/Alert'
+import ArrowDemo from '../Demo/Arrow'
 let demoStyles = {
     container: {
-        margin: '20px 20px 0',
-        backgroundImage: 'url(/App/images/phone.png)',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
-        height: 1584/2 + 'px',
-        padding: '100px 16px',
-        width: '365px',
+        background: '#fefefe',
+        height: '590px',
+        width: '100%',
     }
 }
 export default class Demo extends React.Component {
     render() {
-        const {style} = this.props;
+        const {style, params: {name}} = this.props;
         return (
-            <div style={style}>
-                <div style={demoStyles.container}></div>
+            <div style={demoStyles.container}>
+                {name ===  'Alert'?<AlertDemo/> : null}
+                {name ===  'Arrow'?<ArrowDemo/> : null}
             </div>
         )
     }
