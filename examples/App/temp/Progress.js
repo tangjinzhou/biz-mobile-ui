@@ -1,22 +1,23 @@
 import * as React from 'react';
-import {px2rem} from '../../src/util/util';
+import {px2rem} from '@bizfe/biz-mobile-ui/build/util/util';
 import {
     Button,
     LinearProgress,
     CircleProgress
-} from '../../src/index.tsx';
-interface ProgressProps {
+} from '@bizfe/biz-mobile-ui';
 
-}
 const styles = {
     progress: {
         width: '90%',
         margin: '20px auto 0',
     },
 }
-export default class Progress extends React.Component<ProgressProps, any> {
-    _table = null;
-    state = {progress: 10}
+export default class Progress extends React.Component {
+    constructor(...args) {
+        super(...args);
+        this.state = {progress: 10}
+    }
+
     changeProgress(value) {
         if (value < 0) {
             value = 0;

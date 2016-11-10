@@ -1,15 +1,15 @@
 import * as React from 'react';
-import {px2rem} from '../../src/util/util';
+import {px2rem, deviceHeight, htmlFontSize} from '@bizfe/biz-mobile-ui/build/util/util';
 import {
     Table,
     Button,
-} from '../../src/index.tsx';
-interface ConsumeProps {
+} from '@bizfe/biz-mobile-ui';
 
-}
-
-export default class Consume extends React.Component<ConsumeProps, any> {
-    _table = null;
+export default class Consume extends React.Component {
+    constructor(...args) {
+        super(...args);
+        this._table = null;
+    }
     selectedChange = (row, checked, attr) => {
         console.log(row, checked, attr);
         console.log(this._table.getSelectedRows());

@@ -1,9 +1,9 @@
 //import * as attachFastClick from 'fastclick';
 //attachFastClick['attach'](document.body);
 import * as React from 'react';
-import request from './request';
-import {px2rem, deviceHeight, htmlFontSize} from '../../src/util/util';
-import colors from '../../src/styles/colors';
+import request from '../request';
+import {px2rem, deviceHeight, htmlFontSize} from '@bizfe/biz-mobile-ui/build/util/util';
+import colors from '@bizfe/biz-mobile-ui/build/styles/colors';
 import {
     Button,
     Alert,
@@ -31,12 +31,10 @@ import {
     InputItem,
     Dialog,
     //DatePicker,
-} from '../../src/index.tsx';
+} from '@bizfe/biz-mobile-ui';
 import Pregress from './Progress';
 import Consume from './Consume';
-interface AppProps {
 
-}
 const slideHeight = px2rem(100);
 const styles = {
     tab: {
@@ -67,9 +65,12 @@ const styles = {
         marginTop: px2rem(10),
     }
 }
-export default class App extends React.Component<AppProps, any> {
-    _table = null;
-    state = {selectIndex: 0, info: 'hello', open: true};
+export default class App extends React.Component {
+    constructor(...args) {
+        super(...args);
+        this._table = null;
+        this.state = {selectIndex: 0, info: 'hello', open: true};
+    }
     //isMounted = this.isMounted;
     componentDidMount() {
         let req = request('./getProduct.action').then((res)=> {
@@ -89,11 +90,11 @@ export default class App extends React.Component<AppProps, any> {
     }
 
     showAlertWithThreeBtn() {
-        Alert.alert({
+        /*Alert.alert({
             title: 'biz-kcfe',
             message:<span>hello bizmolejj<br/>快去更新!</span>,
             buttons: [{text: '取消'}, {text: '确定'}, {text: '吐槽', color: 'red'}]
-        });
+        });*/
     }
 
     showAlertConfirm() {
@@ -142,7 +143,7 @@ export default class App extends React.Component<AppProps, any> {
                     <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>
                         <Tab label="旭日">
                             <div style={Object.assign({}, styles.tab, {backgroundColor: colors.grey_200})}>
-                                <Carousel onChangeIndex={this.commonFunc} autoplay={true} style={{height: 500}}>
+                                <Carousel onChangeIndex={this.commonFunc} autoplay={true}>
                                     <div style={styles.slide1}>slide 1</div>
                                     <div style={styles.slide2}>slide 2</div>
                                     <div style={styles.slide3}>slide 3</div>

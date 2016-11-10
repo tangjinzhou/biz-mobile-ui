@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>biz-mobile-ui</title>
+    <link rel="stylesheet" href="/dist/app.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      (function () {
+        var dpr, scale;
+        var docEl = document.documentElement;
+        var metaEl = document.querySelector('meta[name="viewport"]');
+        var baseFontSize = 0;
+        dpr = window.devicePixelRatio || 1;
+
+        var ua = navigator.userAgent;
+        var matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i);
+        var isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi);
+        if (!isIos && !(matches && matches[1] > 534)) {
+          // 如果非iOS, 非Android4.3以上, 就不执行高清, dpr设为1;
+          dpr = 1;
+            baseFontSize = '37.5px';
+        }
+        scale = 1 / dpr;
+        // 设置viewport，进行缩放，达到高清效果
+        metaEl.setAttribute('content', 'width=device-width,initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=no');
+
+        // 设置data-dpr属性，留作的css hack之用
+        docEl.setAttribute('data-dpr', dpr);
+
+        var updateView = function(width){
+          docEl.style.fontSize = baseFontSize || width / 10 + 'px';
+        }
+
+        updateView(Math.min(docEl.getBoundingClientRect().width, docEl.getBoundingClientRect().height));
+
+        var a = null;
+        window.addEventListener("resize", function(){
+          clearTimeout(a);
+          a = setTimeout(function(){
+            updateView(Math.min(docEl.getBoundingClientRect().width, docEl.getBoundingClientRect().height));
+          }, 300);
+        }, false)
+      })();
+    </script>
+    <script src="/dist/dll.vendor.js"></script>
+    <script src="/dist/app.js"></script>
+  </body>
+</html>

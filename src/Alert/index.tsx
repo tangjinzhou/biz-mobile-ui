@@ -2,7 +2,6 @@ import * as classNames from 'classnames';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-
 interface ButtonProps {
     text: string;
     className?: string;
@@ -38,7 +37,7 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
     componentDidMount() {
         this._promptInput && this._promptInput.focus();
     }
-    onTouchTap = (index) => {
+    onTouchTap = (index: number) => {
         if(this._promptInput) {
             this._promptInput.blur();
         }

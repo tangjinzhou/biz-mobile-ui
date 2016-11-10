@@ -36,7 +36,7 @@ var devConfigExtension = {
     },
     
     resolve: {
-        root: path.resolve('src'),
+        /*root: path.resolve('src'),*/
         extensions: ['', '.tsx', '.ts', '.js', '.less','.css'],
         modulesDirectories: ["node_modules"]
         /*alias: {
@@ -61,6 +61,11 @@ var devConfigExtension = {
                 include: path.join(__dirname, "src")
             },
             { test: /\.(jpg|png|jpg|png|woff|woff2|eot|ttf|svg|gif)$/, loader: "url?name=[name].[ext]" },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel',
+            },
             {
                 test: /\.tsx?$/,
                 loaders: ['babel', 'ts?configFileName=tsconfig.json'],

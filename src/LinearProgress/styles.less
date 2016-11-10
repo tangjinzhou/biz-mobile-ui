@@ -1,10 +1,10 @@
 @linearProgressPrefixCls: biz-linearProgress;
 .@{linearProgressPrefixCls} {
   position: relative;
-  background-color: @grey-400;
-  height: 6px;
+  background-color: @linearProgressBgColor;
+  height: @linearProgressHeight;
   width: 100%;
-  border-radius: 3px;
+  border-radius: @linearProgressRadius;
   overflow: hidden;
   &-indeterminate{
       position: absolute;
@@ -12,8 +12,8 @@
       left: -50%;
       width: 50%;
       height: 100%;
-      border-radius: 3px;
-      background: @bg-1;
+      border-radius: @linearProgressRadius;
+      background: @linearProgressColor;
       transform: translate3d(0, 0, 0);
       animation: indeterminateProgress 900ms infinite linear;
   }
@@ -22,8 +22,8 @@
     top: 0;
     left: 0;
     height: 100%;
-    background: @bg-1;
-    border-radius: 3px;
+    background: @linearProgressColor;
+    border-radius: @linearProgressRadius;
     transition: width 0.3s linear 0ms;
   }
 }

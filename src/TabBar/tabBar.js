@@ -1,7 +1,6 @@
-"use strict";
-const React = require('react');
-const classNames = require('classnames');
-class TabBar extends React.Component {
+import * as React from 'react';
+import * as classNames from 'classnames';
+export default class TabBar extends React.Component {
     constructor(...args) {
         super(...args);
         this.state = { selectedIndex: 0 };
@@ -77,6 +76,4 @@ TabBar.defaultProps = {
     onChangeIndex: () => { },
     onTabTouchTap: () => { },
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = TabBar;
 //# sourceMappingURL=TabBar.js.map

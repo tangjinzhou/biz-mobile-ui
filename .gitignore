@@ -42,3 +42,4 @@ jspm_packages
 node_modules/
 /node_modules/
 /dist/
+/build/

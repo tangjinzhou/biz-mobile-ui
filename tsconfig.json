@@ -3,11 +3,12 @@
         "sourceMap": true,
         "jsx": "react",
         "allowSyntheticDefaultImports": true,
-        "module": "commonjs",
+      "moduleResolution": "node",
         "experimentalDecorators": true,
         "target": "es6"
     },
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "examples"
     ]
 }
