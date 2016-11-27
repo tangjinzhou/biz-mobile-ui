@@ -6,6 +6,7 @@ interface RadioProps extends BizuiProps{
     name?:string,
     disabled?:boolean,
     checked?:boolean,
+    defaultChecked?: boolean,
     onChange?:(string)=>any,
     label?: string | React.ReactNode,
     labelPosition? : 'left' | 'right',
@@ -18,19 +19,28 @@ export default class Radio extends React.Component<RadioProps, any> {
         className: '',
         name: '',
         disabled: false,
-        checked: false,
+        defaultChecked: false,
         onChange: ()=> {
         },
         label: '',
         labelPosition: 'right',
         value: '',
     }
-    state = {checked: this.props.checked};
+    state = {checked: this.props.defaultChecked};
 
     componentWillReceiveProps(newProps) {
-        if(newProps.checked !== this.state.checked) {
+        const checked = newProps.checked;
+        if(checked !== this.state.checked && typeof checked === 'boolean') {
             this.setState({
-                checked: newProps.checked
+                checked: checked
+            });
+        }
+    }
+    componentWillMount(){
+        const {defaultChecked, checked} = this.props
+        if(defaultChecked !== checked && typeof checked === 'boolean') {
+            this.setState({
+                checked: checked
             });
         }
     }

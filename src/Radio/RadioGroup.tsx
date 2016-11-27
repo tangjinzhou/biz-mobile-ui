@@ -7,6 +7,7 @@ interface RadioGroupProps extends BizuiProps{
     valueSelected?: string,
     onChange?:(value)=>any,
     labelPosition? : 'left' | 'right',
+    defaultValueSelected?: string,
 }
 
 export default class Radio extends React.Component<RadioGroupProps, any> {
@@ -17,12 +18,21 @@ export default class Radio extends React.Component<RadioGroupProps, any> {
         onChange: ()=> {
         },
     }
-    state = {valueSelected: this.props.valueSelected};
+    state = {valueSelected: this.props.defaultValueSelected};
 
     componentWillReceiveProps(newProps) {
-        if(newProps.valueSelected !== this.state.valueSelected) {
+        if(newProps.valueSelected !== undefined && newProps.valueSelected !== this.state.valueSelected) {
             this.setState({
                 valueSelected: newProps.valueSelected
+            });
+        }
+    }
+
+    componentWillMount(){
+        const {defaultValueSelected, valueSelected} = this.props
+        if(defaultValueSelected !== valueSelected && typeof valueSelected === 'string') {
+            this.setState({
+                valueSelected: valueSelected
             });
         }
     }

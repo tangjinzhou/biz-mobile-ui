@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import objectAssign from 'object-assign';
+import * as objectAssign from 'object-assign';
 
 type IconSize = "lg" | "2x" | "3x" | "4x" | "5x";
 interface IconPropType extends BizuiProps{

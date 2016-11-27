@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import Icon from '../Icon';
-interface InputProps extends BizuiProps {
+interface TextareaProps extends BizuiProps {
     label?: string | React.ReactNode,
     type?: 'text' | 'tel' | 'number' | 'password',
     name?: string,
@@ -13,17 +13,29 @@ interface InputProps extends BizuiProps {
     onChange?: Function,
     onBlur?: Function,
     onFocus?: Function,
-    extra?: string | React.ReactNode,
     error?: boolean,
     onErrorTap?: Function,
     labelWidth?: string,
     onTouchTap?: Function,
     defaultValue?: String,
+    rows?: number,
+    autoHeight?: boolean,
+    maxHeight?: string,
+    minHeight?: string,
+    showCount?: boolean
 }
 
-export default class InputItem extends React.Component<InputProps, any>{
+const styles = {
+    shadow: {
+        visibility: 'hidden',
+        position: 'absolute',
+        height: 'initial',
+    }
+}
+
+export default class TextareaItem extends React.Component<TextareaProps, any>{
     static defaultProps = {
-        prefixCls: 'biz-input',
+        prefixCls: 'biz-textarea',
         className: '',
         label: '',
         type: 'text',
@@ -35,33 +47,49 @@ export default class InputItem extends React.Component<InputProps, any>{
         onFocus: ()=>{},
         error: false,
         onErrorTap: ()=>{},
-        defaultValue: ''
+        defaultValue: '',
+        rows: 1,
+        maxHeight: 'none',
+        minHeight: 'none',
+        autoHeight: false,
+        showCount: false,
     }
     state = {
         value: '',
         showClear: false,
+        height: 'auto'
     }
-    _input = null
+    _textarea = null
+    _shadow = null
     isFocus = false
     componentWillMount(){
+
+    }
+    componentDidMount() {
         const {value, defaultValue} = this.props;
         const val = value === undefined ? defaultValue : value;
         this.updateState(val as string);
-    }
-    componentDidMount() {
-
     }
     componentWillReceiveProps(newProps) {
         if (newProps.value !== undefined && newProps.value !== this.state.value) {
             this.updateState(newProps.value);
         }
     }
+    getHeight(value){
+        this._shadow.value = value
+        return this._shadow.scrollHeight
+    }
     updateState(val = ''){
-        const {clear, max} = this.props;
+        const {clear, autoHeight, max} = this.props;
         if(typeof max === 'number'){
             val = val.slice(0, max || 0);
         }
-        this.setState({value: val, showClear: this.isFocus && clear && val.length > 0});
+        const state = {value: val, showClear: this.isFocus && clear && val.length > 0, height: 'auto'}
+        if(autoHeight) {
+            const height = this.getHeight(val);
+            state.height = height;
+        }
+        this.setState(state);
     }
     onChange = (e) => {
         const val = e.target.value;
@@ -91,37 +119,50 @@ export default class InputItem extends React.Component<InputProps, any>{
     clearValue = () => {
         this.updateState();
     }
-    onTouchTap=()=>{
+    onTouchTap=(e)=>{
         const {disabled, onTouchTap} = this.props;
         onTouchTap && onTouchTap();
     }
     render(){
-        const {prefixCls, className, type, label, extra, error, name, placeholder, onErrorTap, labelWidth, disabled, max} = this.props;
-        const inputItemClass = classNames({
+        const {prefixCls, className, type, label, rows, error, name, placeholder, onErrorTap, max,showCount, labelWidth,minHeight, maxHeight, disabled, clear} = this.props;
+        const textareaItemClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
             [`${prefixCls}-disabled`]: disabled
         });
-        const inputDisabled = disabled ? {disabled: 'disabled'} : '';
+        const {height, value, showClear} = this.state;
+        const textareaDisabled = disabled ? {disabled: 'disabled'} : '';
         return(
-            <div className={inputItemClass}>
-                {label ?<div className={`${prefixCls}-label`} style={{width: labelWidth}}>{label}</div>: null}
-                    <input
-                        className={`${prefixCls}-val`}
+            <div className={textareaItemClass}>
+                <div className={`${prefixCls}-label`} style={{width: labelWidth}}>{label}</div>
+                <div className={`${prefixCls}-val`}>
+                    <textarea
+                        style={styles.shadow}
+                        ref={(c) => this._shadow = c}
+                        defaultValue={this.props.defaultValue}
+                        readOnly={true}
+                        onChange={()=>{}}
+                        rows={1}
+                    />
+                    <textarea
+                        style={{height: height, maxHeight: maxHeight, minHeight: minHeight}}
                         onTouchTap={this.onTouchTap}
                         placeholder={placeholder}
-                        ref={(c) => this._input = c}
+                        ref={(c) => this._textarea = c}
                         type={type}
-                        value={this.state.value}
+                        value={value}
                         onChange={this.onChange}
                         onBlur={this.onBlur}
                         onFocus={this.onFocus}
                         name={name}
-                        max={max}
-                        {...inputDisabled}
+                        rows={rows}
+                        {...textareaDisabled}
                     />
-                {extra ? <div className={`${prefixCls}-extra`}>{extra}</div> : null}
-                {this.state.showClear ? <div className={`${prefixCls}-clear`} onTouchTap={this.clearValue}><Icon type="remove" fixedWidth={true}/></div> : null}
+                    {showCount? <span className={`${prefixCls}-count`}>
+                        {value.length}/{max}
+                    </span> : null}
+                </div>
+                {clear ? <div className={`${prefixCls}-clear`} style={{visibility: showClear?'visible':'hidden'}} onTouchTap={this.clearValue}><Icon type="remove" fixedWidth={true}/></div> : null}
                 {error ? <div className={`${prefixCls}-error`} onTouchTap={onErrorTap}><Icon type="exclamation" fixedWidth={true}/></div> : null}
             </div>
         )

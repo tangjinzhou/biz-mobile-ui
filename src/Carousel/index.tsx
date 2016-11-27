@@ -13,13 +13,14 @@ interface CarouselProps extends BizuiProps {
     resistance?: boolean,
     onSwitching?: (x: number, y?:string) => void,
     showDots?: boolean,
+    defaultIndex?: number
 }
 
 export default class Carousel extends React.Component<CarouselProps, any> {
     static defaultProps = {
         prefixCls: 'biz-carousel',
         className: '',
-        selectedIndex: 0,
+        defaultIndex: 0,
         autoplay: false,
         interval: 3000,
         threshold: 5,
@@ -29,7 +30,7 @@ export default class Carousel extends React.Component<CarouselProps, any> {
         onSwitching: () => {},
         showDots: true,
     }
-    state = {selectedIndex: this.props.selectedIndex}
+    state = {selectedIndex: this.props.defaultIndex}
     getDots() {
         const dots = [];
         const {prefixCls, children}=this.props;
@@ -44,8 +45,16 @@ export default class Carousel extends React.Component<CarouselProps, any> {
         }
         return dots;
     }
+    componentWillMount(){
+        const {defaultIndex, selectedIndex} = this.props
+        if(defaultIndex !== selectedIndex && typeof selectedIndex === 'number') {
+            this.setState({
+                selectedIndex: selectedIndex
+            });
+        }
+    }
     componentWillReceiveProps(newProps) {
-        if(newProps.selectedIndex !== this.state.selectedIndex) {
+        if(typeof newProps.selectedIndex === 'number' && newProps.selectedIndex !== this.state.selectedIndex) {
             this.setState({
                 selectedIndex: newProps.selectedIndex
             });

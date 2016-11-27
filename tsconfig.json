@@ -3,12 +3,13 @@
         "sourceMap": true,
         "jsx": "react",
         "allowSyntheticDefaultImports": true,
-      "moduleResolution": "node",
+        "moduleResolution": "node",
         "experimentalDecorators": true,
         "target": "es5"
     },
     "exclude": [
         "node_modules",
-        "examples"
+        "examples",
+        "test"
     ]
 }

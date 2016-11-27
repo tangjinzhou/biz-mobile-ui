@@ -2,31 +2,38 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 interface TabBarProps extends BizuiProps{
     selectedIndex? : number,
+    defaultIndex?: number,
     onChangeIndex?: (x:number, y:number)=>void,
 }
 
 export default class TabBar extends React.Component<TabBarProps, any>{
     static defaultProps = {
-        selectedIndex: 0,
+        defaultIndex: 0,
         prefixCls: 'biz-tabBar',
         className: '',
         onChangeIndex:()=>{},
         onTabTouchTap: ()=>{},
     };
-    state = {selectedIndex: 0};
-    componentWillMount() {
-        const initialIndex = this.props.selectedIndex;
-        this.setState({
-            selectedIndex: initialIndex < this.getTabCount() ? initialIndex : 0,
-        });
-    }
-    componentWillReceiveProps(newProps) {
-        if(newProps.selectedIndex !== this.state.selectedIndex){
+    state = {selectedIndex: this.props.defaultIndex};
+
+    componentWillMount(){
+        const {defaultIndex, selectedIndex} = this.props
+        if(defaultIndex !== selectedIndex && typeof selectedIndex === 'number') {
             this.setState({
-                selectedIndex: newProps.selectedIndex
+                selectedIndex: selectedIndex
+            });
+        }
+    }
+
+    componentWillReceiveProps(newProps) {
+        const selectedIndex = newProps.selectedIndex;
+        if(typeof selectedIndex === 'number' && selectedIndex !== this.state.selectedIndex){
+            this.setState({
+                selectedIndex: selectedIndex
             })
         }
     }
+
     getTabCount() {
         return this.getTabs().length;
     }

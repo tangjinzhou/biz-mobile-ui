@@ -24,7 +24,7 @@ var devConfigExtension = {
             /*'webpack-dev-server/client?http://localhost:3333',
             'webpack/hot/only-dev-server',
             'react-hot-loader/patch',*/
-            './app.tsx'
+            './test/app.tsx'
         ],
        // hotReload: ['webpack-hot-middleware/client'],
         //dllVendor: './dist/dll.vendor.js'

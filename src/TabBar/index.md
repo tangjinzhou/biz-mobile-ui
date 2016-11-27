@@ -11,6 +11,7 @@
 |prefixCls |string   |biz-tabBar | 自定义组件主题类名前缀|
 |className | string  |-           |组件跟节点添加类名|
 |style|Object|{}|自定义组件跟节点的内联样式|
+|defaultIndex|int|0|默认选中|
 |selectedIndex|int|0|被选中tab索引|
 |onChangeIndex|function(toIndex, fromIndex)|无|切换回调|
 

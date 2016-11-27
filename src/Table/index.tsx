@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import objectAssign from 'object-assign';
+import * as objectAssign from 'object-assign';
 import Checkbox from '../Checkbox';
 interface HeaderTrProps extends BizuiProps {
     key?:string,

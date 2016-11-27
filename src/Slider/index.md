@@ -16,3 +16,4 @@
 |step|number|0.1|值越小越平滑|
 |onChange|function(x:number, y:number)|无|滑动值变化时触发|
 |value|number|0|当前值|
+|defaultValue|number|0|初始化默认值|

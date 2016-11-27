@@ -10,6 +10,7 @@ interface SliderProps extends BizuiProps {
     onDragStop?: Function,
     step?: number,
     value?: number,
+    defaultValue?: number,
 }
 
 export default class Slider extends React.Component<SliderProps, any>{
@@ -23,11 +24,11 @@ export default class Slider extends React.Component<SliderProps, any>{
         onDragStart: ()=>{},
         onDragStop: ()=>{},
         step: 1,
-        value: 0,
+        defaultValue: 0,
     }
     state = {
         dragging: false,
-        value: 0,
+        value: this.props.defaultValue,
     };
     track = null;
     steps = null;
@@ -44,21 +45,15 @@ export default class Slider extends React.Component<SliderProps, any>{
     }
     componentWillMount() {
         const {
-            value: valueProp,
-            min,
-            max,
+            value,
+            defaultValue,
         } = this.props;
 
-        let value = valueProp;
-        if (value > max) {
-            value = max;
-        } else if (value < min) {
-            value = min;
+        if(typeof value === 'number' && value !== defaultValue) {
+            this.setState({
+                value: value,
+            });
         }
-
-        this.setState({
-            value: value,
-        });
     }
     componentDidMount(){
         this.stepsWidth = this.track.clientWidth;
@@ -69,12 +64,14 @@ export default class Slider extends React.Component<SliderProps, any>{
         this.stepsOffsetLeft = this.steps.getBoundingClientRect().left;
     }
     componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== undefined && !this.state.dragging) {
+        const value = nextProps.value;
+        if (typeof value === 'number' && !this.state.dragging && value !== this.state.value) {
             this.setState({
-                value: nextProps.value,
+                value: value,
             });
         }
     }
+
     handleTouchStart = (event) => {
         if (this.props.disabled) {
             return;

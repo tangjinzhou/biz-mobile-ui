@@ -12,6 +12,7 @@
 |style|Object|{}|自定义组件跟节点的内联样式|
 |color|string|-|控制器颜色|
 |disabled|boolean|false|是否禁用|
+|defaultIndex|int|0|默认选中|
 |selectedIndex|int|0|当前被选中索引|
 |values|Array<string>|`[]`|控制器数组|
 |onChangeIndex|function(toIndex, fromIndex)|无|切换回调|

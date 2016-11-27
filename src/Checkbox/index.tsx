@@ -12,6 +12,7 @@ interface CheckboxProps extends BizuiProps{
     checkedIcon? : React.ReactNode,
     uncheckedIcon? : React.ReactNode,
     value?: string,
+    defaultChecked?: boolean
 }
 
 export default class Checkbox extends React.Component<CheckboxProps, any> {
@@ -19,7 +20,7 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
         prefixCls: 'biz-checkbox',
         className: '',
         disabled: false,
-        checked: false,
+        defaultChecked: false,
         onChange: ()=> {
         },
         label: '',
@@ -27,16 +28,24 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
         checkedIcon: <Icon type='check-square'/>,
         uncheckedIcon: <Icon type='square-o'/>,
     }
-    state = {checked: this.props.checked};
+    state = {checked: this.props.defaultChecked};
 
     componentWillReceiveProps(newProps) {
-        if(newProps.checked !== this.state.checked) {
+        const checked = newProps.checked;
+        if(checked !== this.state.checked && typeof checked === 'boolean') {
             this.setState({
-                checked: newProps.checked
+                checked: checked
             });
         }
     }
-
+    componentWillMount(){
+        const {defaultChecked, checked} = this.props
+        if(defaultChecked !== checked && typeof checked === 'boolean') {
+            this.setState({
+                checked: checked
+            });
+        }
+    }
     touchTap(e, value) {
         if (!this.props.disabled) {
             const checked = !this.state.checked;

@@ -11,7 +11,7 @@ var TabBar = (function (_super) {
     function TabBar() {
         var _this = this;
         _super.apply(this, arguments);
-        this.state = { selectedIndex: 0 };
+        this.state = { selectedIndex: this.props.defaultIndex };
         this.handleChange = function (index, e) {
             var fromIndex = _this.state.selectedIndex;
             _this.props.onChangeIndex(index, fromIndex);
@@ -21,15 +21,18 @@ var TabBar = (function (_super) {
         };
     }
     TabBar.prototype.componentWillMount = function () {
-        var initialIndex = this.props.selectedIndex;
-        this.setState({
-            selectedIndex: initialIndex < this.getTabCount() ? initialIndex : 0,
-        });
+        var _a = this.props, defaultIndex = _a.defaultIndex, selectedIndex = _a.selectedIndex;
+        if (defaultIndex !== selectedIndex && typeof selectedIndex === 'number') {
+            this.setState({
+                selectedIndex: selectedIndex
+            });
+        }
     };
     TabBar.prototype.componentWillReceiveProps = function (newProps) {
-        if (newProps.selectedIndex !== this.state.selectedIndex) {
+        var selectedIndex = newProps.selectedIndex;
+        if (typeof selectedIndex === 'number' && selectedIndex !== this.state.selectedIndex) {
             this.setState({
-                selectedIndex: newProps.selectedIndex
+                selectedIndex: selectedIndex
             });
         }
     };
@@ -82,7 +85,7 @@ var TabBar = (function (_super) {
         var _b;
     };
     TabBar.defaultProps = {
-        selectedIndex: 0,
+        defaultIndex: 0,
         prefixCls: 'biz-tabBar',
         className: '',
         onChangeIndex: function () { },

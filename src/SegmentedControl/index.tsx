@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import objectAssign from 'object-assign';
+import * as objectAssign from 'object-assign';
 
 interface SegmentedControlProps extends BizuiProps{
     color?: string;
@@ -8,32 +8,41 @@ interface SegmentedControlProps extends BizuiProps{
     selectedIndex?: number;
     values?: Array<string>;
     onChangeIndex?: (x:number, y:number)=>void,
+    defaultIndex?: number,
 }
 
 export default class SegmentedControl extends React.Component<SegmentedControlProps, any>{
     static defaultProps = {
         prefixCls: 'biz-segmented',
         className: '',
-        selectedIndex: 0,
         onChangeIndex:()=>{},
         values: [],
         style: {},
         disabled: false,
+        defaultIndex: 0,
     };
-    state = {selectedIndex: this.props.selectedIndex};
+    state = {selectedIndex: this.props.defaultIndex};
     tabsCompontent=null;
-    componentWillReceiveProps(newProps) {
-        if(newProps.selectedIndex !== this.state.selectedIndex){
+    componentWillMount(){
+        const {defaultIndex, selectedIndex} = this.props
+        if(defaultIndex !== selectedIndex && typeof selectedIndex === 'number') {
             this.setState({
-                selectedIndex: newProps.selectedIndex
+                selectedIndex: selectedIndex
+            });
+        }
+    }
+    componentWillReceiveProps(newProps) {
+        const selectedIndex = newProps.selectedIndex;
+        if(typeof selectedIndex === 'number' && selectedIndex !== this.state.selectedIndex){
+            this.setState({
+                selectedIndex: selectedIndex
             })
         }
     }
-
     onTouchTap = (e, index, value)=> {
         const {onChangeIndex, disabled} = this.props;
         const fromIndex = this.state.selectedIndex;
-        if(disabled){
+        if(!disabled){
             onChangeIndex(index, fromIndex);
             if(index !== fromIndex) {
                 this.setState({selectedIndex: index});
@@ -61,6 +70,7 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
                     onTouchTap={(e) => this.onTouchTap(e, index, value)}
                     style={{
                         color: index === selectedIndex ? '' : color,
+                        borderRightColor: color,
                         backgroundColor: index === selectedIndex ? color : '',
                     }}
                 >

@@ -12,6 +12,7 @@
 |className | string  |-           |组件跟节点添加类名|
 |style|Object|{}|自定义组件跟节点的内联样式|
 |selectedIndex|int|0|被选中tab索引|
+|defaultIndex|int|0|默认选中|
 |onChangeIndex|function(toIndex, fromIndex)|无|切换回调|
 |animation|boolean|true|是否可活动切换tab对应内容|
 |animateTransitions|boolean|true|切换tab时,tab对应的内容是否开启滚动,仅animation为true时生效|

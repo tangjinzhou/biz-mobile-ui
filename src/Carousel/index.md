@@ -13,6 +13,7 @@
 |prefixCls |string   |biz-carousel  | 自定义组件主题类名前缀|
 |className | string  |-           |组件跟节点添加类名|
 |style|Object|{}|自定义组件跟节点的内联样式|
+|defaultIndex|int|0|默认选中|
 |selectedIndex|int|0|当前显示的索引|
 |autoplay|boolean|false|是否自动轮播|
 |interval|int|3000|autoplay为true时生效，自动播放的时间间隔，单位毫秒|

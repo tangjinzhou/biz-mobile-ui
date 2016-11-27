@@ -1,0 +1,77 @@
+@textareaPrefixCls: biz-textarea;
+.@{textareaPrefixCls} {
+  display: flex;
+  align-items: flex-start;
+
+  border-bottom: 1px solid @grey-400;
+  &-label{
+    font-size: 16px;
+    text-align: left;
+    margin-right: 10px;
+    height: 45px;
+    line-height: 48px;
+  }
+  &-val{
+    flex: 1;
+    padding: 11px 0 ;
+    position: relative;
+    font-size: 16px;
+    line-height: 24px;
+    textarea{
+      font-style: inherit;
+      font-variant: inherit;
+      font-weight: inherit;
+      font-stretch: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      font-family: inherit;
+      appearance: none;
+      width: 100%;
+      border: 0;
+      background-color: transparent;
+      padding: 0;
+      overflow: visible;
+      resize: none;
+      word-break: break-all;
+      word-wrap: break-word;
+      outline: none;
+    }
+  }
+  &-count {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: @grey-500;
+  }
+  &-clear{
+    margin: 13px 5px 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: @grey-400;
+    i{
+      width: 100%;
+      line-height: 20px;
+      font-size: 18px;
+      color: @white-darker;
+    }
+  }
+  &-error{
+    margin: 13px 5px 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: @red-500;
+    i{
+      width: 100%;
+      line-height: 20px;
+      font-size: 18px;
+      color: @white-darker;
+    }
+  }
+}
+.@{textareaPrefixCls}-disabled {
+  .@{textareaPrefixCls}-label{
+    color: @grey-500;
+  }
+}

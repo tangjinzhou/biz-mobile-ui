@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import objectAssign from 'object-assign';
+import * as objectAssign from 'object-assign';
 interface LinearProgressProps extends BizuiProps{
     color?: string,
     fillColor?: string,

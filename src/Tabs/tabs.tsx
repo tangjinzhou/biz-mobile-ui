@@ -7,11 +7,12 @@ interface TabsProps extends BizuiProps{
     animation?: boolean,
     animateTransitions?: boolean,
     tabsPosition?: string,
+    defaultIndex?: number,
 }
 
 export default class Tabs extends React.Component<TabsProps, any>{
     static defaultProps = {
-        selectedIndex: 0,
+        defaultIndex: 0,
         prefixCls: 'biz-tabs',
         className: '',
         onChangeIndex:()=>{},
@@ -20,17 +21,21 @@ export default class Tabs extends React.Component<TabsProps, any>{
         animateTransitions: true,
         tabsPosition: 'top',
     };
-    state = {selectedIndex: 0};
-    componentWillMount() {
-        const initialIndex = this.props.selectedIndex;
-        this.setState({
-            selectedIndex: initialIndex < this.getTabCount() ? initialIndex : 0,
-        });
-    }
-    componentWillReceiveProps(newProps) {
-        if(newProps.selectedIndex !== this.state.selectedIndex){
+    state = {selectedIndex: this.props.defaultIndex};
+    componentWillMount(){
+        const {defaultIndex, selectedIndex} = this.props
+        if(defaultIndex !== selectedIndex && typeof selectedIndex === 'number') {
             this.setState({
-                selectedIndex: newProps.selectedIndex
+                selectedIndex: selectedIndex
+            });
+        }
+    }
+
+    componentWillReceiveProps(newProps) {
+        const selectedIndex = newProps.selectedIndex;
+        if(typeof selectedIndex === 'number' && selectedIndex !== this.state.selectedIndex){
+            this.setState({
+                selectedIndex: selectedIndex
             })
         }
     }
