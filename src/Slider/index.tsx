@@ -44,16 +44,7 @@ export default class Slider extends React.Component<SliderProps, any>{
         return percent;
     }
     componentWillMount() {
-        const {
-            value,
-            defaultValue,
-        } = this.props;
-
-        if(typeof value === 'number' && value !== defaultValue) {
-            this.setState({
-                value: value,
-            });
-        }
+        this.updateState(this.props.value)
     }
     componentDidMount(){
         this.stepsWidth = this.track.clientWidth;
@@ -63,15 +54,16 @@ export default class Slider extends React.Component<SliderProps, any>{
         this.stepsWidth = this.track.clientWidth;
         this.stepsOffsetLeft = this.steps.getBoundingClientRect().left;
     }
-    componentWillReceiveProps(nextProps) {
-        const value = nextProps.value;
+    componentWillReceiveProps(newProps) {
+        this.updateState(newProps.value)
+    }
+    updateState(value){
         if (typeof value === 'number' && !this.state.dragging && value !== this.state.value) {
             this.setState({
                 value: value,
             });
         }
     }
-
     handleTouchStart = (event) => {
         if (this.props.disabled) {
             return;

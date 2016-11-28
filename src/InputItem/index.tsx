@@ -18,7 +18,7 @@ interface InputProps extends BizuiProps {
     onErrorTap?: Function,
     labelWidth?: string,
     onTouchTap?: Function,
-    defaultValue?: String,
+    defaultValue?: string,
 }
 
 export default class InputItem extends React.Component<InputProps, any>{
@@ -38,7 +38,7 @@ export default class InputItem extends React.Component<InputProps, any>{
         defaultValue: ''
     }
     state = {
-        value: '',
+        value: this.props.defaultValue,
         showClear: false,
     }
     _input = null

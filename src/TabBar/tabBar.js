@@ -21,15 +21,12 @@ var TabBar = (function (_super) {
         };
     }
     TabBar.prototype.componentWillMount = function () {
-        var _a = this.props, defaultIndex = _a.defaultIndex, selectedIndex = _a.selectedIndex;
-        if (defaultIndex !== selectedIndex && typeof selectedIndex === 'number') {
-            this.setState({
-                selectedIndex: selectedIndex
-            });
-        }
+        this.updateState(this.props.selectedIndex);
     };
     TabBar.prototype.componentWillReceiveProps = function (newProps) {
-        var selectedIndex = newProps.selectedIndex;
+        this.updateState(newProps.selectedIndex);
+    };
+    TabBar.prototype.updateState = function (selectedIndex) {
         if (typeof selectedIndex === 'number' && selectedIndex !== this.state.selectedIndex) {
             this.setState({
                 selectedIndex: selectedIndex

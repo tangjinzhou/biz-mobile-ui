@@ -20,23 +20,20 @@ export default class Radio extends React.Component<RadioGroupProps, any> {
     }
     state = {valueSelected: this.props.defaultValueSelected};
 
-    componentWillReceiveProps(newProps) {
-        if(newProps.valueSelected !== undefined && newProps.valueSelected !== this.state.valueSelected) {
-            this.setState({
-                valueSelected: newProps.valueSelected
-            });
-        }
+    componentWillMount(){
+        this.updateState(this.props.valueSelected)
     }
 
-    componentWillMount(){
-        const {defaultValueSelected, valueSelected} = this.props
-        if(defaultValueSelected !== valueSelected && typeof valueSelected === 'string') {
+    componentWillReceiveProps(newProps) {
+        this.updateState(newProps.valueSelected)
+    }
+    updateState(valueSelected) {
+        if(valueSelected !== this.state.valueSelected && typeof valueSelected === 'string') {
             this.setState({
                 valueSelected: valueSelected
             });
         }
     }
-
     getRadios() {
         const radios = [];
         React.Children.forEach(this.props.children, (radio) => {

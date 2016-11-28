@@ -17,7 +17,7 @@ interface TextareaProps extends BizuiProps {
     onErrorTap?: Function,
     labelWidth?: string,
     onTouchTap?: Function,
-    defaultValue?: String,
+    defaultValue?: string,
     rows?: number,
     autoHeight?: boolean,
     maxHeight?: string,
@@ -55,7 +55,7 @@ export default class TextareaItem extends React.Component<TextareaProps, any>{
         showCount: false,
     }
     state = {
-        value: '',
+        value: this.props.defaultValue,
         showClear: false,
         height: 'auto'
     }

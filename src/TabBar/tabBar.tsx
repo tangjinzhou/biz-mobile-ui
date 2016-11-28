@@ -17,23 +17,19 @@ export default class TabBar extends React.Component<TabBarProps, any>{
     state = {selectedIndex: this.props.defaultIndex};
 
     componentWillMount(){
-        const {defaultIndex, selectedIndex} = this.props
-        if(defaultIndex !== selectedIndex && typeof selectedIndex === 'number') {
-            this.setState({
-                selectedIndex: selectedIndex
-            });
-        }
+        this.updateState(this.props.selectedIndex)
     }
 
     componentWillReceiveProps(newProps) {
-        const selectedIndex = newProps.selectedIndex;
+        this.updateState(newProps.selectedIndex)
+    }
+    updateState(selectedIndex){
         if(typeof selectedIndex === 'number' && selectedIndex !== this.state.selectedIndex){
             this.setState({
                 selectedIndex: selectedIndex
             })
         }
     }
-
     getTabCount() {
         return this.getTabs().length;
     }

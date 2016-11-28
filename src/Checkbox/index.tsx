@@ -30,17 +30,15 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
     }
     state = {checked: this.props.defaultChecked};
 
-    componentWillReceiveProps(newProps) {
-        const checked = newProps.checked;
-        if(checked !== this.state.checked && typeof checked === 'boolean') {
-            this.setState({
-                checked: checked
-            });
-        }
-    }
     componentWillMount(){
-        const {defaultChecked, checked} = this.props
-        if(defaultChecked !== checked && typeof checked === 'boolean') {
+        this.updateState(this.props.checked)
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.updateState(newProps.checked)
+    }
+    updateState(checked) {
+        if(checked !== this.state.checked && typeof checked === 'boolean') {
             this.setState({
                 checked: checked
             });

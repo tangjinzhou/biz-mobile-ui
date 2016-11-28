@@ -24,15 +24,13 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
     state = {selectedIndex: this.props.defaultIndex};
     tabsCompontent=null;
     componentWillMount(){
-        const {defaultIndex, selectedIndex} = this.props
-        if(defaultIndex !== selectedIndex && typeof selectedIndex === 'number') {
-            this.setState({
-                selectedIndex: selectedIndex
-            });
-        }
+        this.updateState(this.props.selectedIndex)
     }
+
     componentWillReceiveProps(newProps) {
-        const selectedIndex = newProps.selectedIndex;
+        this.updateState(newProps.selectedIndex)
+    }
+    updateState(selectedIndex){
         if(typeof selectedIndex === 'number' && selectedIndex !== this.state.selectedIndex){
             this.setState({
                 selectedIndex: selectedIndex

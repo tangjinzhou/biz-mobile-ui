@@ -46,18 +46,17 @@ export default class Carousel extends React.Component<CarouselProps, any> {
         return dots;
     }
     componentWillMount(){
-        const {defaultIndex, selectedIndex} = this.props
-        if(defaultIndex !== selectedIndex && typeof selectedIndex === 'number') {
+        this.updateState(this.props.selectedIndex)
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.updateState(newProps.selectedIndex)
+    }
+    updateState(selectedIndex){
+        if(typeof selectedIndex === 'number' && selectedIndex !== this.state.selectedIndex){
             this.setState({
                 selectedIndex: selectedIndex
-            });
-        }
-    }
-    componentWillReceiveProps(newProps) {
-        if(typeof newProps.selectedIndex === 'number' && newProps.selectedIndex !== this.state.selectedIndex) {
-            this.setState({
-                selectedIndex: newProps.selectedIndex
-            });
+            })
         }
     }
     onChangeIndex = (index, fromIndex)=>{
