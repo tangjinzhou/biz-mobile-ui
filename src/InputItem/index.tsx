@@ -88,7 +88,9 @@ export default class InputItem extends React.Component<InputProps, any>{
         this.props.onBlur(val);
         this.updateState(val);
     }
-    clearValue = () => {
+    clearValue = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
         this.updateState();
     }
     onTouchTap=()=>{

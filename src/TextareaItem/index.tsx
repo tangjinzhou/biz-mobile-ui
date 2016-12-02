@@ -116,7 +116,9 @@ export default class TextareaItem extends React.Component<TextareaProps, any>{
         this.props.onBlur(val);
         this.updateState(val);
     }
-    clearValue = () => {
+    clearValue = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
         this.updateState();
     }
     onTouchTap=(e)=>{

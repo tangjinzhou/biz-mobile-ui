@@ -18,7 +18,7 @@ static prompt = (config?: AlertConfigProps)
 |className | string  |-           |组件跟节点添加类名|
 |style|Object|{}|自定义组件跟节点的内联样式|
 |title|string|-|标题|
-|message|string|-|内容|
+|message|`string` / `React.ReactNode`|-|内容|
 |buttons|Array<ButtonProps>|`[{text: '确定'}]`|按钮配置|
 |onTouchTap|function(index, value)|无|点击按钮回调, index为按钮索引, value为输入框中值|
 |defaultValue|string|-|输入框默认值|
