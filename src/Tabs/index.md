@@ -15,6 +15,7 @@
 |defaultIndex|int|0|默认选中|
 |onChangeIndex|function(toIndex, fromIndex)|无|切换回调|
 |animation|boolean|true|是否可活动切换tab对应内容|
+|animateHeight|boolean|false|容器高度自适应当前tab内容高度|
 |animateTransitions|boolean|true|切换tab时,tab对应的内容是否开启滚动,仅animation为true时生效|
 |tabsPosition|string|top|tab位置,可选`top`/`bottom`|
 

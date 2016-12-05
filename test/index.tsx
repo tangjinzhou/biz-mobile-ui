@@ -40,8 +40,9 @@ const slideHeight = px2rem(100);
 const styles = {
     tab: {
         backgroundColor: '#ddd',
-        minHeight: deviceHeight / htmlFontSize - parseFloat(px2rem(88)) + 'rem',
-        overflow: 'hidden',
+        //minHeight: deviceHeight / htmlFontSize - parseFloat(px2rem(88)) + 'rem',
+        //overflow: 'scroll',
+        //height: '500px',
     },
     seg: {
         width: '90%',
@@ -129,7 +130,7 @@ export default class App extends React.Component<any, any> {
         return (
             <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
                 <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>} badgeContent={21}>
-                    <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animation={true}>
+                    <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animateHeight={true} animation={true}>
                         <Tab label="旭日">
                             <div style={objectAssign({}, styles.tab, {backgroundColor: colors.grey_200})}>
                                 <Carousel onChangeIndex={this.commonFunc} autoplay={true}>

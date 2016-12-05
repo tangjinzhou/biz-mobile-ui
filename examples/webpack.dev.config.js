@@ -59,7 +59,7 @@ var devConfigExtension = {
                 //loaders: ['style', 'css?sourceMap', 'postcss?sourceMap','less?sourceMap'],
                 loader: ExtractTextPlugin.extract("css?sourceMap!postcss?sourceMap!less?sourceMap")
             },
-            { test: /\.(jpg|png|jpg|png|woff|woff2|eot|ttf|svg|gif)$/, loader: "url?name=[name].[ext]" },
+            { test: /\.(jpg|png|jpeg|png|woff|woff2|eot|ttf|svg|gif)$/, loader: "url?limit=10000" },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,

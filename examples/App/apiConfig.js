@@ -21,6 +21,7 @@ let allAPI = {
     'TabBar': {name: '底部tab'},
     'Table': {name: '表格'},
     'Tabs': {name: '切换'},
+    'TextareaItem': {name: '多行输入框'},
     'Toast': {name: '提示'},
 };
 export default allAPI;

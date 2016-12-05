@@ -6,6 +6,7 @@ interface TabsProps extends BizuiProps{
     onChangeIndex?: (x:number, y:number)=>void,
     animation?: boolean,
     animateTransitions?: boolean,
+    animateHeight?: boolean,
     tabsPosition?: string,
     defaultIndex?: number,
 }
@@ -20,6 +21,7 @@ export default class Tabs extends React.Component<TabsProps, any>{
         animation: true,
         animateTransitions: true,
         tabsPosition: 'top',
+        animateHeight: false,
     };
     state = {selectedIndex: this.props.defaultIndex};
     componentWillMount(){
@@ -76,7 +78,7 @@ export default class Tabs extends React.Component<TabsProps, any>{
         this.setState({selectedIndex: index});
     }
     render() {
-        const {prefixCls, className, animation, animateTransitions, tabsPosition, style} = this.props;
+        const {prefixCls, className, animation, animateTransitions, animateHeight, tabsPosition, style} = this.props;
         const tabsClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
@@ -101,8 +103,12 @@ export default class Tabs extends React.Component<TabsProps, any>{
                             index={this.state.selectedIndex}
                             onChangeIndex={this.swipeableViewsChange}
                             animateTransitions={animateTransitions}
+                            animateHeight={animateHeight}
                         >
-                            {contents}</SwipeableViews> : {contents}
+                            {contents}
+                        </SwipeableViews>
+                        :
+                        contents
                     }
                 </div>
                 {tabsPosition === 'bottom'? tabsContainer : null}

@@ -32,11 +32,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.post('/getDoc',upload.array(), function (req, res) {
-    var docFilePath = path.join(__dirname, 'node_modules', '@bizfe', 'biz-mobile-ui', 'src', req.body.name, 'index.md');
-    var demoFilePath = path.join(__dirname, 'App', 'Demo', req.body.name, 'index.js');
-    var docFile = fs.readFileSync(docFilePath, "utf8");
-    var demoFile = fs.readFileSync(demoFilePath, "utf8");
-    res.send({doc: docFile + '### demo代码\n ```javascript\n' + demoFile + '\n```'});
+    if(req.body.name && req.body.name !== 'undefined') {
+        var docFilePath = path.join(__dirname, 'node_modules', '@bizfe', 'biz-mobile-ui', 'src', req.body.name, 'index.md');
+        var demoFilePath = path.join(__dirname, 'App', 'Demo', req.body.name, 'index.js');
+        var docFile = fs.readFileSync(docFilePath, "utf8");
+        var demoFile = fs.readFileSync(demoFilePath, "utf8");
+        res.send({doc: docFile + '### demo代码\n ```javascript\n' + demoFile + '\n```'});
+    } else {
+        var docFilePath = path.join(__dirname,'App', 'start.md');
+        var docFile = fs.readFileSync(docFilePath, "utf8");
+        res.send({doc: docFile});
+    }
+
 });
 
 app.get('/dist/*', function (req, res) {
@@ -55,10 +62,10 @@ app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, req.url));
 });
 
-app.listen(3333, function(err) {
+app.listen(3332, function(err) {
     if (err) {
         console.log(err);
         return;
     }
-    console.log('Listening at http://localhost:3333');
+    console.log('Listening at http://localhost:3332');
 });

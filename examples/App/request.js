@@ -1,4 +1,4 @@
-
+import 'whatwg-fetch'
 function parseJSON(response) {
   return response.json();
 }
@@ -24,7 +24,7 @@ function jsonToQueryString(json) {
 }
 declare var window: Window;*/
 export default function request(url, options) {
-  return window.fetch(url, {
+  return fetch(url, {
       method: 'POST',
       headers: {
           "Content-Type": "application/x-www-form-urlencoded"
