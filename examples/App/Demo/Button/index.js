@@ -17,7 +17,7 @@ const styles = {
         borderRadius: '50%',
     }
 }
-export default class AlertDemo extends React.Component {
+export default class ButtonDemo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
