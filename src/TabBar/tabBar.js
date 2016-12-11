@@ -14,9 +14,10 @@ var TabBar = (function (_super) {
         this.state = { selectedIndex: this.props.defaultIndex };
         this.handleChange = function (index, e) {
             var fromIndex = _this.state.selectedIndex;
-            _this.props.onChangeIndex(index, fromIndex);
+            var _a = _this.props, onChangeIndex = _a.onChangeIndex, selectedIndex = _a.selectedIndex;
             if (index !== fromIndex) {
-                _this.setState({ selectedIndex: index });
+                onChangeIndex(index, fromIndex);
+                typeof selectedIndex !== 'number' && _this.setState({ selectedIndex: index });
             }
         };
     }

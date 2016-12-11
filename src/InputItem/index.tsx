@@ -64,8 +64,11 @@ export default class InputItem extends React.Component<InputProps, any>{
         this.setState({value: val, showClear: this.isFocus && clear && val.length > 0});
     }
     onChange = (e) => {
-        const val = e.target.value;
-        const {clear, onChange, value} = this.props;
+        let val = e.target.value;
+        const {clear, onChange, value, max} = this.props;
+        if(typeof max === 'number'){
+            val = val.slice(0, max || 0);
+        }
         if(value !== undefined) {
             onChange(val)
             return;
@@ -91,7 +94,10 @@ export default class InputItem extends React.Component<InputProps, any>{
     clearValue = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        this.updateState();
+        if(this.props.value !== undefined){
+            this.updateState();
+        }
+        this.props.onChange('');
     }
     onTouchTap=()=>{
         const {disabled, onTouchTap} = this.props;

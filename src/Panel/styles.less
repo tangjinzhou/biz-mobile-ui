@@ -1,0 +1,28 @@
+@panelPrefixCls: biz-panel;
+
+.@{panelPrefixCls} {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  &-mask{
+    background-color: @maskBgColor;
+  }
+  &-wrap{
+    position: absolute;
+    top: 0;
+    .animated(300ms);
+    background-color: @white-darker;
+    width: 70%;
+    height: 100%;
+    .scroll();
+  }
+  &-wrap-left{
+    left: 0;
+  }
+  &-wrap-right{
+    right: 0;
+  }
+}

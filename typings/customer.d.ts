@@ -25,6 +25,10 @@ declare module 'react-tap-event-plugin'{
     var exports:()=>any;
     export = exports;
 }
+declare module 'zscroller/lib/DOMScroller'{
+    var exports: any;
+    export = exports;
+}
 interface BizuiProps {
     prefixCls?: string,
     className?: string,

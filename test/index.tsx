@@ -28,6 +28,7 @@ import {
     Arrow,
     Slider,
     Popup,
+    Panel,
     InputItem,
     Dialog,
     TextareaItem
@@ -105,21 +106,20 @@ export default class App extends React.Component<any, any> {
         });
     }
     showPopup = (position) => {
-
-        Popup.show(<ul>
-                <li style={{padding: px2rem(10)}}>
+        Panel.show(<ul>
+                <li style={{padding: px2rem(100)}}>
                     hello World
                 </li>
-                <li style={{padding: px2rem(10)}}>
+                <li style={{padding: px2rem(100)}}>
                     hello sogou
                 </li>
-            <li style={{padding: px2rem(10)}}>
+            <li style={{padding: px2rem(100)}}>
                 hello World
             </li>
-            <li style={{padding: px2rem(10)}}>
+            <li style={{padding: px2rem(100)}}>
                 hello sogou
             </li>
-            </ul>, {position: position, showMask: true});
+            </ul>, {position: 'right', showMask: true, panelWidth: '80%'});
     }
     commonFunc = (...args) => {
         console.log(args);
@@ -129,7 +129,7 @@ export default class App extends React.Component<any, any> {
 
         return (
             <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
-                <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>} badgeContent={21}>
+                <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>} badgeContent={'21'}>
                     <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animateHeight={true} animation={true}>
                         <Tab label="旭日">
                             <div style={objectAssign({}, styles.tab, {backgroundColor: colors.grey_200})}>
@@ -142,7 +142,7 @@ export default class App extends React.Component<any, any> {
                                 {this.state.open ? <Dialog open={this.state.open}>{this.state.info}</Dialog>:null}
                                 <div style={{background: '#FFFFFF', paddingLeft: px2rem(15)}}>
                                     <TextareaItem labelWidth={px2rem(50)} label="客户名" autoHeight maxHeight={px2rem(300)} defaultValue="sogou" placeholder="请输入客户名"/>
-                                    <TextareaItem labelWidth={px2rem(50)} label="评论" showCount={true} max={100} rows={3} type="number" placeholder="请输入评论"/>
+                                    <TextareaItem labelWidth={px2rem(50)} label="评论" onChange={console.log} showCount={true} max={10} rows={3} type="number" placeholder="请输入评论"/>
                                     <TextareaItem labelWidth={px2rem(50)} label="电话" type="number" value="4158" disabled/>
                                     <TextareaItem defaultValue="没有label"/>
 
@@ -194,7 +194,7 @@ export default class App extends React.Component<any, any> {
                                     onDragStart={this.commonFunc}
                                     onDragStop={this.commonFunc}
                                 />
-                                <RadioGroup name="productType" valueSelected="2" onChange={this.commonFunc}>
+                                <RadioGroup name="productType" defaultValueSelected="2" onChange={this.commonFunc}>
                                     <Radio label="旭日" value="1"/>
                                     <Radio label="晨星" value="2"/>
                                     <Radio label="皓月" value="3"/>
@@ -256,7 +256,7 @@ export default class App extends React.Component<any, any> {
                         <Tab label="信息流" badgeContent="new">
                             <div style={objectAssign({}, styles.tab, {backgroundColor: '#9E9E9E'})}>world5</div>
                         </Tab>
-                        <Tab label="晨星">
+                        <Tab label="晨星" badgeContent="">
                             <div style={objectAssign({}, styles.tab, {backgroundColor: '#2196F3'})}>world6</div>
                         </Tab>
                         <Tab label="品专">

@@ -108,6 +108,7 @@ export default class Dialog extends React.Component<DialogProps, any>{
             const wrapOutDiv = div.getElementsByClassName(prefixCls + '-wrap')[0];
             wrapOutDiv.className = wrapOutDiv.className + ' fadeOut';
             div.getElementsByClassName(prefixCls + '-mask')[0].remove();
+            this.layer = null;
             setTimeout(function(){
                 ReactDOM.unmountComponentAtNode(div);
                 div.remove();

@@ -1,36 +1,51 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
-export default class LinearProgress extends React.Component {
-    render() {
-        const { prefixCls, className, color, fillColor, mode, style, min, max, value: val, transitionDuration } = this.props;
-        const linearClass = classNames({
-            [`${prefixCls}`]: true,
-            [className]: true,
-        });
-        const modeClass = classNames({
-            [`${prefixCls}-indeterminate`]: mode === 'indeterminate',
-            [`${prefixCls}-determinate`]: mode === 'determinate',
-        });
-        let value = val;
-        value = value < min ? min : value;
-        value = value > max ? max : value;
-        const percent = value / (max - min) * 100 + '%';
-        const modeStyle = {
-            backgroundColor: color,
-            width: mode === 'determinate' ? percent : '',
-            transitionDuration: mode === 'determinate' ? transitionDuration + 'ms' : '',
-        };
-        return (React.createElement("div", {className: linearClass, style: Object.assign({}, style, { backgroundColor: fillColor })}, React.createElement("div", {className: modeClass, style: modeStyle})));
+import {px2rem} from '@bizfe/biz-mobile-ui/build/util/util';
+import {
+    Button,
+    LinearProgress,
+    colors,
+} from '@bizfe/biz-mobile-ui';
+
+const styles = {
+    progress: {
+        width: '90%',
+        margin: '20px auto 0',
+    },
+    circle: {
+        display: 'inline-block'
     }
 }
-LinearProgress.defaultProps = {
-    prefixCls: 'biz-linearProgress',
-    className: '',
-    color: '',
-    fillColor: '',
-    max: 100,
-    min: 0,
-    mode: 'indeterminate',
-    value: 0,
-    transitionDuration: 300,
-};
+export default class Progress extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {progress: 10}
+    }
+
+    changeProgress(value) {
+        if (value < 0) {
+            value = 0;
+        } else if (value > 100) {
+            value = 100;
+        }
+        this.setState({progress: value});
+    }
+
+    render() {
+        return (
+            <div>
+                <LinearProgress style={styles.progress}/>
+                <LinearProgress style={Object.assign({},styles.progress,{height: px2rem(15)})}
+                                color="#8E24AA"
+                                fillColor="#FFF"/>
+                <LinearProgress style={styles.progress} mode="determinate" value={this.state.progress}/>
+                <Button style={Object.assign({},styles.progress, {display: 'block'})}
+                        onTouchTap={()=>this.changeProgress(this.state.progress + 20)}
+                        size="small">+ 20</Button>
+                <Button style={Object.assign({},styles.progress, {display: 'block'})}
+                        onTouchTap={()=>this.changeProgress(this.state.progress - 10)}
+                        size="small">- 10</Button>
+            </div>
+        );
+    }
+}
+

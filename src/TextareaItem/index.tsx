@@ -92,8 +92,11 @@ export default class TextareaItem extends React.Component<TextareaProps, any>{
         this.setState(state);
     }
     onChange = (e) => {
-        const val = e.target.value;
-        const {clear, onChange, value} = this.props;
+        let val = e.target.value;
+        const {clear, onChange, value, max} = this.props;
+        if(typeof max === 'number'){
+            val = val.slice(0, max || 0);
+        }
         if(value !== undefined) {
             onChange(val)
             return;
@@ -119,7 +122,10 @@ export default class TextareaItem extends React.Component<TextareaProps, any>{
     clearValue = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        this.updateState();
+        if(this.props.value !== undefined) {
+            this.updateState();
+        }
+        this.props.onChange('');
     }
     onTouchTap=(e)=>{
         const {disabled, onTouchTap} = this.props;

@@ -26,9 +26,14 @@ export default class TabBarItem extends React.Component<TabBarItemProps, any>{
 
         return (
             <div className={tabClass} onTouchTap={(e)=>handleChange(index, e)} style={style}>
-                {icon}
+                <div className={`${prefixCls}-badge`}>
+                    {icon}
+                    {typeof badgeContent === 'string' ?
+                        <Badge content={badgeContent}/>
+                        :null
+                    }
+                </div>
                 {label}
-                {badgeContent !== null ?<Badge className={`${prefixCls}-badge`} content={badgeContent}/>:null}
             </div>
         )
     }

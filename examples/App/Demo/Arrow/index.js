@@ -3,8 +3,8 @@ import {px2rem} from '@bizfe/biz-mobile-ui/build/util/util';
 import {Arrow, colors} from '@bizfe/biz-mobile-ui';
 
 export default class ArrowDemo extends React.Component {
-    constructor(...args) {
-        super(...args);
+    constructor(props) {
+        super(props);
     }
 
     render() {

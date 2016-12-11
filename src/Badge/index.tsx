@@ -16,15 +16,17 @@ export default class Badge extends React.Component<BadgeProps, any> {
         const badgeClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
+            [`${prefixCls}-dot`]: content === '',
         });
         const contentClass = classNames({
             [`${prefixCls}-content`]: true,
             [`${prefixCls}-dot`]: content === '',
         })
+        
         return (
-            <div className={badgeClass} style={style}>
-                <span className={contentClass}>{content}</span>
-            </div>
+            <span className={badgeClass} style={style}>
+                {content}
+            </span>
         )
     }
 }

@@ -14,14 +14,14 @@
   "author": "tangjinzhou",
   "license": "ISC",
   "dependencies": {
-    "@bizfe/biz-mobile-ui": "0.0.3",
+    "@bizfe/biz-mobile-ui": "0.0.6",
     "babel-polyfill": "^6.16.0",
     "classnames": "^2.2.5",
     "highlight.js": "^9.8.0",
     "lodash": "^4.16.6",
     "marked": "^0.3.6",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1",
+    "react": "15.4.1",
+    "react-dom": "15.4.1",
     "react-markdown": "^2.4.2",
     "react-router": "^2.8.1",
     "whatwg-fetch": "^1.1.1"

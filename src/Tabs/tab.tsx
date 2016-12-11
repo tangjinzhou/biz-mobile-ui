@@ -64,8 +64,13 @@ export default class Tab extends React.Component<TabProps, any>{
 
         return (
             <div style={style} ref={(c) => this._tab = c} className={tabClass} onTouchTap={(e)=>handleChange(index, e)}>
-                {label}
-                {badgeContent !== null ?<Badge className={`${prefixCls}-badge`} content={badgeContent}/>:null}
+                <div className={`${prefixCls}-badge`}>
+                    {label}
+                    {typeof badgeContent === 'string' ?
+                        <Badge content={badgeContent}/>
+                        :null
+                    }
+                </div>
             </div>
         )
     }

@@ -38,12 +38,14 @@ export default class SegmentedControl extends React.Component<SegmentedControlPr
         }
     }
     onTouchTap = (e, index, value)=> {
-        const {onChangeIndex, disabled} = this.props;
+        const {onChangeIndex, disabled, selectedIndex} = this.props;
         const fromIndex = this.state.selectedIndex;
         if(!disabled){
-            onChangeIndex(index, fromIndex);
             if(index !== fromIndex) {
-                this.setState({selectedIndex: index});
+                onChangeIndex(index, fromIndex);
+                typeof selectedIndex !== 'number' && this.setState({
+                    selectedIndex: index
+                })
             }
         }
     }

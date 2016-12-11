@@ -5,7 +5,7 @@ interface SliderProps extends BizuiProps {
     disabled?: boolean,
     max?: number,
     min?: number,
-    onChange?: (x:number, y:number)=>void,
+    onChange?: (x:number)=>void,
     onDragStart?: Function,
     onDragStop?: Function,
     step?: number,
@@ -27,14 +27,15 @@ export default class Slider extends React.Component<SliderProps, any>{
         defaultValue: 0,
     }
     state = {
-        dragging: false,
         value: this.props.defaultValue,
     };
+    dragging = false;
     track = null;
     steps = null;
     dragRunning = false;
     stepsWidth = 0;
     stepsOffsetLeft = 0;
+    endValue = 0;
     getPercent(value, min, max) {
         let percent = (value - min) / (max - min);
         if (isNaN(percent)) {
@@ -58,23 +59,22 @@ export default class Slider extends React.Component<SliderProps, any>{
         this.updateState(newProps.value)
     }
     updateState(value){
-        if (typeof value === 'number' && !this.state.dragging && value !== this.state.value) {
+        if (typeof value === 'number' && !this.dragging && value !== this.state.value) {
             this.setState({
                 value: value,
             });
         }
     }
     handleTouchStart = (event) => {
+        this.endValue = this.state.value;
         if (this.props.disabled) {
             return;
         }
 
-        this.setState({
-            dragging: true
-        });
+        this.dragging = true;
         this.setValueFromPosition(event.touches[0].clientX - this.stepsOffsetLeft);
         if (this.props.onDragStart) {
-            this.props.onDragStart(event);
+            this.props.onDragStart(this.endValue);
         }
         event.preventDefault();
         event.stopPropagation();
@@ -98,11 +98,9 @@ export default class Slider extends React.Component<SliderProps, any>{
         if (this.props.disabled) {
             return;
         }
-        this.setState({
-            dragging: false
-        });
+        this.dragging = false;
         if (this.props.onDragStop) {
-            this.props.onDragStop(event);
+            this.props.onDragStop(this.endValue);
         }
     }
     setValueFromPosition(position) {
@@ -132,20 +130,20 @@ export default class Slider extends React.Component<SliderProps, any>{
         }
         if (this.state.value !== value) {
             if (this.props.onChange) {
-                this.props.onChange(value, this.state.value);
+                this.props.onChange(value);
             }
+            this.endValue = value
             this.setState({
                 value: value,
             });
-
-
         }
     }
     render (){
-        const {prefixCls, className, min, max, style} = this.props;
+        const {prefixCls, className, min, max, style,disabled} = this.props;
         const sliderClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
+            [`${prefixCls}-disable`]: disabled
         });
         const percent = this.getPercent(this.state.value, min, max);
         const trackPos = {transform: 'translateX(-' + (1 - percent) * 100 + '%)'};

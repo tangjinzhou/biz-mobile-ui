@@ -28,6 +28,7 @@ export {default as Table} from './Table';
 export {default as Arrow} from './Arrow';
 export {default as Slider} from './Slider';
 export {default as Popup} from './Popup';
+export {default as Panel} from './Panel';
 export {default as InputItem} from './InputItem';
 export {default as TextareaItem} from './TextareaItem';
 export {default as Dialog} from './Dialog';

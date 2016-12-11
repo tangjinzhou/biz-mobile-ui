@@ -28,7 +28,7 @@ export default class Radio extends React.Component<RadioGroupProps, any> {
         this.updateState(newProps.valueSelected)
     }
     updateState(valueSelected) {
-        if(valueSelected !== this.state.valueSelected && typeof valueSelected === 'string') {
+        if(valueSelected !== this.state.valueSelected && valueSelected !== undefined) {
             this.setState({
                 valueSelected: valueSelected
             });
@@ -44,14 +44,16 @@ export default class Radio extends React.Component<RadioGroupProps, any> {
         return radios;
     }
     selectChange = (value) => {
-        this.setState({
-            valueSelected: value
-        });
-        this.props.onChange(value);
+        if(this.props.valueSelected === undefined && value !== this.state.valueSelected){
+            this.setState({
+                valueSelected: value
+            });
+            this.props.onChange(value);
+        }
     }
     render() {
-        const {name, onChange, labelPosition, prefixCls, className} = this.props;
-        const valueSelected = this.state.valueSelected;
+        const {name, onChange, labelPosition, prefixCls, className, valueSelected: temp} = this.props;
+        let valueSelected = temp !== undefined ? temp : this.state.valueSelected;
         const radios = this.getRadios().map((radio, index) => {
             return React.cloneElement(radio, {
                 key: index,
@@ -59,6 +61,7 @@ export default class Radio extends React.Component<RadioGroupProps, any> {
                 name: name,
                 checked: valueSelected === radio.props.value,
                 onChange: (value) => this.selectChange(value),
+                isGroupRadio: true,
             });
         });
         const radioGroupClass = classNames({

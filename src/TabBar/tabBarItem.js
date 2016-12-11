@@ -20,7 +20,9 @@ var TabBarItem = (function (_super) {
             _b[className] = true,
             _b
         ));
-        return (React.createElement("div", {className: tabClass, onTouchTap: function (e) { return handleChange(index, e); }, style: style}, icon, label, badgeContent !== null ? React.createElement(Badge_1.default, {className: prefixCls + "-badge", content: badgeContent}) : null));
+        return (React.createElement("div", {className: tabClass, onTouchTap: function (e) { return handleChange(index, e); }, style: style}, React.createElement("div", {className: prefixCls + "-badge"}, icon, typeof badgeContent === 'string' ?
+            React.createElement(Badge_1.default, {content: badgeContent})
+            : null), label));
         var _b;
     };
     TabBarItem.defaultProps = {

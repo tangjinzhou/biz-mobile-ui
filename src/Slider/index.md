@@ -14,6 +14,8 @@
 |min|int|0|最小值|
 |max|int|100|最大值|
 |step|number|0.1|值越小越平滑|
-|onChange|function(x:number, y:number)|无|滑动值变化时触发|
+|onChange|function(x:number)|无|滑动值变化时触发|
+|onDragStart|function(x:number)|无|滑动开始时触发|
+|onDragEnd|function(x:number)|无|滑动结束时触发|
 |value|number|0|当前值|
 |defaultValue|number|0|初始化默认值|

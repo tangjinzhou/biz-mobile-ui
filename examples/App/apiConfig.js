@@ -1,27 +1,99 @@
-let allAPI = {
-    'Alert': {name: '弹窗'},
-    'Arrow': {name: '箭头'},
-    'Badge': {name: '徽标'},
-    'Button': {name: '按钮'},
-    'Card': {name: '卡片'},
-    'Carousel': {name: '轮播图'},
-    'Checkbox': {name: '复选框'},
-    'CircleProgress': {name: '圆形进度条'},
-    'Dialog': {name: '弹窗容器'},
-    'Ellipsis': {name: '省略号'},
-    'Icon': {name: '图标'},
-    'InputItem': {name: '输入框'},
-    'Line': {name: '线条'},
-    'LinearProgress': {name: '限行进度条'},
-    'Popup': {name: '弹层'},
-    'Radio': {name: '单选框'},
-    'SegmentedControl': {name: '分段控制器'},
-    'Slider': {name: '滑动条'},
-    'Switch': {name: '滑动开关'},
-    'TabBar': {name: '底部tab'},
-    'Table': {name: '表格'},
-    'Tabs': {name: '切换'},
-    'TextareaItem': {name: '多行输入框'},
-    'Toast': {name: '提示'},
-};
+let allAPI = [
+    {
+        name: '弹窗',
+        key: 'Alert',
+    },
+    {
+        name: '箭头',
+        key: 'Arrow',
+    },
+    {
+        name: '徽标',
+        key: 'Badge',
+    },
+    {
+        name: '按钮',
+        key: 'Button',
+    },
+    {
+        name: '卡片',
+        key: 'Card',
+    },
+    {
+        name: '轮播图',
+        key: 'Carousel',
+    },
+    {
+        name: '复选框',
+        key: 'Checkbox',
+    },
+    {
+        name: '圆形进度条',
+        key: 'CircleProgress',
+    },
+    {
+        name: '弹窗容器',
+        key: 'Dialog',
+    },
+    {
+        name: '省略号',
+        key: 'Ellipsis',
+    },
+    {
+        name: '图标',
+        key: 'Icon',
+    },
+    {
+        name: '输入框',
+        key: 'InputItem',
+    },
+    {
+        name: '条形进度条',
+        key: 'LinearProgress',
+    },
+    {
+        name: '左右弹层',
+        key: 'Panel',
+    },
+    {
+        name: '上下弹层',
+        key: 'Popup',
+    },
+    {
+        name: '单选框',
+        key: 'Radio',
+    },
+    {
+        name: '分段控制器',
+        key: 'SegmentedControl',
+    },
+    {
+        name: '滑动条',
+        key: 'Slider',
+    },
+    {
+        name: '滑动开关',
+        key: 'Switch',
+    },
+    {
+        name: '底部tab',
+        key: 'TabBar',
+    },
+    {
+        name: '表格',
+        key: 'Table',
+    },
+    {
+        name: '切换',
+        key: 'Tabs',
+    },
+    {
+        name: '多行输入框',
+        key: 'TextareaItem',
+    },
+    {
+        name: '提示',
+        key: 'Toast',
+    },
+];
 export default allAPI;

@@ -18,7 +18,7 @@
 |defaultValue|string|-|默认值|
 |placeholder|string|-|placeholder|
 |disabled|boolean|false|禁用输入|
-|clear|boolean|true|value不为空时,是否显示清除按钮|
+|clear|boolean|true|value不为空时,是否显示清除按钮,受控组件时只会触发onChange回调|
 |max|int|-|最大输入长度|
 |onChange|function(value)|无|value变化时回调|
 |onBlur|function(value)|无|input失去焦点时回调|

@@ -45,9 +45,10 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
         }
     }
     touchTap(e, value) {
-        if (!this.props.disabled) {
+        const {disabled, checked} = this.props
+        if (!disabled) {
             const checked = !this.state.checked;
-            this.setState({checked: checked});
+            typeof checked !== 'boolean' && this.setState({checked: checked});
             this.props.onChange(checked, value);
         }
     }

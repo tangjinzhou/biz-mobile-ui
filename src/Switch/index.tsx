@@ -37,7 +37,9 @@ export default class Switch extends React.Component<SwitchProps, any> {
     touchTap() {
         if (!this.props.disabled) {
             const checked = !this.state.checked;
-            this.setState({checked: checked});
+            if(typeof this.props.checked !== 'boolean') {
+                this.setState({checked: checked});
+            }
             this.props.onChange(checked);
         }
     }

@@ -37,7 +37,7 @@ app.post('/getDoc',upload.array(), function (req, res) {
         var demoFilePath = path.join(__dirname, 'App', 'Demo', req.body.name, 'index.js');
         var docFile = fs.readFileSync(docFilePath, "utf8");
         var demoFile = fs.readFileSync(demoFilePath, "utf8");
-        res.send({doc: docFile + '### demo代码\n ```javascript\n' + demoFile + '\n```'});
+        res.send({doc: docFile + '\n### demo代码\n ```javascript\n' + demoFile + '\n```'});
     } else {
         var docFilePath = path.join(__dirname,'App', 'start.md');
         var docFile = fs.readFileSync(docFilePath, "utf8");

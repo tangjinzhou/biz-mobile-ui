@@ -1,22 +1,29 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
-export default class Icon extends React.Component {
+import {px2rem} from '@bizfe/biz-mobile-ui/build/util/util';
+import {Icon, colors} from '@bizfe/biz-mobile-ui';
+
+export default class IconDemo extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
-        const { prefixCls, type, className, size, spin, fixedWidth, style, color } = this.props;
-        const iconClass = classNames({
-            [`${prefixCls}`]: true,
-            [`${prefixCls}-${type}`]: true,
-            [`${prefixCls}-${size}`]: size === 'lg' || size === '2x' || size === '3x' || size === '4x' || size === '5x',
-            [`${prefixCls}-spin`]: spin,
-            [`${prefixCls}-fw`]: fixedWidth,
-            [className]: true,
-        });
-        return (React.createElement("i", {style: Object.assign({}, style, { color: color }), className: iconClass, "aria-hidden": "true"}));
+        return (
+            <div style={{padding: px2rem(10)}}>
+                <Icon type="home"></Icon>
+                <Icon type="home" size="lg"></Icon>
+                <Icon type="home" size="2x"></Icon>
+                <Icon type="home" size="3x"></Icon>
+                <Icon type="home" size="4x"></Icon>
+                <Icon type="home" size="5x"></Icon>
+                <br/>
+                <Icon type="spinner" spin size="2x"></Icon>
+                <br/>
+                <Icon type="commenting"></Icon>
+                <br/>
+                <Icon type="heart" color={colors.red_500}></Icon>
+            </div>
+        );
     }
 }
-Icon.defaultProps = {
-    prefixCls: 'biz-icon',
-    className: '',
-    spin: false,
-    fixedWidth: false,
-};
+

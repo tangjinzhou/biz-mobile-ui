@@ -1,8 +1,8 @@
 ---
-输入框 Input
+输入框 TextareaItem
 ---
 
-单行文本。
+多行文本。
 
 ## API
 
@@ -17,7 +17,7 @@
 |defaultValue|string|-|默认值|
 |placeholder|string|-|placeholder|
 |disabled|boolean|false|禁用输入|
-|clear|boolean|true|value不为空时,是否显示清除按钮|
+|clear|boolean|true|value不为空时,是否显示清除按钮,受控组件时只会触发onChange回调||
 |max|int|-|最大输入长度|
 |showCount|boolean|false|显示计数功能|
 |rows|int|1|行数|

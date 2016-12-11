@@ -25,9 +25,13 @@
     align-items: center;
     justify-content: center;
     border-top: 1px solid @grey-400;
-    &-badge {
-      top: -40px;
-      left: 6px;
+    &-badge{
+      position: relative;
+      >.biz-badge {
+        position: absolute;
+        top: -2px;
+        left: 20px;
+      }
     }
   }
   .@{tabBarItemPrefixCls}-active {

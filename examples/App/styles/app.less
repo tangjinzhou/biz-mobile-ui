@@ -1,17 +1,54 @@
+@import "../../node_modules/@bizfe/biz-mobile-ui/src/styles/app.less";
 @import "main";
 
 @import "markdown";
-.api-nav{
+.pc-nav{
   a{
     color: #444;
     padding: 10px;
     display: inline-block;
     width: 100%;
     &:hover{
+      //color: #0099ff;
+    }
+    &.active{
+      color: #0099ff;
+    }
+  }
+}
+.mo-nav{
+  a{
+    color: #444;
+    padding: 10px;
+    display: inline-block;
+    width: 100%;
+    &:active{
       color: #0099ff;
     }
     &.active{
       color: #0099ff;
     }
   }
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: #ddd;
+}
+body::-webkit-scrollbar,
+.main-nav::-webkit-scrollbar{
+  display: none;
+}
+h2{
+  padding: 10px 15px;
+  font-size: 14px;
+  color: @grey-600;
+  background-color: @grey-100;
 }

@@ -11,6 +11,7 @@ interface RadioProps extends BizuiProps{
     label?: string | React.ReactNode,
     labelPosition? : 'left' | 'right',
     value?: string,
+    isGroupRadio?: boolean,
 }
 
 export default class Radio extends React.Component<RadioProps, any> {
@@ -44,8 +45,9 @@ export default class Radio extends React.Component<RadioProps, any> {
     }
 
     touchTap(e, value) {
-        if (!this.props.disabled && !this.state.checked) {
-            this.setState({checked: true});
+        const {disabled, checked, isGroupRadio} = this.props
+        if (!disabled && !this.state.checked  && typeof checked === 'boolean') {
+            !isGroupRadio && this.setState({checked: true});
             this.props.onChange(value);
         }
     }

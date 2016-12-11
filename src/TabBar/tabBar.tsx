@@ -60,9 +60,10 @@ export default class TabBar extends React.Component<TabBarProps, any>{
 
     handleChange = (index, e)=> {
         const fromIndex = this.state.selectedIndex;
-        this.props.onChangeIndex(index, fromIndex);
+        const {onChangeIndex, selectedIndex} = this.props;
         if(index !== fromIndex){
-            this.setState({selectedIndex: index});
+            onChangeIndex(index, fromIndex);
+            typeof selectedIndex !== 'number' && this.setState({selectedIndex: index});
         }
     }
     render() {

@@ -28,10 +28,17 @@
     justify-content: center;
     border-bottom: 1px solid @border-2;
     padding: 0 10px;
-    &-badge {
-      font-size: @font-size-2;
-      bottom: 30px;
-      right: -12px;
+    &-badge{
+      position: relative;
+      >.biz-badge {
+        position: absolute;
+        top: -10px;
+        left: 90%;
+      }
+      >.biz-badge-dot {
+        top: -5px;
+        right: 100%;
+      }
     }
   }
 

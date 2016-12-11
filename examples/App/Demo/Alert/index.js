@@ -12,8 +12,8 @@ const styles = {
     }
 }
 export default class AlertDemo extends React.Component {
-    constructor(...args) {
-        super(...args);
+    constructor(props) {
+        super(props);
     }
 
     showAlertWithTwoBtn(index, value) {

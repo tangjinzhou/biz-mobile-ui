@@ -1,21 +1,23 @@
 @badgePrefixCls: biz-badge;
 .@{badgePrefixCls} {
   position: relative;
+  display: inline-block;
   font-size: 14px;
-  &-content{
-    background-color: @badgeBgColor;
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: @white-darker;
-    border-radius: 8px;
-    padding: 0 4px;
-  }
-  &-dot{
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-    padding: 0;
-    font-size: 0;
-  }
+  display: inline-block;
+  background-color: @badgeBgColor;
+  color: @white-darker;
+  height: 16px;
+  line-height: 16px;
+  min-width: 16px;
+  border-radius: 8px;
+  padding: 0 4px;
+}
+.@{badgePrefixCls}-dot{
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  min-width: 8px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 0;
 }

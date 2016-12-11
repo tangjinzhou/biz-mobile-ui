@@ -38,7 +38,7 @@ class PopupDialog extends React.Component<PopupDialogProps, any> {
         });
         return(
             <div className={popupClass} style={style}>
-                {showMask ? <div className={['body-mask',`${prefixCls}-mask`].join(' ')} onTouchTap={maskOnTouchTap}></div> : null}
+                <div style={showMask? {opacity: 0}:{}} className={['body-mask',`${prefixCls}-mask`].join(' ')} onTouchTap={maskOnTouchTap}></div>
                 <div className={wrapClass}>
                     {children}
                 </div>
