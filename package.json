@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/tangjinzhou/biz-mobile-ui#readme",
   "dependencies": {
+    "@types/lodash": "^4.14.44",
     "classnames": "2.2.5",
     "object-assign": "4.1.0",
     "react": "15.4.1",

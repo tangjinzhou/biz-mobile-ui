@@ -31,7 +31,8 @@ import {
     Panel,
     InputItem,
     Dialog,
-    TextareaItem
+    TextareaItem,
+    ScrollerView
     //DatePicker,
 } from '../src/index'
 import Pregress from './Progress';
@@ -70,7 +71,7 @@ const styles = {
 }
 export default class App extends React.Component<any, any> {
     _table = null;
-    state = {selectIndex: 0, info: 'hello', open: false};
+    state = {selectIndex: 0, info: 'hello', open: false, refreshing: false};
     //isMounted = this.isMounted;
     componentDidMount() {
 
@@ -124,15 +125,33 @@ export default class App extends React.Component<any, any> {
     commonFunc = (...args) => {
         console.log(args);
     }
-
+    onRefresh=()=> {
+        console.log('onRefresh');
+        this.setState({ refreshing: true });
+        this.onAjax();
+    }
+    onAjax=()=> {
+        setTimeout(() => {
+            this.setState({
+                refreshing: false,
+            });
+        }, 1000);
+    }
     render() {
 
         return (
             <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
                 <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>} badgeContent={'21'}>
-                    <Tabs selectedIndex={this.state.selectIndex} onChangeIndex={this.onTabChange} animateHeight={true} animation={true}>
+                    <Tabs onChangeIndex={this.onTabChange} animateHeight={true} animation={true}>
                         <Tab label="旭日">
-                            <div style={objectAssign({}, styles.tab, {backgroundColor: colors.grey_200})}>
+                            <ScrollerView
+                                onRefresh={this.onRefresh}
+                                refreshOption={{
+                                    distanceToRefresh: parseFloat(px2rem(50)) * htmlFontSize,
+                                    refreshing: this.state.refreshing
+                                    }}
+                            >
+                                <div style={objectAssign({}, styles.tab, {backgroundColor: colors.grey_200})}>
                                 <Carousel onChangeIndex={this.commonFunc} autoplay={true}>
                                     <div style={styles.slide1}>slide 1</div>
                                     <div style={styles.slide2}>slide 2</div>
@@ -228,7 +247,7 @@ export default class App extends React.Component<any, any> {
                                     你好
                                 </Card>
                             </div>
-
+                            </ScrollerView>
                         </Tab>
                         <Tab label="晨星">
                             <div style={objectAssign({}, styles.tab)}>

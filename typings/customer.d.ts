@@ -25,7 +25,7 @@ declare module 'react-tap-event-plugin'{
     var exports:()=>any;
     export = exports;
 }
-declare module 'zscroller/lib/DOMScroller'{
+declare module 'zscroller'{
     var exports: any;
     export = exports;
 }

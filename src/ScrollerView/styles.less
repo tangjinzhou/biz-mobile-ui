@@ -1,0 +1,45 @@
+@scrollerViewPrefixCls: biz-scrollerView;
+
+.@{scrollerViewPrefixCls} {
+  position: relative;
+  min-width: 100%;
+  height: 200px;
+}
+
+@pull-to-refresh: scroller-view-refresh-control;
+.@{pull-to-refresh} {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+
+  &-content {
+    transform-origin: left top;
+    transform: translateZ(0);
+  }
+
+  &-ptr {
+    color: grey;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    margin-top: -50px;
+    overflow: hidden;
+    &-icon {
+      display: block;
+    }
+    &-loading {
+      display: none;
+    }
+  }
+  &-loading {
+    .@{pull-to-refresh}-ptr {
+      &-icon {
+        display: none;
+      }
+      &-loading {
+        display: block;
+      }
+    }
+  }
+
+}
