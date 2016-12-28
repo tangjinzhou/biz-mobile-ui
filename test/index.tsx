@@ -137,6 +137,9 @@ export default class App extends React.Component<any, any> {
             });
         }, 1000);
     }
+    onEndReached=()=> {
+        console.log('onEndReached 数据加载中');
+    }
     render() {
 
         return (
@@ -150,6 +153,7 @@ export default class App extends React.Component<any, any> {
                                     distanceToRefresh: parseFloat(px2rem(50)) * htmlFontSize,
                                     refreshing: this.state.refreshing
                                     }}
+                                onEndReached={this.onEndReached}
                             >
                                 <div style={objectAssign({}, styles.tab, {backgroundColor: colors.grey_200})}>
                                 <Carousel onChangeIndex={this.commonFunc} autoplay={true}>
@@ -247,6 +251,7 @@ export default class App extends React.Component<any, any> {
                                     你好
                                 </Card>
                             </div>
+                                <p style={{textAlign: 'center', padding: '10px'}}>数据加载中...</p>
                             </ScrollerView>
                         </Tab>
                         <Tab label="晨星">

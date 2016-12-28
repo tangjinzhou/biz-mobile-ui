@@ -15,7 +15,8 @@ interface ScrollerViewProps extends BizuiProps {
     scrollEventThrottle?: number,
     onScroll?: Function,
     refreshOption?: RefreshControlProps,
-    onRefresh?: Function
+    onRefresh?: Function,
+    onEndReached?: Function,
 }
 
 export default class ScrollerView extends React.Component<ScrollerViewProps, any> {
@@ -33,16 +34,18 @@ export default class ScrollerView extends React.Component<ScrollerViewProps, any
     refreshControlRefresh = null
     refreshControl = null
     manuallyRefresh = false
+    _isPullUp = false
+    _pullUpStartPageY = null
     componentDidMount(){
         const { scrollerOptions, onRefresh, refreshOption} = this.props;
         this.domScroller = new DOMScroller(this.INNERVIEW, objectAssign({}, {
             scrollingX: false,
             onScroll: this.throttleScroll(),
         }, scrollerOptions));
-
+        this.bindEvt();
         if (onRefresh) {
             const scroller = this.domScroller.scroller;
-            const { distanceToRefresh, refreshing } = refreshOption;
+            const { distanceToRefresh, refreshing } = objectAssign({}, RefreshControl.defaultProps, refreshOption);
             scroller.activatePullToRefresh(distanceToRefresh,
                 () => {
                     this.manuallyRefresh = true;
@@ -63,7 +66,6 @@ export default class ScrollerView extends React.Component<ScrollerViewProps, any
                             onRefresh();
                             this.refreshControlRefresh = resolve;
                         }),
-                        // at lease 1s for ux
                         new Promise(resolve => setTimeout(resolve, 1000)),
                     ]).then(finishPullToRefresh, finishPullToRefresh);
                 });
@@ -83,17 +85,56 @@ export default class ScrollerView extends React.Component<ScrollerViewProps, any
             }
         }
     }
-    componentWillReceiveProps(newProps) {
+    componentWillUnmount() {
+        this.domScroller && this.domScroller.destroy();
+        this.unBindEvt();
     }
     throttleScroll(){
         const {scrollEventThrottle, onScroll} = this.props;
         let handleScroll = onScroll || (() => {});
         if (scrollEventThrottle && onScroll) {
             handleScroll = throttle(e => {
-                onScroll(e);
+                onScroll();
             }, scrollEventThrottle);
         }
         return handleScroll;
+    }
+    bindEvt() {
+        if(this.props.onEndReached){
+            const ele = this.SCROLLVIEW;
+            ele.addEventListener('touchstart', this.onPullUpStart);
+            ele.addEventListener('touchmove', this.onPullUpMove);
+            ele.addEventListener('touchend', this.onPullUpEnd);
+            ele.addEventListener('touchcancel', this.onPullUpEnd);
+        }
+    }
+    unBindEvt() {
+        if(this.props.onEndReached){
+            const ele = this.SCROLLVIEW;
+            ele.removeEventListener('touchstart', this.onPullUpStart);
+            ele.removeEventListener('touchmove', this.onPullUpMove);
+            ele.removeEventListener('touchend', this.onPullUpEnd);
+            ele.removeEventListener('touchcancel', this.onPullUpEnd);
+        }
+    }
+    onPullUpStart=(e) => {
+        this._pullUpStartPageY = e.touches[0].screenY;
+        this._isPullUp = false;
+    }
+    onPullUpMove = (e) => {
+        if (e.touches[0].screenY < this._pullUpStartPageY && this._reachBottom()) {
+            this._isPullUp = true;
+        }
+    }
+    onPullUpEnd = (e) => {
+        if (this._isPullUp && this.props.onEndReached) {
+            this.props.onEndReached(e);
+        }
+        this._isPullUp = false;
+    }
+    _reachBottom() {
+        const element = this.SCROLLVIEW;
+        return element.scrollHeight - element.scrollTop === element.clientHeight;
     }
     render() {
         const {prefixCls, className, style, children, refreshOption, onRefresh} = this.props;
