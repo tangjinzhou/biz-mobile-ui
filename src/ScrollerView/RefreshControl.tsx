@@ -2,10 +2,9 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 interface RefreshControlProps extends BizuiProps {
     icon?: any,
-    loading?: any,
+    loading?: string | React.ReactNode,
     distanceToRefresh?: number,
     refreshing?: boolean,
-    onRefresh: Function,
 }
 
 export default class RefreshControl extends React.Component<RefreshControlProps, any> {
