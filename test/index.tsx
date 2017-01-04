@@ -143,7 +143,7 @@ export default class App extends React.Component<any, any> {
     render() {
 
         return (
-            <TabBar selectedIndex={0} onChangeIndex={this.onTabChange}>
+            <TabBar onChangeIndex={this.onTabChange}>
                 <TabBarItem label="首页" icon={<Icon type="home" size="2x"/>} badgeContent={'21'}>
                     <Tabs onChangeIndex={this.onTabChange} animateHeight={true} animation={true}>
                         <Tab label="旭日">

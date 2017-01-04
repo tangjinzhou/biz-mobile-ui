@@ -54,7 +54,7 @@ class PanelDialog extends React.Component<PanelDialogProps, any> {
         });
         return(
             <div className={popupClass} style={style}>
-                <div ref={(c) => this.mask = c} style={showMask? {opacity: 0}:{}} className={['body-mask',`${prefixCls}-mask`].join(' ')} onTouchTap={maskOnTouchTap}></div>
+                <div ref={(c) => this.mask = c} style={showMask? {}:{opacity: 0}} className={['body-mask',`${prefixCls}-mask`].join(' ')} onTouchTap={maskOnTouchTap}></div>
                 <div className={wrapClass} style={{width: panelWidth}}>
                     {children}
                 </div>

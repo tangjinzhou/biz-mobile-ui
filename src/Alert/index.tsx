@@ -35,7 +35,11 @@ class AlertDialog extends React.Component<AlertDialogProps, any> {
     };
     _promptInput = null;
     componentDidMount() {
-        this._promptInput && this._promptInput.focus();
+        //let that = this
+        //that._promptInput && that._promptInput.focus();
+    }
+    componentWillUnmount(){
+        this._promptInput && this._promptInput.blur();
     }
     onTouchTap = (index: number) => {
         if(this._promptInput) {

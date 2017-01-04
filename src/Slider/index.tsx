@@ -143,7 +143,7 @@ export default class Slider extends React.Component<SliderProps, any>{
         const sliderClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
-            [`${prefixCls}-disable`]: disabled
+            [`${prefixCls}-disabled`]: disabled
         });
         const percent = this.getPercent(this.state.value, min, max);
         const trackPos = {transform: 'translateX(-' + (1 - percent) * 100 + '%)'};

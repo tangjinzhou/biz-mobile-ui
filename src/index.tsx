@@ -3,6 +3,19 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import animationFrame from './util/animationFrame';
 injectTapEventPlugin();
 animationFrame();
+interface CustomerElement extends Element{
+    blur?: ()=>{}
+}
+function blurActiveInput(e) {
+    if(e.target.tagName == "INPUT" || e.target.tagName == 'TEXTAREA') {
+        return;
+    }
+    var activeElement = document.activeElement as CustomerElement;
+    if(activeElement.tagName == "INPUT" || activeElement.tagName == "TEXTAREA") {
+        activeElement.blur && activeElement.blur();
+    }
+}
+document.addEventListener('touchstart', blurActiveInput, false)
 export {colors} from './styles/colors';
 export {default as Alert} from './Alert';
 export {default as Button} from './Button';

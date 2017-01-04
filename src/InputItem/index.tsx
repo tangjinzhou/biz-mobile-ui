@@ -48,8 +48,8 @@ export default class InputItem extends React.Component<InputProps, any>{
         const val = value === undefined ? defaultValue : value;
         this.updateState(val as string);
     }
-    componentDidMount() {
-
+    componentWillUnmount(){
+        this._input && this._input.blur();
     }
     componentWillReceiveProps(newProps) {
         if (newProps.value !== undefined && newProps.value !== this.state.value) {
@@ -94,7 +94,7 @@ export default class InputItem extends React.Component<InputProps, any>{
     clearValue = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        if(this.props.value !== undefined){
+        if(this.props.value === undefined){
             this.updateState();
         }
         this.props.onChange('');

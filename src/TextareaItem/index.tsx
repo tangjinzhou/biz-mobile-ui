@@ -62,8 +62,8 @@ export default class TextareaItem extends React.Component<TextareaProps, any>{
     _textarea = null
     _shadow = null
     isFocus = false
-    componentWillMount(){
-
+    componentWillUnmount(){
+        this._textarea && this._textarea.blur();
     }
     componentDidMount() {
         const {value, defaultValue} = this.props;
@@ -122,7 +122,7 @@ export default class TextareaItem extends React.Component<TextareaProps, any>{
     clearValue = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        if(this.props.value !== undefined) {
+        if(this.props.value === undefined) {
             this.updateState();
         }
         this.props.onChange('');

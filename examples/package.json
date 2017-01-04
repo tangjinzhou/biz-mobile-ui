@@ -4,8 +4,9 @@
   "description": "biz-mobile-ui demo",
   "main": "index.js",
   "scripts": {
+    "p": "NODE_ENV=production webpack --config webpack.p.config.js --progress",
     "build:dll": "webpack --config webpack.dll.js",
-    "start": "npm run build:dll && node server.js"
+    "start": "npm run build:dll && node devServer.js"
   },
   "keywords": [
     "react",
@@ -14,7 +15,7 @@
   "author": "tangjinzhou",
   "license": "ISC",
   "dependencies": {
-    "@bizfe/biz-mobile-ui": "0.0.6",
+    "@bizfe/biz-mobile-ui": "^1.0.0",
     "babel-polyfill": "^6.16.0",
     "classnames": "^2.2.5",
     "highlight.js": "^9.8.0",
