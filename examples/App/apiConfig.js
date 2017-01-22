@@ -64,6 +64,10 @@ let allAPI = [
         key: 'Radio',
     },
     {
+        name: '滚动',
+        key: 'ScrollerView'
+    },
+    {
         name: '分段控制器',
         key: 'SegmentedControl',
     },

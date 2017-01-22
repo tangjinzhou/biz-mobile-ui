@@ -37,6 +37,10 @@ import { Button } from '@bizfe/biz-mobile-ui'
 ### 5.构建和部署
 npm run p
 
+### 6.TODO
+单元测试
+Picker, DatePicker
+
 ### 学习资料
 [react](https://facebook.github.io/react/docs/hello-world.html)
 

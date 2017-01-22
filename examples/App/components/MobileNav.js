@@ -21,6 +21,7 @@ function getStyles(){
             color: colors.blue_500,
             lineHeight: px2rem(50),
             position: 'relative',
+            zIndex: 9,
         },
         btn: {
             position: 'absolute',

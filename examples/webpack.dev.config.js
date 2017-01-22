@@ -46,7 +46,7 @@ var devConfigExtension = {
     },
     output: {
         filename: '[name].js',
-        publicPath: "/dist"
+        publicPath: "/dist/"
     },
 
     // more options here: http://webpack.github.io/docs/configuration.html#devtool
@@ -87,10 +87,11 @@ var devConfigExtension = {
             filename: 'hotReload.js',
             chunks: ['app']
         }),*/
-        /*new webpack.optimize.CommonsChunkPlugin({
-            name: 'dllVendor',
-            minChunks: Infinity,
-        }),*/
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.js',
+            chunks: ['app', 'vendor']
+        }),
         new ExtractTextPlugin("[name].css", {
             allChunks: true,
             disable: false

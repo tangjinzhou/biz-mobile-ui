@@ -134,6 +134,7 @@ export default class ScrollerView extends React.Component<ScrollerViewProps, any
     }
     _reachBottom() {
         const element = this.SCROLLVIEW;
+        console.log(element.scrollHeight - element.scrollTop, element.clientHeight)
         return element.scrollHeight - element.scrollTop === element.clientHeight;
     }
     render() {
@@ -143,13 +144,14 @@ export default class ScrollerView extends React.Component<ScrollerViewProps, any
             [className]: true,
         })
         return (
-            <div className={scrollerViewClass} style={style} ref={(c)=>this.SCROLLVIEW = c}>
-                <div style={{}} ref={(c)=>this.INNERVIEW = c}>
-                    {onRefresh? <RefreshControl ref={(c)=>this.refreshControl = c} {...refreshOption} onRefresh={onRefresh}/>: null}
-                    {children}
+            <div style={{overflow: 'hidden'}}>
+                <div className={scrollerViewClass} style={style} ref={(c)=>this.SCROLLVIEW = c}>
+                    <div style={{}} ref={(c)=>this.INNERVIEW = c}>
+                        {onRefresh? <RefreshControl ref={(c)=>this.refreshControl = c} {...refreshOption} onRefresh={onRefresh}/>: null}
+                        {children}
+                    </div>
                 </div>
             </div>
-
         );
     }
 }

@@ -15,7 +15,7 @@
   "author": "tangjinzhou",
   "license": "ISC",
   "dependencies": {
-    "@bizfe/biz-mobile-ui": "^1.0.0",
+    "@bizfe/biz-mobile-ui": "^1.0.1",
     "babel-polyfill": "^6.16.0",
     "classnames": "^2.2.5",
     "highlight.js": "^9.8.0",
