@@ -45,6 +45,7 @@ export default class Consume extends React.Component<any, any> {
             ]
         ];
         const data = [{
+            key: '1',
             area: '北京',
             name: '搜狗',
             cost: '1298,23',
@@ -53,6 +54,7 @@ export default class Consume extends React.Component<any, any> {
                 selected: true,
             }
         }, {
+            key: '2',
             area: '上海',
             name: '搜狐',
             cost: '90.23',
@@ -62,6 +64,7 @@ export default class Consume extends React.Component<any, any> {
                 selected: true,
             }
         }, {
+            key: '3',
             area: '广州',
             name: '搜猫',
             cost: '1765,12.34983773666626227727',
@@ -70,6 +73,7 @@ export default class Consume extends React.Component<any, any> {
                 //selected: true,
             }
         },{
+            key: '4',
             area: '北京',
             name: '搜狗',
             cost: '1298,23',

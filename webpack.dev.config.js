@@ -46,7 +46,7 @@ var devConfigExtension = {
     },
     output: {
         filename: '[name].js',
-        publicPath: "/dist"
+        publicPath: "/dist/"
     },
 
     // more options here: http://webpack.github.io/docs/configuration.html#devtool
@@ -60,7 +60,7 @@ var devConfigExtension = {
                 loader: ExtractTextPlugin.extract("css?sourceMap!postcss?sourceMap!less?sourceMap"),
                 include: path.join(__dirname, "src")
             },
-            { test: /\.(jpg|png|jpg|png|woff|woff2|eot|ttf|svg|gif)$/, loader: "url?name=[name].[ext]" },
+            { test: /\.(jpg|png|jpg|png|woff|woff2|eot|ttf|svg|gif)$/, loader: "url?limit=10000" },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,

@@ -29,6 +29,12 @@ declare module 'zscroller'{
     var exports: any;
     export = exports;
 }
+declare module 'lodash'{
+    var exports: {
+        throttle: any;
+    };
+    export = exports;
+}
 interface BizuiProps {
     prefixCls?: string,
     className?: string,

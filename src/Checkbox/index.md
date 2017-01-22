@@ -18,6 +18,4 @@
 | onChange  | function(checked, value) |无 | 复选框变化后的回调  |
 | label     |`string`/`React.ReactNode` |-|标签名 |
 |labelPosition| string| right|标签位置,可选值`left`/`right`|
-|checkedIcon|`React.ReactNode`|`<Icon type='check-square'/>`|被选中时显示的Icon|
-|uncheckedIcon|`React.ReactNode`|`<Icon type='square-o'/>`|取消选中时显示的Icon|
 |value|string|-|复选框值|

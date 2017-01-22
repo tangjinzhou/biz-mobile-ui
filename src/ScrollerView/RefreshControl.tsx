@@ -5,6 +5,7 @@ interface RefreshControlProps extends BizuiProps {
     loading?: string | React.ReactNode,
     distanceToRefresh?: number,
     refreshing?: boolean,
+    onRefresh: Function,
 }
 
 export default class RefreshControl extends React.Component<RefreshControlProps, any> {

@@ -10,6 +10,34 @@
     flex-shrink: 0;
     text-align: center;
   }
+  &-square-checked,
+  &-square{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid @black-darker;
+  }
+  &-square-checked{
+    border-color: @blue-500;
+    overflow: hidden;
+    position: relative;
+    &:after{
+      position: absolute;
+      top: 0px;
+      left: 5px;
+      display: block;
+      width: 7px;
+      height: 12px;
+      border-color: @blue-500;
+      border-style: solid;
+      border-width: 0 2px 2px 0;
+      content: " ";
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
 }
 .@{checkboxPrefixCls}-disabled {
   opacity: 0.5;

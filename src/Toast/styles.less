@@ -37,7 +37,55 @@
     padding: 10px 20px;
     max-width: 300px;
   }
-  &-content{
+  &-info-icon,
+  &-loading-icon,
+  &-success-icon,
+  &-error-icon {
+    display: inline-block;
+    width: 54px;
+    height: 54px;
+    background: url("./Warning.png") no-repeat;
+    background-size: cover;
+    margin-bottom: 10px;
+  }
+  &-info-icon {
+    width: 30px;
+    height: 30px;
+  }
+  &-loading-icon {
+    -webkit-animation: loading-spin 4s infinite linear;
+    animation: loading-spin 4s infinite linear;
+    background-image: url("./Loading.png");
+  }
+  &-success-icon {
+    background-image: url("./Success.png");
+  }
+  &-error-icon {
+    background-image: url("./Error.png");
+  }
 
+  &-content{
+  }
+}
+
+@-webkit-keyframes loading-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes loading-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
   }
 }

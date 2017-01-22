@@ -1,6 +1,6 @@
 {
   "name": "@bizfe/biz-mobile-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "biz-mobile-ui",
   "main": "build/index.js",
   "scripts": {
@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/tangjinzhou/biz-mobile-ui#readme",
   "dependencies": {
-    "@types/lodash": "^4.14.44",
     "classnames": "2.2.5",
+    "lodash": "4.17.4",
     "object-assign": "4.1.0",
     "react": "15.4.1",
     "react-dom": "15.4.1",

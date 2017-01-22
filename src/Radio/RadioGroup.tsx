@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import Icon from '../Icon';
 
 interface RadioGroupProps extends BizuiProps{
     name:string,

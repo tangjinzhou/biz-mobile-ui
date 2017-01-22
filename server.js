@@ -1,5 +1,3 @@
-/// <reference path="typings/index.d.ts"/>
-
 var path = require('path');
 var express = require('express');
 var webpack = require('webpack');
@@ -40,12 +38,12 @@ app.get('/*.action', function (req, res) {
     res.sendFile(path.join(__dirname, 'mock',req.url.replace('.action','.json')));
 })
 
-app.listen(3333, function(err) {
+app.listen(3000, function(err) {
     if (err) {
         console.log(err);
         return;
     }
-    console.log('Listening at http://localhost:3333');
+    console.log('Listening at http://localhost:3000');
 });
 
 /*var path = require('path');

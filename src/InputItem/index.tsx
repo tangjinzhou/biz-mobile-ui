@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import Icon from '../Icon';
 interface InputProps extends BizuiProps {
     label?: string | React.ReactNode,
     type?: 'text' | 'tel' | 'number' | 'password',
@@ -129,8 +128,8 @@ export default class InputItem extends React.Component<InputProps, any>{
                         {...inputDisabled}
                     />
                 {extra ? <div className={`${prefixCls}-extra`}>{extra}</div> : null}
-                {this.state.showClear ? <div className={`${prefixCls}-clear`} onTouchTap={this.clearValue}><Icon type="remove" fixedWidth={true}/></div> : null}
-                {error ? <div className={`${prefixCls}-error`} onTouchTap={onErrorTap}><Icon type="exclamation" fixedWidth={true}/></div> : null}
+                {this.state.showClear ? <div className={`${prefixCls}-clear`} onTouchTap={this.clearValue}></div> : null}
+                {error ? <div className={`${prefixCls}-error`} onTouchTap={onErrorTap}></div> : null}
             </div>
         )
     }

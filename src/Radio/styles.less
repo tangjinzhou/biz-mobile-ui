@@ -10,6 +10,30 @@
     flex-shrink: 0;
     text-align: center;
   }
+  &-circle-checked,
+  &-circle{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid @black-darker;
+  }
+  &-circle-checked{
+    border-color: @blue-500;
+    overflow: hidden;
+    position: relative;
+    &:after{
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      display: block;
+      width: 8px;
+      height: 8px;
+      content: " ";
+      border-radius: 50%;
+      background-color: @blue-500;
+    }
+  }
 }
 .@{radioPrefixCls}-disabled {
     opacity: 0.4;

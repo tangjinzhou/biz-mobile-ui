@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import Icon from '../Icon';
 interface TextareaProps extends BizuiProps {
     label?: string | React.ReactNode,
     type?: 'text' | 'tel' | 'number' | 'password',
@@ -170,8 +169,8 @@ export default class TextareaItem extends React.Component<TextareaProps, any>{
                         {value.length}/{max}
                     </span> : null}
                 </div>
-                {clear ? <div className={`${prefixCls}-clear`} style={{visibility: showClear?'visible':'hidden'}} onTouchTap={this.clearValue}><Icon type="remove" fixedWidth={true}/></div> : null}
-                {error ? <div className={`${prefixCls}-error`} onTouchTap={onErrorTap}><Icon type="exclamation" fixedWidth={true}/></div> : null}
+                {clear ? <div className={`${prefixCls}-clear`} style={{visibility: showClear?'visible':'hidden'}} onTouchTap={this.clearValue}></div> : null}
+                {error ? <div className={`${prefixCls}-error`} onTouchTap={onErrorTap}></div> : null}
             </div>
         )
     }

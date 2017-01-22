@@ -60,7 +60,7 @@ export default class Radio extends React.Component<RadioProps, any> {
             [`${prefixCls}-disabled`]: disabled,
         })
         const inputDisabled = disabled ? {disabled: 'disabled'} : '';
-        const iconType = this.state.checked ? 'dot-circle-o': 'circle-o';
+        const icon = this.state.checked ? <span className={prefixCls + "-circle-checked"}></span> : <span className={prefixCls + "-circle"}></span>;
         return (
             <div style={style} className={radioClass} onTouchTap={(e)=>this.touchTap(e, value)}>
                 <input
@@ -73,9 +73,9 @@ export default class Radio extends React.Component<RadioProps, any> {
                     onChange={()=>{}}
                     value={value}
                 />
-                {labelPosition === 'right' ? <Icon type={iconType}/> : null}
+                {labelPosition === 'right' ? icon : null}
                 <div className={`${prefixCls}-label`}>{label}</div>
-                {labelPosition === 'left' ? <Icon type={iconType}/> : null}
+                {labelPosition === 'left' ? icon : null}
             </div>
         );
     }

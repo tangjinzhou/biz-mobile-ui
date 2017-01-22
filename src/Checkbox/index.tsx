@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import Icon from '../Icon';
 
 interface CheckboxProps extends BizuiProps{
     name?:string,
@@ -24,9 +23,7 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
         onChange: ()=> {
         },
         label: '',
-        labelPosition: 'right',
-        checkedIcon: <Icon type='check-square'/>,
-        uncheckedIcon: <Icon type='square-o'/>,
+        labelPosition: 'right'
     }
     state = {checked: this.props.defaultChecked};
 
@@ -53,14 +50,14 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
     }
 
     render() {
-        const {prefixCls, className, style, name, disabled, onChange, label, labelPosition, checkedIcon, uncheckedIcon, value} = this.props;
+        const {prefixCls, className, style, name, disabled, onChange, label, labelPosition, value} = this.props;
         const checkboxClass = classNames({
             [`${prefixCls}`]: true,
             [className]: true,
             [`${prefixCls}-disabled`]: disabled,
         })
         const inputDisabled = disabled ? {disabled: 'disabled'} : '';
-        const icon = this.state.checked ? checkedIcon: uncheckedIcon;
+        const icon = this.state.checked ? <span className={prefixCls + "-square-checked"}></span> : <span className={prefixCls + "-square"}></span>;
         return (
             <div style={style} className={checkboxClass} onTouchTap={(e)=>this.touchTap(e, value)}>
                 <input

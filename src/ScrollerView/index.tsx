@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import * as objectAssign from 'object-assign';
 import * as DOMScroller from 'zscroller';
-import {throttle} from 'lodash'
+import {throttle} from 'lodash';
 import RefreshControl from './RefreshControl'
 interface RefreshControlProps extends BizuiProps {
     icon?: any,

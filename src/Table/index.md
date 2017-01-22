@@ -43,9 +43,13 @@
 |title|string|-|列标题|
 |field|string|-|列数据在数据项中对应的key|
 
+#### dataItem
+| 属性      | 类型    | 默认值       | 描述         |
+|----------|---------|------------|--------------|
+|key|string|-|React 需要的 key，建议设置, 有助于性能提升|
+
 #### dataItem.attr
 以下属性放在attr中,防止冲突
-
 | 属性      | 类型    | 默认值       | 描述         |
 |----------|---------|------------|--------------|
 |selectable|boolean|true|是否可选, TableProps.selectable为true时生效|

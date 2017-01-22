@@ -102,7 +102,7 @@ export default class App extends React.Component<any, any> {
     }
 
     showMessage = () => {
-        const messge = Toast.error('填写正确的邮箱', 1000, ()=> {
+        const messge = Toast.loading('填写正确的邮箱', 0, ()=> {
             console.log('showMessage done');
         });
     }
@@ -154,6 +154,7 @@ export default class App extends React.Component<any, any> {
                                     refreshing: this.state.refreshing
                                     }}
                                 onEndReached={this.onEndReached}
+                                style={{height: px2rem(500)}}
                             >
                                 <div style={objectAssign({}, styles.tab, {backgroundColor: colors.grey_200})}>
                                 <Carousel onChangeIndex={this.commonFunc} autoplay={true}>
@@ -161,7 +162,35 @@ export default class App extends React.Component<any, any> {
                                     <div style={styles.slide2}>slide 2</div>
                                     <div style={styles.slide3}>slide 3</div>
                                 </Carousel>
+                                    <Button style={objectAssign({},styles.seg, {display: 'block'})}
+                                            onTouchTap={this.showMessage}>
+                                        show info Message
+                                    </Button>
+                                    <RadioGroup name="productType" defaultValueSelected="2" onChange={this.commonFunc}>
+                                        <Radio label="旭日" value="1"/>
+                                        <Radio label="晨星" value="2"/>
+                                        <Radio label="皓月" value="3"/>
+                                    </RadioGroup>
+                                    <div>
+                                        <Radio style={{marginTop: px2rem(10)}}
+                                               label={<Ellipsis width={px2rem(50)} line={1} text="你好helloeooeoddllld"/>}
+                                               checked onChange={this.commonFunc}
+                                               labelPosition="left"/>
+                                    </div>
 
+                                    <div>
+                                        <Checkbox style={{marginTop: px2rem(10)}}
+                                                  label={<Ellipsis text="你好"/>}
+                                                  disabled checked/>
+                                        <Checkbox style={{marginTop: px2rem(10)}}
+                                                  label={<Ellipsis line={2} text="你好"/>}/>
+                                    </div>
+                                    <div>
+                                        <Checkbox style={{marginTop: px2rem(10)}}
+                                                  label={<Ellipsis width={px2rem(50)} line={1} text="你好helloeooeoddllld"/>}
+                                                  checked onChange={this.commonFunc}
+                                                  labelPosition="left" value="1"/>
+                                    </div>
                                 {this.state.open ? <Dialog open={this.state.open}>{this.state.info}</Dialog>:null}
                                 <div style={{background: '#FFFFFF', paddingLeft: px2rem(15)}}>
                                     <TextareaItem labelWidth={px2rem(50)} label="客户名" autoHeight maxHeight={px2rem(300)} defaultValue="sogou" placeholder="请输入客户名"/>
@@ -217,31 +246,7 @@ export default class App extends React.Component<any, any> {
                                     onDragStart={this.commonFunc}
                                     onDragStop={this.commonFunc}
                                 />
-                                <RadioGroup name="productType" defaultValueSelected="2" onChange={this.commonFunc}>
-                                    <Radio label="旭日" value="1"/>
-                                    <Radio label="晨星" value="2"/>
-                                    <Radio label="皓月" value="3"/>
-                                </RadioGroup>
-                                <div>
-                                    <Radio style={{marginTop: px2rem(10)}}
-                                           label={<Ellipsis width={px2rem(50)} line={1} text="你好helloeooeoddllld"/>}
-                                           checked onChange={this.commonFunc}
-                                           labelPosition="left"/>
-                                </div>
 
-                                <div>
-                                    <Checkbox style={{marginTop: px2rem(10)}}
-                                              label={<Ellipsis text="你好"/>}
-                                              disabled checked/>
-                                    <Checkbox style={{marginTop: px2rem(10)}}
-                                              label={<Ellipsis line={2} text="你好"/>}/>
-                                </div>
-                                <div>
-                                    <Checkbox style={{marginTop: px2rem(10)}}
-                                              label={<Ellipsis width={px2rem(50)} line={1} text="你好helloeooeoddllld"/>}
-                                              checked onChange={this.commonFunc}
-                                              labelPosition="left" value="1"/>
-                                </div>
 
 
                                 <Card style={{marginTop: px2rem(10)}}>

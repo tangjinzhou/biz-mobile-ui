@@ -46,13 +46,9 @@ export {default as InputItem} from './InputItem';
 export {default as TextareaItem} from './TextareaItem';
 export {default as Dialog} from './Dialog';
 export {createDialog} from './Dialog';
+export {default as ScrollerView} from './ScrollerView';
 //TODO: 优先级按照如下顺序
 //export {default as NavBar} from './NavBar';
 //export {default as SearchBar} from './SearchBar';
 //export {default as Picker} from './Picker';
 //export {default as DatePicker} from './DatePicker'; ios and 安卓两种 参考material-ui & andt-mobile & mint-ui
-//以下基于https://github.com/pbakaus/scroller去做, 尽量不要引入过多第三方控件
-export {default as ScrollerView} from './ScrollerView';
-//export {default as ListView} from './ListView';
-//export {default as LoadMore} from './LoadMore'; 上拉加载更多 and 手动加载更多
-//export {default as LazyLoad} from './LazyLoad';

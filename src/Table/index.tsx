@@ -188,7 +188,8 @@ class Table extends React.Component<TableProps, any> {
                         }
                 tbodyTd.push(<td key={'td-' + j}>{content(tempData, i, field)}</td>);
             }
-            tbodyTr.push(<tr key={'tr-'+i}>{tbodyTd}</tr>);
+            const trKey = dataSource[i]['key'] !== undefined ? dataSource[i]['key'] + '' : 'tr-' + i;
+            tbodyTr.push(<tr key={trKey}>{tbodyTd}</tr>);
         }
         return (
             <tbody>

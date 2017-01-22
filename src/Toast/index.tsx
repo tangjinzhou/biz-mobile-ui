@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Icon from '../Icon';
 import * as classNames from 'classnames';
 
 interface MessageProps {
@@ -21,30 +20,18 @@ class MessageDialog extends React.Component<MessageProps, any> {
             [`${prefixCls}-info-wrap`]: type === 'info',
             ['fadeIn']: true,
         });
-        const iconProp = {
-            info: {
-                type: 'info-circle',
-                size: 'lg'
-            },
-            loading: {
-                type: 'spinner',
-                size: '3x',
-                spin: true,
-            },
-            success: {
-                type: 'check-circle-o',
-                size: '3x',
-            },
-            error: {
-                type: 'times-circle-o',
-                size: '3x',
-            }
-        };
+        const iconClass = classNames({
+            [`${prefixCls}-info-icon`]: type === 'info',
+            [`${prefixCls}-loading-icon`]: type === 'loading',
+            [`${prefixCls}-success-icon`]: type === 'success',
+            [`${prefixCls}-error-icon`]: type === 'error',
+        })
+
         return(
             <div className={prefixCls}>
                 <div className={['body-mask',`${prefixCls}-mask`].join(' ')}></div>
                 <div className={wrapClass}>
-                    <Icon {...iconProp[type]}></Icon>
+                    <span className={iconClass}></span>
                     <div className={`${prefixCls}-content`}>
                         {type == 'info'?<span>&nbsp;</span>:null}
                         {content}
