@@ -4,7 +4,7 @@
   "description": "biz-mobile-ui demo",
   "main": "index.js",
   "scripts": {
-    "p": "NODE_ENV=production webpack --config webpack.p.config.js --progress",
+    "p": "npm run build:dll && NODE_ENV=production webpack --config webpack.p.config.js --progress",
     "build:dll": "webpack --config webpack.dll.js",
     "start": "npm run build:dll && node devServer.js"
   },

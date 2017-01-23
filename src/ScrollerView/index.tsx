@@ -102,19 +102,19 @@ export default class ScrollerView extends React.Component<ScrollerViewProps, any
     bindEvt() {
         if(this.props.onEndReached){
             const ele = this.SCROLLVIEW;
-            ele.addEventListener('touchstart', this.onPullUpStart);
-            ele.addEventListener('touchmove', this.onPullUpMove);
-            ele.addEventListener('touchend', this.onPullUpEnd);
-            ele.addEventListener('touchcancel', this.onPullUpEnd);
+            ele.addEventListener('touchstart', this.onPullUpStart, false);
+            ele.addEventListener('touchmove', this.onPullUpMove, false);
+            ele.addEventListener('touchend', this.onPullUpEnd, false);
+            ele.addEventListener('touchcancel', this.onPullUpEnd, false);
         }
     }
     unBindEvt() {
         if(this.props.onEndReached){
             const ele = this.SCROLLVIEW;
-            ele.removeEventListener('touchstart', this.onPullUpStart);
-            ele.removeEventListener('touchmove', this.onPullUpMove);
-            ele.removeEventListener('touchend', this.onPullUpEnd);
-            ele.removeEventListener('touchcancel', this.onPullUpEnd);
+            ele.removeEventListener('touchstart', this.onPullUpStart, false);
+            ele.removeEventListener('touchmove', this.onPullUpMove, false);
+            ele.removeEventListener('touchend', this.onPullUpEnd, false);
+            ele.removeEventListener('touchcancel', this.onPullUpEnd, false);
         }
     }
     onPullUpStart=(e) => {
@@ -133,9 +133,10 @@ export default class ScrollerView extends React.Component<ScrollerViewProps, any
         this._isPullUp = false;
     }
     _reachBottom() {
-        const element = this.SCROLLVIEW;
-        console.log(element.scrollHeight - element.scrollTop, element.clientHeight)
-        return element.scrollHeight - element.scrollTop === element.clientHeight;
+        const ele = this.SCROLLVIEW;
+        const innerEle = this.INNERVIEW;
+        const translateY = parseFloat(innerEle.style.transform.split(',')[1])
+        return ele.clientHeight - innerEle.clientHeight >= translateY
     }
     render() {
         const {prefixCls, className, style, children, refreshOption, onRefresh} = this.props;

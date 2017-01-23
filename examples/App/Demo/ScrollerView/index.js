@@ -25,6 +25,7 @@ export default class ScrollerViewDemo extends React.Component {
         }
     }
     data = [...Array(10)]
+    loading = false
     onRefresh=()=> {
         console.log('onRefresh');
         this.setState({ refreshing: true });
@@ -36,13 +37,16 @@ export default class ScrollerViewDemo extends React.Component {
             this.setState({
                 refreshing: false,
                 loadingMore: false,
-            });
+            }, () => this.loading = false);
         }, 1000);
     }
     onEndReached=()=> {
-        console.log('onEndReached 数据加载中');
-        this.setState({ loadingMore: true });
-        this.onAjax('loadingMore');
+        if(!this.loading) {
+            this.loading = true;
+            console.log('onEndReached 数据加载中');
+            this.setState({ loadingMore: true });
+            this.onAjax('loadingMore');
+        }
     }
     render() {
         const {refreshing, loadingMore} = this.state;

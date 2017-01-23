@@ -138,7 +138,7 @@ export default class App extends React.Component<any, any> {
         }, 1000);
     }
     onEndReached=()=> {
-        console.log('onEndReached 数据加载中');
+        alert('onEndReached 数据加载中');
     }
     render() {
 

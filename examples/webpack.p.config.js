@@ -68,6 +68,10 @@ var config = {
                 NODE_ENV: JSON.stringify('production'),
             }
         }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require("./dist/vendor-manifest.json")
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'vendor.js',
