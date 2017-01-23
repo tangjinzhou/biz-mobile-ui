@@ -12,8 +12,13 @@ const styles = {
         borderBottom: '1px solid #ddd'
     },
     loading: {
-        padding: px2rem(10),
+        lineHeight: px2rem(30),
+        height: px2rem(30),
+        width: '100%',
         textAlign: 'center',
+        position: 'absolute',
+        bottom: px2rem(-30),
+        left: 0,
     }
 }
 export default class ScrollerViewDemo extends React.Component {
@@ -63,7 +68,7 @@ export default class ScrollerViewDemo extends React.Component {
                 <ul>
                     {this.data.map((val, index)=><li style={styles.li} key={ '_' + index}>{index}</li>)}
                 </ul>
-                {loadingMore ? <p style={styles.loading}>加载更多...</p> : ''}
+                <p style={styles.loading}>加载更多...</p>
             </ScrollerView>
         );
     }
